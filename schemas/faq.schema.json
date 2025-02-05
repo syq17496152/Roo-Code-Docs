@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FAQ Schema",
+  "description": "Schema for FAQ entries",
+  "Author": "@mkearl",
+  "Version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the FAQ document",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "author": {
+      "type": "object",
+      "required": ["name", "email"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "organization": {
+          "type": "string"
+        }
+      }
+    },
+    "contributors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "faqs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "answer", "category"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["path", "alt"],
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "description": "Path to the image file"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "description": "Alternative text for the image"
+                    },
+                    "caption": {
+                      "type": "string",
+                      "description": "Optional caption for the image"
+                    },
+                    "position": {
+                      "type": "string",
+                      "enum": ["inline", "above", "below"],
+                      "default": "inline"
+                    }
+                  }
+                }
+              }
+            },
+            "required": ["text"]
+          },
+          "category": {
+            "type": "string",
+            "enum": ["general", "technical", "pricing", "support", "security", "other"]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "footer": {
+          "type": "object",
+          "required": ["resources", "copyright"],
+          "properties": {
+            "resources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["text", "url"],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "enum": ["Documentation", "GitHub Repository", "API Reference"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "enum": [
+                      "https://docs.roocode.com",
+                      "https://github.com/RooVetGit/Roo-Code",
+                      "https://docs.roocode.com/api"
+                    ]
+                  }
+                }
+              }
+            },
+            "copyright": {
+              "type": "string",
+              "const": "© 2025 Roo Code. All rights reserved."
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["version", "author", "faqs"]
+}
