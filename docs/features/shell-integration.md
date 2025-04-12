@@ -43,59 +43,51 @@ Maximum time to wait for shell integration to initialize before executing comman
 #### Terminal Command Delay
 <img src="/img/shell-integration/shell-integration-2.png" alt="Terminal command delay slider set to 0ms" width="600" />
 
-Adds a delay after command execution to ensure full output capture. Implemented using `PROMPT_COMMAND='sleep N'` in bash/zsh or `start-sleep` in PowerShell. Originally a workaround for VSCode bug #237208, may not be needed on most systems. Default: 0ms (disabled).
+Adds a small pause after running commands to help Roo capture all output correctly. This is helpful if Roo seems to miss parts of command output or reacts before commands finish. Default: 0ms (disabled).
 
 ### Advanced Settings
 
 #### PowerShell Counter Workaround
 <img src="/img/shell-integration/shell-integration-3.png" alt="PowerShell counter workaround checkbox" width="600" />
 
-Appends a unique counter to PowerShell commands to prevent duplicate command issues. Enable this if PowerShell fails to execute identical consecutive commands.
+Helps PowerShell run the same command multiple times in a row. Enable this if you notice Roo can't run identical commands consecutively in PowerShell.
 
 #### Clear ZSH EOL Mark
 <img src="/img/shell-integration/shell-integration-4.png" alt="Clear ZSH EOL mark checkbox" width="600" />
 
-Sets `PROMPT_EOL_MARK=""` to clear ZSH end-of-line marks, preventing issues with command output when output ends with special characters like '%'.
+Prevents ZSH from adding special characters at the end of output lines that can confuse Roo when reading terminal results.
 
 #### Oh My Zsh Integration
 <img src="/img/shell-integration/shell-integration-5.png" alt="Enable Oh My Zsh integration checkbox" width="600" />
 
-Sets `ITERM_SHELL_INTEGRATION_INSTALLED="Yes"` to enable proper integration with Oh My Zsh. Experimental feature for users of Oh My Zsh.
+Makes Roo work better with the popular Oh My Zsh shell customization framework. Turn this on if you use Oh My Zsh and experience terminal issues.
 
 #### Powerlevel10k Integration
 <img src="/img/shell-integration/shell-integration-6.png" alt="Enable Powerlevel10k integration checkbox" width="600" />
 
-Sets `POWERLEVEL9K_TERM_SHELL_INTEGRATION=true` to enable proper integration with the Powerlevel10k ZSH theme.
+Improves compatibility if you use the Powerlevel10k theme for ZSH. Turn this on if your fancy terminal prompt causes issues with Roo.
 
 #### ZDOTDIR Handling
 <img src="/img/shell-integration/shell-integration-7.png" alt="Enable ZDOTDIR handling checkbox" width="600" />
 
-Creates a temporary directory for ZDOTDIR to handle ZSH shell integration properly while preserving your ZSH configuration.
+Helps Roo work with custom ZSH configurations without interfering with your personal shell settings and customizations.
 
 ## How Shell Integration Works
 
-Shell integration uses terminal sequences to mark different stages of command execution:
+Shell integration connects Roo to your terminal's command execution process in real-time:
 
-1. **Activation**: When you open a terminal, your shell sends an activation sequence (`\x1b]633;A\x07`).
+1. **Connection**: When you open a terminal, VS Code establishes a special connection with your shell.
 
-2. **Command Lifecycle**: VSCode tracks each command using Operating System Command (OSC) sequences:
-   - OSC 633;A - Mark prompt start
-   - OSC 633;B - Mark command start
-   - OSC 633;C - Mark command executed
-   - OSC 633;D - Mark command finished with exit code
-   - OSC 633;E - Set command line
-   - OSC 633;P - Set properties like current working directory
+2. **Command Tracking**: VS Code monitors your terminal activities by detecting:
+   - When a new prompt appears
+   - When you enter a command
+   - When the command starts running
+   - When the command finishes (and whether it succeeded or failed)
+   - What directory you're currently in
 
-3. **Shell-Specific Implementation**:
+3. **Different Shells, Same Result**: Each shell type (Bash, Zsh, PowerShell, Fish) implements this slightly differently behind the scenes, but they all provide the same functionality to Roo.
 
-   | Shell | Initial Activation | Command Start | Command Stop |
-   |-------|-------------------|---------------|--------------|
-   | Bash | `PROMPT_COMMAND` | `trap DEBUG` | `PROMPT_COMMAND` |
-   | Zsh | `precmd` | `preexec` | `precmd` |
-   | PowerShell | `prompt` function | `PSConsoleHostReadLine` | `prompt` function |
-   | Fish | `fish_prompt` | `fish_preexec` | `fish_prompt` |
-
-4. **Output Capture**: Roo Code captures command text, working directory, start/end times, exit codes, and output streams.
+4. **Information Gathering**: Roo can see what commands are running, where they're running, how long they take, whether they succeed, and their complete output - all without you having to copy and paste anything.
 
 ## Troubleshooting Shell Integration
 
@@ -188,28 +180,28 @@ Visual indicators of active shell integration:
 
 ### Ctrl+C Behavior
 
-**Issue**: If text is in the terminal when Roo runs a command, shell integration sends Ctrl+C first, breaking output capture.
+**Issue**: If text is already typed in the terminal when Roo tries to run a command, Roo will press Ctrl+C first to clear the line, which can interrupt running processes.
 
-**Workaround**: Ensure terminal prompt is clean before letting Roo run commands.
+**Workaround**: Make sure your terminal prompt is empty (no partial commands typed) before asking Roo to execute terminal commands.
 
 ### Multi-line Command Issues
 
-**Issue**: Multi-line commands produce unexpected behavior with phantom output from previous commands.
+**Issue**: Commands that span multiple lines can confuse Roo and may show output from previous commands mixed in with current output.
 
-**Workaround**: Use command chaining with `&&` instead of multiple lines (e.g., `echo a && echo b`).
+**Workaround**: Instead of multi-line commands, use command chaining with `&&` to keep everything on one line (e.g., `echo a && echo b` instead of typing each command on a separate line).
 
 ### PowerShell-Specific Issues
 
-1. **Output Buffering**: PowerShell may emit completion markers before output is fully processed.
-2. **Duplicate Commands**: PowerShell fails to execute identical consecutive commands.
+1. **Premature Completion**: PowerShell sometimes tells Roo a command is finished before all the output has been shown.
+2. **Repeated Commands**: PowerShell may refuse to run the same command twice in a row.
 
-**Workaround**: Enable the "PowerShell counter workaround" setting and set a terminal command delay of 150ms.
+**Workaround**: Enable the "PowerShell counter workaround" setting and set a terminal command delay of 150ms in the settings to give commands more time to complete.
 
 ### Incomplete Terminal Output
 
-**Issue**: VSCode may not capture complete command output.
+**Issue**: Sometimes VS Code doesn't show or capture all the output from a command.
 
-**Workaround**: Close and reopen the terminal, then run the command again.
+**Workaround**: If you notice missing output, try closing and reopening the terminal tab, then run the command again. This refreshes the terminal connection.
 
 ## Troubleshooting Resources
 
