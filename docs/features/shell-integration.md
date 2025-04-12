@@ -47,6 +47,17 @@ Adds a small pause after running commands to help Roo capture all output correct
 
 ### Advanced Settings
 
+:::info Important
+**Terminal restart required for these settings**
+
+Changes to advanced terminal settings only take effect after restarting your terminals. To restart a terminal:
+
+1. Click the trash icon in the terminal panel to close the current terminal
+2. Open a new terminal with Terminal → New Terminal or <kbd>Ctrl</kbd>+<kbd>`</kbd> (backtick)
+
+Always restart all open terminals after changing any of these settings.
+:::
+
 #### PowerShell Counter Workaround
 <img src="/img/shell-integration/shell-integration-3.png" alt="PowerShell counter workaround checkbox" width="600" />
 
