@@ -29,7 +29,7 @@ customModes:
       - read
       - command
       - - edit
-        - fileRegex: \.(md|mdx)$
-          description: Documentation files
+        - fileRegex: (\.(md|mdx)$|sidebars\.ts$)
+          description: Documentation files and sidebar configuration
       - mcp
     source: project
