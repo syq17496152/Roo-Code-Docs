@@ -20,6 +20,12 @@ Once configured, Roo Code will use your local Claude CLI installation to interac
 
 The Claude Code provider allows you to use Anthropic's Claude models through their official CLI (Command Line Interface) instead of the web API. This provides direct access to your Claude Max subscription right from Roo Code.
 
+:::warning API Key Precedence
+The Claude Code provider executes the `claude` command-line tool, which is built on Anthropic's official SDKs. These SDKs are designed to automatically use the `ANTHROPIC_API_KEY` environment variable for authentication if it is set.
+
+If you have this environment variable defined, it will take precedence over the CLI's internal login (`/login`). Roo Code will reflect that an API key is being used, which is the expected behavior of the underlying `claude` tool.
+:::
+
 **Website:** [https://docs.anthropic.com/en/docs/claude-code/setup](https://docs.anthropic.com/en/docs/claude-code/setup)
 
 ---
@@ -86,8 +92,8 @@ The specific models available depend on your Claude CLI subscription and plan.
 ## Common Questions
 
 **"Do I need a Claude API key for this provider?"**
-- No! This provider uses your Claude CLI setup instead of the web API
-- You'll need the Claude CLI installed and authenticated on your system
+- No, the primary authentication method is the CLI's built-in `/login` command.
+- However, if the `ANTHROPIC_API_KEY` environment variable is set in your system, the Claude CLI will use it for authentication, and it will take precedence.
 
 **"How do I install the Claude CLI?"**
 - Visit [Anthropic's CLI documentation](https://docs.anthropic.com/en/docs/claude-code/setup) for installation instructions
