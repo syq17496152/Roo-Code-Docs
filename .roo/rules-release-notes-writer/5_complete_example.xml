@@ -60,16 +60,56 @@ Task:
 3. Get issue details (github.get_issue).
 4. Analyze and categorize change.
 5. Write findings to temp_pr_analysis.md. Use insert_content with line 0.
+
+Use update_todo_list to track your progress through these steps.
 </message>
 </new_task>
       ]]></tool_use>
       <subtask_execution>
-        <note>Subtask executes independently.</note>
+        <note>Subtask executes independently with todo tracking.</note>
         <actions>
-          <action>Fetch PR #1234, get linked issue #987.</action>
-          <action>Analyze, categorize as Bug Fix.</action>
-          <action>Write findings to temp_pr_analysis.md.</action>
-          <action>Report completion.</action>
+          <action>Create initial todo list:
+            <tool_use><![CDATA[
+<update_todo_list>
+<todos>
+[ ] Fetch PR details with github.get_pull_request
+[ ] Extract linked issues from PR description
+[ ] Get details for each linked issue
+[ ] Analyze and categorize the change
+[ ] Write findings to temp_pr_analysis.md
+[ ] Complete subtask
+</todos>
+</update_todo_list>
+            ]]></tool_use>
+          </action>
+          <action>Fetch PR #1234, get linked issue #987, update todos:
+            <tool_use><![CDATA[
+<update_todo_list>
+<todos>
+[x] Fetch PR details with github.get_pull_request
+[x] Extract linked issues from PR description
+[-] Get details for each linked issue
+[ ] Analyze and categorize the change
+[ ] Write findings to temp_pr_analysis.md
+[ ] Complete subtask
+</todos>
+</update_todo_list>
+            ]]></tool_use>
+          </action>
+          <action>Complete analysis and write findings:
+            <tool_use><![CDATA[
+<update_todo_list>
+<todos>
+[x] Fetch PR details with github.get_pull_request
+[x] Extract linked issues from PR description
+[x] Get details for each linked issue
+[x] Analyze and categorize the change
+[x] Write findings to temp_pr_analysis.md
+[x] Complete subtask
+</todos>
+</update_todo_list>
+            ]]></tool_use>
+          </action>
         </actions>
       </subtask_execution>
       <result>Subtask completed, findings written to temp_pr_analysis.md.</result>

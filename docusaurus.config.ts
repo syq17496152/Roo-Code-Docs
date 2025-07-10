@@ -145,6 +145,10 @@ const config: Config = {
             to: '/advanced-usage/footgun-prompting',
             from: ['/features/footgun-prompting'],
           },
+          {
+            to: '/features/codebase-indexing',
+            from: ['/features/experimental/codebase-indexing'],
+          },
           
           // MCP related redirects
           {

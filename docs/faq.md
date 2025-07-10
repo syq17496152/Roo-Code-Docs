@@ -146,7 +146,7 @@ Yes, you can create your own MCP servers to add custom functionality to Roo Code
 
 ### What is Codebase Indexing?
 
-[Codebase Indexing](/features/experimental/codebase-indexing) is an experimental feature that creates a semantic search index of your project using AI embeddings. This enables Roo Code to better understand and navigate large codebases by finding relevant code based on meaning rather than just keywords.
+[Codebase Indexing](/features/codebase-indexing) creates a semantic search index of your project using AI embeddings. This enables Roo Code to better understand and navigate large codebases by finding relevant code based on meaning rather than just keywords.
 
 ### How much does Codebase Indexing cost?
 

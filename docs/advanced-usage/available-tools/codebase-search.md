@@ -1,7 +1,7 @@
 # codebase_search
 
-:::warning Experimental Feature
-The `codebase_search` tool is part of the experimental [Codebase Indexing](/features/experimental/codebase-indexing) feature. This feature is under active development and may change significantly in future releases. It requires additional setup including an embedding provider and vector database.
+:::info Setup Required
+The `codebase_search` tool is part of the [Codebase Indexing](/features/codebase-indexing) feature. It requires additional setup including an embedding provider and vector database.
 :::
 
 The `codebase_search` tool performs semantic searches across your entire codebase using AI embeddings. Unlike traditional text-based search, it understands the meaning of your queries and finds relevant code even when exact keywords don't match.
@@ -48,9 +48,9 @@ This tool searches through your indexed codebase using semantic similarity rathe
 
 ## Requirements
 
-This tool is only available when the experimental Codebase Indexing feature is properly configured:
+This tool is only available when the Codebase Indexing feature is properly configured:
 
-- **Feature Enabled**: Codebase Indexing must be enabled in experimental settings
+- **Feature Configured**: Codebase Indexing must be configured in settings
 - **Embedding Provider**: OpenAI API key or Ollama configuration required
 - **Vector Database**: Qdrant instance running and accessible
 - **Index Status**: Codebase must be indexed (status: "Indexed" or "Indexing")
@@ -59,11 +59,10 @@ This tool is only available when the experimental Codebase Indexing feature is p
 
 ## Limitations
 
-- **Experimental Feature**: Part of the experimental codebase indexing system
 - **Requires Configuration**: Depends on external services (embedding provider + Qdrant)
 - **Index Dependency**: Only searches through indexed code blocks
 - **Result Limits**: Maximum of 50 results per search to maintain performance
-- **Similarity Threshold**: Only returns results above 0.4 similarity score
+- **Similarity Threshold**: Only returns results above similarity threshold (default: 0.4, configurable)
 - **File Size Limits**: Limited to files under 1MB that were successfully indexed
 - **Language Support**: Effectiveness depends on Tree-sitter language support
 
@@ -87,7 +86,7 @@ When the `codebase_search` tool is invoked, it follows this process:
 3. **Vector Search Execution**:
    - Searches the Qdrant vector database for similar code embeddings
    - Uses cosine similarity to find the most relevant code blocks
-   - Applies the minimum similarity threshold (0.4) to filter results
+   - Applies the minimum similarity threshold (default: 0.4, configurable) to filter results
    - Limits results to 50 matches for optimal performance
 
 4. **Path Filtering** (if specified):

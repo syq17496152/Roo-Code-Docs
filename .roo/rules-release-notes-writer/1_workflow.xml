@@ -33,21 +33,32 @@
 		             </step>
 				<step number="2">
 					<action>Fetch release dates</action>
-					<tool>github.get_tag</tool>
-					<details>Get commit dates for new and previous version tags to set a date range.</details>
+					<tool>gh api (get tag)</tool>
+					<details>Get commit dates for new and previous version tags to set a date range using gh CLI.</details>
 				</step>
 				<step number="3">
 					<action>Search for merged PRs within date range</action>
-					<tool>github.search_issues</tool>
+					<tool>gh pr list or gh search prs</tool>
 					<details>
-		          Use release date range to search for merged PRs.
-		          Query: `is:pr is:merged repo:RooCodeInc/Roo-Code merged:YYYY-MM-DD..YYYY-MM-DD`
-		        </details>
+				        Use release date range to search for merged PRs.
+				        Query: `--state merged --search "merged:YYYY-MM-DD..YYYY-MM-DD"`
+				      </details>
 				</step>
 			</steps>
 		</phase>
 		<phase name="process_each_pr">
 			<description>Process PRs with subtasks. Each subtask investigates one PR, storing findings in a temp file.</description>
+			<initialization>
+				<step>
+					<action>Create temporary analysis file</action>
+					<tool>write_to_file</tool>
+					<file>temp_pr_analysis.md</file>
+					<content># PR Analysis for Release Notes v[version]
+
+</content>
+					<details>Create an empty temp file that subtasks will append to.</details>
+				</step>
+			</initialization>
 			<subtask_workflow>
 				<overview>
 					For each PR, create a subtask with new_task. Each subtask investigates one PR and appends findings to temp_pr_analysis.md.
@@ -64,11 +75,13 @@
 							Investigate PR #[number] for release notes v[version].
 							
 							Task:
-							1. Get PR details with github.get_pull_request
+							1. Get PR details with gh pr view
 							2. Extract linked issues from PR description (e.g., "Fixes #123")
-							3. Get details for linked issues with github.get_issue
+							3. Get details for linked issues with gh issue view
 							4. Analyze and categorize the change (bug fix, feature, etc.)
-							5. Append findings to temp_pr_analysis.md in the specified format. Use insert_content with line 0.
+							5. Append findings to temp_pr_analysis.md in the specified format. Use insert_content with line 0 to append to the end of the file.
+							
+							Use update_todo_list to track your progress through these steps.
 						</message_format>
 					</step>
 					

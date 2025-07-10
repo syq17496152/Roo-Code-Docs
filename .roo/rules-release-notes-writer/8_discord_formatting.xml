@@ -46,8 +46,9 @@ This release includes N other fixes... Thanks to contributors: [list]
     </step>
 
     <step number="5">
-      <action>Present Discord-formatted content.</action>
-      <delivery>Present formatted content in completion message.</delivery>
+      <action>Write Discord-formatted content to temp file.</action>
+      <delivery>Write formatted content to temp_discord_release_notes.md.</delivery>
+      <tool>write_to_file</tool>
     </step>
   </workflow_steps>
 

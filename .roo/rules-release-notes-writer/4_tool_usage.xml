@@ -1,80 +1,54 @@
   <tool_usage_guide>
   <overview>
-    Guidance for using GitHub MCP and file tools for creating release notes.
+    Guidance for using GitHub CLI (gh) and file tools for creating release notes.
   </overview>
 
-  <github_tools>
-    <tool name="github.get_tag">
+  <github_cli_tools>
+    <tool name="gh api (get tag)">
       <purpose>Fetch release date for a version tag.</purpose>
       <usage><![CDATA[
-<use_mcp_tool>
-<server_name>github</server_name>
-<tool_name>get_tag</tool_name>
-<arguments>{ "owner": "RooCodeInc", "repo": "Roo-Code", "tag": "v3.20.3" }</arguments>
-</use_mcp_tool>
+<execute_command>
+<command>gh api repos/RooCodeInc/Roo-Code/git/refs/tags/v3.20.3 --jq '.object.sha' | xargs -I {} gh api repos/RooCodeInc/Roo-Code/git/commits/{} --jq '.committer.date'</command>
+</execute_command>
       ]]></usage>
       <output>Returns commit date for the tag to set the PR search range.</output>
     </tool>
 
-    <tool name="github.search_issues">
+    <tool name="gh pr list (search PRs)">
       <purpose>Get all merged PRs between two dates.</purpose>
       <usage><![CDATA[
-<use_mcp_tool>
-<server_name>github</server_name>
-<tool_name>search_issues</tool_name>
-<arguments>{ "owner": "RooCodeInc", "repo": "Roo-Code", "q": "is:pr is:merged repo:RooCodeInc/Roo-Code merged:2025-01-10..2025-01-13" }</arguments>
-</use_mcp_tool>
+<execute_command>
+<command>gh pr list --repo RooCodeInc/Roo-Code --state merged --search "merged:2025-01-10..2025-01-13" --json number,title,author,mergedAt --limit 1000</command>
+</execute_command>
       ]]></usage>
-      <parsing_tip>Extract PR numbers from the results list.</parsing_tip>
+      <parsing_tip>Returns JSON array with PR numbers, titles, authors, and merge dates.</parsing_tip>
     </tool>
 
-    <tool name="github.get_pull_request">
+    <tool name="gh pr view">
       <purpose>Get details for a specific PR.</purpose>
       <usage><![CDATA[
-<use_mcp_tool>
-<server_name>github</server_name>
-<tool_name>get_pull_request</tool_name>
-<arguments>{ "owner": "RooCodeInc", "repo": "Roo-Code", "pull_number": 1234 }</arguments>
-</use_mcp_tool>
+<execute_command>
+<command>gh pr view 1234 --repo RooCodeInc/Roo-Code --json number,title,author,body,mergedAt,files</command>
+</execute_command>
       ]]></usage>
       <extract>
         <field>title</field>
-        <field>user.login (author)</field>
+        <field>author.login (author)</field>
         <field>body</field>
+        <field>files (changed files)</field>
       </extract>
     </tool>
 
-    <tool name="github.get_pull_request_files">
-      <purpose>See which files changed in a PR.</purpose>
-      <usage><![CDATA[
-<use_mcp_tool>
-<server_name>github</server_name>
-<tool_name>get_pull_request_files</tool_name>
-<arguments>{ "owner": "RooCodeInc", "repo": "Roo-Code", "pull_number": 1234 }</arguments>
-</use_mcp_tool>
-      ]]></usage>
-      <analysis>
-        Use file paths to understand change scope (e.g., src/extension/* for core, webview-ui/* for UI).
-      </analysis>
-    </tool>
-
-    <tool name="github.get_pull_request_diff">
-      <purpose>Get code changes for deeper analysis.</purpose>
-      <when_to_use>When PR title/description is unclear.</when_to_use>
-    </tool>
-
-    <tool name="github.get_issue">
+    <tool name="gh issue view">
       <purpose>Get details for linked issues to acknowledge all contributors.</purpose>
       <usage><![CDATA[
-<use_mcp_tool>
-<server_name>github</server_name>
-<tool_name>get_issue</tool_name>
-<arguments>{ "owner": "RooCodeInc", "repo": "Roo-Code", "issue_number": 987 }</arguments>
-</use_mcp_tool>
+<execute_command>
+<command>gh issue view 987 --repo RooCodeInc/Roo-Code --json number,title,author,body</command>
+</execute_command>
       ]]></usage>
       <extract>
         <field>title</field>
-        <field>user.login (reporter)</field>
+        <field>author.login (reporter)</field>
         <field>body</field>
       </extract>
       <issue_extraction_patterns>
@@ -85,7 +59,17 @@
         <pattern>#123</pattern>
       </issue_extraction_patterns>
     </tool>
-  </github_tools>
+
+    <tool name="gh search prs">
+      <purpose>Alternative method to search for PRs with more complex queries.</purpose>
+      <usage><![CDATA[
+<execute_command>
+<command>gh search prs --repo RooCodeInc/Roo-Code --merged --merged-at "2025-01-10..2025-01-13" --json number,title,author,mergedAt --limit 1000</command>
+</execute_command>
+      ]]></usage>
+      <note>Use this if gh pr list doesn't support the date range properly.</note>
+    </tool>
+  </github_cli_tools>
 
   <subtask_tools>
     <tool name="new_task">
@@ -101,14 +85,64 @@
 <message>Investigate PR #1234 for release notes v3.20.3.
 
 Task:
-1. Get PR details (github.get_pull_request)
+1. Get PR details (gh pr view)
 2. Extract linked issues from description
-3. Get issue details (github.get_issue)
+3. Get issue details (gh issue view)
 4. Analyze and categorize change
 5. Write findings to temp_pr_analysis.md in the required format. Use insert_content with line 0.
+
+Use update_todo_list to track your progress through these steps.
 </message>
 </new_task>
       ]]></usage>
+    </tool>
+
+    <tool name="update_todo_list">
+      <purpose>Track progress through PR investigation steps in subtasks.</purpose>
+      <when_to_use>At the start of each PR investigation subtask and after completing each step.</when_to_use>
+      <usage><![CDATA[
+<!-- Initial todo list at start of PR investigation -->
+<update_todo_list>
+<todos>
+[ ] Fetch PR details with gh pr view
+[ ] Extract linked issues from PR description
+[ ] Get details for each linked issue
+[ ] Analyze and categorize the change
+[ ] Write findings to temp_pr_analysis.md
+[ ] Complete subtask
+</todos>
+</update_todo_list>
+
+<!-- After fetching PR details -->
+<update_todo_list>
+<todos>
+[x] Fetch PR details with gh pr view
+[-] Extract linked issues from PR description
+[ ] Get details for each linked issue
+[ ] Analyze and categorize the change
+[ ] Write findings to temp_pr_analysis.md
+[ ] Complete subtask
+</todos>
+</update_todo_list>
+
+<!-- Final update when all done -->
+<update_todo_list>
+<todos>
+[x] Fetch PR details with gh pr view
+[x] Extract linked issues from PR description
+[x] Get details for each linked issue
+[x] Analyze and categorize the change
+[x] Write findings to temp_pr_analysis.md
+[x] Complete subtask
+</todos>
+</update_todo_list>
+      ]]></usage>
+      <best_practices>
+        <practice>Update immediately after each step completes</practice>
+        <practice>Use [-] for in-progress items, [x] for completed</practice>
+        <practice>Add specific issue numbers when multiple issues exist</practice>
+        <practice>Only mark complete when verified</practice>
+      </best_practices>
     </tool>
     
     <tool name="new_task">

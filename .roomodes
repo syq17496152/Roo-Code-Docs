@@ -9,7 +9,6 @@ customModes:
       - - edit
         - fileRegex: (docs/update-notes/.*\.(md|mdx)$|sidebars\.ts$)
           description: Release notes files and sidebar configuration
-      - mcp
     source: project
   - slug: mode-writer
     name: ✍️ Mode Writer

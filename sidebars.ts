@@ -40,6 +40,7 @@ const sidebars: SidebarsConfig = {
         'features/browser-use',
         'features/checkpoints',
         'features/code-actions',
+        'features/codebase-indexing',
         'features/custom-instructions',
         'features/custom-modes',
         'features/fast-edits',
@@ -52,6 +53,7 @@ const sidebars: SidebarsConfig = {
         'features/concurrent-file-reads',
         'features/rooignore',
         'features/suggested-responses',
+        'features/task-todo-list',
         'features/shell-integration',
         {
           type: 'category',
@@ -74,7 +76,6 @@ const sidebars: SidebarsConfig = {
           label: 'Experimental',
           items: [
             'features/experimental/experimental-features',
-            'features/experimental/codebase-indexing',
             'features/experimental/concurrent-file-edits',
             'features/experimental/power-steering',
           ],
@@ -106,6 +107,7 @@ const sidebars: SidebarsConfig = {
             'advanced-usage/available-tools/search-files',
             'advanced-usage/available-tools/search-and-replace',
             'advanced-usage/available-tools/switch-mode',
+            'advanced-usage/available-tools/update-todo-list',
             'advanced-usage/available-tools/use-mcp-tool',
             'advanced-usage/available-tools/write-to-file',
           ],
@@ -201,6 +203,20 @@ const sidebars: SidebarsConfig = {
       label: 'Update Notes',
       items: [
         'update-notes/index',
+        {
+          type: 'category',
+          label: '3.23',
+          items: [
+            { type: 'doc', id: 'update-notes/v3.23', label: '3.23 Combined' },
+            { type: 'doc', id: 'update-notes/v3.23.6', label: '3.23.6' },
+            { type: 'doc', id: 'update-notes/v3.23.5', label: '3.23.5' },
+            { type: 'doc', id: 'update-notes/v3.23.4', label: '3.23.4' },
+            { type: 'doc', id: 'update-notes/v3.23.3', label: '3.23.3' },
+            { type: 'doc', id: 'update-notes/v3.23.2', label: '3.23.2' },
+            { type: 'doc', id: 'update-notes/v3.23.1', label: '3.23.1' },
+            { type: 'doc', id: 'update-notes/v3.23.0', label: '3.23.0' },
+          ],
+        },
         {
           type: 'category',
           label: '3.22',

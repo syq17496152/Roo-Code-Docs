@@ -32,33 +32,39 @@
     
     <steps>
       <step number="1">
-        <action>Extract PR number from message.</action>
+        <action>Extract PR number from message and create todo list.</action>
+        <tool>update_todo_list</tool>
+        <details>Initialize tracking for the PR investigation steps.</details>
       </step>
       
       <step number="2">
         <action>Fetch PR details.</action>
-        <tool>github.get_pull_request</tool>
+        <tool>gh pr view</tool>
         <extract>Title, author, description, merge date.</extract>
+        <todo_update>Mark "Fetch PR details" as complete.</todo_update>
       </step>
       
       <step number="3">
         <action>Extract linked issues from PR description.</action>
         <process>Search for patterns like "Fixes #123".</process>
+        <todo_update>Mark "Extract linked issues" as complete.</todo_update>
       </step>
       
       <step number="4">
         <action>Fetch issue details.</action>
-        <tool>github.get_issue</tool>
+        <tool>gh issue view</tool>
         <details>For each linked issue, get title and reporter.</details>
+        <todo_update>Mark "Get details for each linked issue" as complete.</todo_update>
       </step>
       
       <step number="5">
         <action>Analyze and categorize the change.</action>
         <categories>Bug Fix, Feature, QOL Improvement, Provider Update, Performance.</categories>
+        <todo_update>Mark "Analyze and categorize the change" as complete.</todo_update>
       </step>
       
       <step number="6">
-        <action>Write findings to temp file.</action>
+        <action>Append findings to temp file.</action>
         <tool>insert_content (line 0)</tool>
         <format><![CDATA[
 ## PR #[number]: [Title]
@@ -72,12 +78,15 @@
 ---
         ]]></format>
         <file>temp_pr_analysis.md</file>
+        <todo_update>Mark "Append findings to temp_pr_analysis.md" as complete.</todo_update>
       </step>
       
       <step number="7">
-        <action>Report completion.</action>
-        <tool>attempt_completion</tool>
-        <message>Investigated PR #[number], findings documented in temp_pr_analysis.md.</message>
+        <action>Write completion summary to temp file.</action>
+        <tool>write_to_file</tool>
+        <file>temp_subtask_complete.md</file>
+        <content>Investigated PR #[number], findings documented in temp_pr_analysis.md.</content>
+        <todo_update>Mark "Complete subtask" as complete.</todo_update>
       </step>
     </steps>
   </pr_investigation_workflow>
@@ -121,8 +130,17 @@ This release includes N other fixes... Thanks to contributors: [list]
       </step>
       
       <step number="6">
-        <action>Present Discord-formatted content.</action>
-        <tool>attempt_completion</tool>
+        <action>Write Discord-formatted content to temp file.</action>
+        <tool>write_to_file</tool>
+        <file>temp_discord_release_notes.md</file>
+        <details>Write the complete Discord-formatted release notes to the temp file.</details>
+      </step>
+      
+      <step number="7">
+        <action>Write completion summary to temp file.</action>
+        <tool>write_to_file</tool>
+        <file>temp_subtask_complete.md</file>
+        <content>Discord-formatted release notes for version [version] written to temp_discord_release_notes.md.</content>
       </step>
     </steps>
   </discord_formatting_workflow>
