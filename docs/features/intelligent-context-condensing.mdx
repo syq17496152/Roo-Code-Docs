@@ -1,11 +1,11 @@
 ---
-sidebar_label: 'Intelligent Context Condensing'
+sidebar_label: '智能上下文压缩'
 ---
 import Codicon from '@site/src/components/Codicon';
 
-# Intelligent Context Condensing
+# 智能上下文压缩
 
-The Intelligent Context Condensing feature helps manage long conversations by summarizing earlier parts of the dialogue. This prevents important information from being lost when the context window nears its limit. This feature is **enabled by default**.
+智能上下文压缩功能通过总结对话的早期部分来帮助管理长对话。这可以防止在上下文窗口接近限制时丢失重要信息。此功能**默认启用**。
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
   <iframe
@@ -26,83 +26,66 @@ The Intelligent Context Condensing feature helps manage long conversations by su
 <br />
 ---
 
-## How It Works
+## 工作原理
 
-As your conversation with Roo Code grows, it might approach the context window limit of the underlying AI model. When this happens, older messages would typically be removed to make space. Intelligent Context Condensing aims to prevent this abrupt loss by:
+当您与 Roo Code 的对话增长时，它可能会接近底层 AI 模型的上下文窗口限制。发生这种情况时，通常会删除较旧的消息以腾出空间。智能上下文压缩旨在通过以下方式防止这种突然的损失：
 
-1.  **Summarizing:** Using an AI model, it condenses earlier parts of the conversation.
-2.  **Retaining Essentials:** The goal is to reduce the overall token count while keeping the key information from the summarized messages.
-3.  **Maintaining Flow:** This allows the AI to have a more coherent understanding of the entire conversation, even very long ones.
+1.  **总结：** 使用 AI 模型，它会压缩对话的早期部分。
+2.  **保留关键内容：** 目标是减少总令牌数，同时保留从总结消息中获取的关键信息。
+3.  **保持流程连贯：** 这允许 AI 对整个对话（即使是很长的对话）有更连贯的理解。
 
-**Important Considerations:**
-*   **Summarization Impact:** While original messages are preserved if you use [Checkpoints](/features/checkpoints) to rewind, the summarized version is what's used in ongoing LLM calls to keep the context manageable.
-*   **Cost:** The AI call to perform the summarization incurs a cost. This cost is included in the context condensing metrics displayed in the UI.
+**重要注意事项：**
+*   **总结影响：** 虽然如果您使用 [检查点](/features/checkpoints) 回退，原始消息会被保留，但正在进行的 LLM 调用中使用的总结版本是为了保持上下文可管理。
+*   **成本：** 执行总结的 AI 调用会产生费用。此费用包含在 UI 中显示的上下文压缩指标中。
 
----
+// ... existing code ...
 
-## Configuration
+## 配置
 
-Intelligent Context Condensing is **enabled by default** and offers several configuration options:
+智能上下文压缩**默认启用**并提供多种配置选项：
 
-1.  Open Roo Code settings (<Codicon name="gear" /> icon in the top right corner of the Roo Code panel).
-2.  Navigate to the "Context" settings section.
-3.  Configure the available options:
-    - **Automatically trigger intelligent context condensing**: Enabled by default, this controls whether condensing happens automatically
-    - **Threshold to trigger intelligent context condensing**: A percentage slider (default 100%) that determines when condensing activates based on context window usage
-    - **API Configuration for Context Condensing**: Choose which API configuration to use for condensing operations (defaults to your current active configuration)
-    - **Custom Context Condensing Prompt**: Customize the system prompt used for context condensing operations
+1.  打开 Roo Code 设置（位于 Roo Code 面板右上角的 <Codicon name="gear" /> 图标）。
+2.  导航到 "Context" 设置部分。
+3.  配置可用选项：
+    - **自动触发智能上下文压缩**：默认启用，控制是否自动进行压缩。
+    - **触发智能上下文压缩的阈值**：一个百分比滑块（默认为 100%），根据上下文窗口使用情况确定何时激活压缩。
+    - **用于上下文压缩的 API 配置**：选择要用于压缩操作的 API 配置（默认使用当前活动的配置）。
+    - **自定义上下文压缩提示**：自定义用于上下文压缩操作的系统提示。
 
-<img src="/img/intelligent-context-condensing/intelligent-context-condensing.png" alt="Settings for Intelligent Context Condensing" width="600" />
-*Intelligent Context Condensing configuration options: automatic triggering toggle, threshold slider, API configuration selection, and custom prompt customization.*
----
+// ... existing code ...
 
-## Controlling and Understanding Context Condensing
+## 控制和理解上下文压缩
 
-Roo Code provides several ways to control and understand the Intelligent Context Condensing feature:
+Roo Code 提供了多种方法来控制和理解智能上下文压缩功能：
 
-### Controlling Context Condensing
-*   **Automatic Threshold:** The threshold slider in "Context" settings allows you to define a percentage (e.g., 80%) of context window usage. Roo Code will attempt to condense the context automatically when the conversation reaches this level of capacity.
-*   **API Configuration:** Select which API configuration to use for context condensing operations. This allows you to use a different provider or model specifically for condensing if desired.
-*   **Custom Prompts:** Modify the system prompt used for condensing to better suit your workflow or to emphasize certain aspects of conversation summarization.
-*   **Manual Trigger:** A **Condense Context** button is available at the top of the task, positioned to the right of the context bar. This allows you to initiate the context condensing process at any time.
+### 控制上下文压缩
+*   **自动阈值：** "Context" 设置中的阈值滑块允许您定义一个百分比（例如，80%）的上下文窗口使用率。当对话达到这个容量水平时，Roo Code 将尝试自动压缩上下文。
+*   **API 配置：** 选择要用于上下文压缩操作的 API 配置。这允许您专门为压缩使用不同的提供商或模型。
+*   **自定义提示：** 修改用于压缩的系统提示，以更好地适合您的工作流程或强调对话总结的某些方面。
+*   **手动触发：** 在任务顶部有一个 **压缩上下文** 按钮，位于上下文栏的右侧。这允许您随时启动上下文压缩过程。
 
-    <img src="/img/intelligent-context-condensing/intelligent-context-condensing-1.png" alt="Manual Condense Context button in expanded task view" width="600" />
-    *The Manual Condense Context button (highlighted with a yellow arrow) is easily accessible for manual control.*
+// ... existing code ...
 
-### Understanding Context Condensing Activity
-*   **Context Condensing Metrics:** When context condensing occurs, Roo Code displays:
-    *   The context token counts before and after context condensing.
-    *   The cost associated with the context condensing AI call.
-    *   An expandable summary detailing what was condensed (this information is part of the `ContextCondenseRow` component visible in the chat history).
+### 理解上下文压缩活动
+*   **上下文压缩指标：** 当上下文压缩发生时，Roo Code 显示：
+    *   上下文压缩前后的上下文令牌计数。
+    *   与上下文压缩 AI 调用相关的成本。
+    *   可展开的摘要详细说明了哪些内容被压缩（这些信息是 `ContextCondenseRow` 组件的一部分，在聊天历史记录中可见）。
 
-<img src="/img/intelligent-context-condensing/intelligent-context-condensing-2.png" alt="Context condensed message in chat" width="600" />
-*After context condensing, a message indicates the context has been condensed, showing token changes and cost.*
+// ... existing code ...
 
-*   **Visual Indicators:**
-    *   A progress indicator ("Condensing context...") is shown in the chat interface while context condensing is active.
+## 技术实现
 
-<img src="/img/intelligent-context-condensation/intelligent-context-condensation-3.png" alt="Condensing context progress indicator in chat" width="600" />
-*The "Condensing context..." indicator appears in the chat during the process.*
+### 令牌计数
+Roo Code 使用复杂的令牌计数系统，该系统：
+- 在可用时使用原生令牌计数端点（例如，Anthropic 的 API）
+- 如果 API 调用失败，则回退到 tiktoken 估算
+- 为不同类型的内容提供准确的计数：
+  - 文本内容：使用基于单词的估算，包括标点符号和换行符的开销
+  - 图像内容：每张图像使用保守估计的 300 个令牌
+  - 系统提示：包括结构元素的额外开销
 
-    *   The task header also displays the current context condensing status.
-    *   The `ContextWindowProgress` bar offers a visual representation of token distribution, including current usage, space reserved for the AI's output, available space, and raw token numbers.
-*   **Interface Clarity:** The "Condense Context" button includes a tooltip explaining its function, available in all supported languages.
-
----
-
-## Technical Implementation
-
-### Token Counting
-Roo Code uses a sophisticated token counting system that:
-- Employs native token counting endpoints when available (e.g., Anthropic's API)
-- Falls back to tiktoken estimation if API calls fail
-- Provides accurate counting for different content types:
-  - Text content: Uses word-based estimation with punctuation and newline overhead
-  - Image content: Uses a conservative estimate of 300 tokens per image
-  - System prompts: Includes additional overhead for structural elements
-
-### Context Window Management
-- By default, 30% of the context window is reserved (20% for model output and 10% as a safety buffer), leaving 70% available for conversation history.
-- This reservation can be overridden by model-specific settings
-- The system automatically calculates available space while maintaining this reservation
-
+### 上下文窗口管理
+- 默认情况下，30% 的上下文窗口被预留（20% 用于模型输出，10% 作为安全缓冲区），剩下 70% 可用于对话历史。
+- 此预留可以通过特定于模型的设置覆盖
+- 系统在保持此预留的同时自动计算可用空间

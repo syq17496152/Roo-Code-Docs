@@ -1,61 +1,61 @@
 ---
-sidebar_label: 'Power Steering'
+sidebar_label: '动力转向'
 ---
 import Codicon from '@site/src/components/Codicon';
 
-# Power Steering (Experimental Feature)
+# 动力转向（实验性功能）
 
-The "Power Steering" experimental feature (`POWER_STEERING`) is designed to enhance the consistency of Roo Code's responses by more frequently reminding the underlying Large Language Model (LLM) about its current mode definition and any custom instructions.
+"动力转向" 实验性功能 (`POWER_STEERING`) 旨在通过更频繁地提醒底层大语言模型 (LLM) 其当前模式定义和任何自定义指令来增强 Roo Code 响应的一致性。
 
----
+// ... existing code ...
 
-## How It Works
+## 它如何工作
 
-When Power Steering is enabled, Roo Code constantly reinforces the LLM's understanding of its assigned role (e.g., "You are a helpful coding assistant") and any specific guidelines provided by the user (e.g., "Always provide code examples in Python").
+启用动力转向后，Roo Code 会不断强化 LLM 对其分配角色（例如，"你是一个有用的编码助手"）和用户提供的任何特定指南（例如，"始终提供 Python 中的代码示例"）的理解。
 
-This is achieved by explicitly including the `modeDetails.roleDefinition` and `modeDetails.customInstructions` within the information sent to the LLM with each interaction.
+这是通过在每次交互中明确包含发送给 LLM 的 `modeDetails.roleDefinition` 和 `modeDetails.customInstructions` 来实现的。
 
-**Goal:**
-The primary goal is to ensure the LLM adheres more strictly to its defined persona and follows user-specific instructions more consistently. If you find Roo deviating from its role or overlooking custom rules, Power Steering can help maintain its focus.
+**目标：**
+主要目标是确保 LLM 更严格地遵循其定义的角色，并更一致地遵循用户的特定指令。如果您发现 Roo 偏离其角色或忽略自定义规则，动力转向可以帮助保持其专注度。
 
-**Trade-off:**
-These frequent reminders consume additional tokens in each message sent to the LLM. This means:
-*   Increased token usage per message.
-*   Potentially higher operational costs.
-*   The context window may be filled more quickly.
+**权衡：**
+这些频繁的提醒会在每条发送给 LLM 的消息中消耗额外的令牌。这意味着：
+*   每条消息的令牌使用量增加。
+*   运营成本可能更高。
+*   上下文窗口可能会更快填满。
 
-It's a balance between stricter adherence to instructions and resource consumption.
+这是在指令严格遵守和资源消耗之间的平衡。
 
-**Default Status:** Disabled.
+**默认状态：** 禁用。
 
----
+// ... existing code ...
 
-## Technical Details
+## 技术细节
 
-*   **Experiment ID:** `powerSteering`
-*   **Mechanism:**
-    *   The feature's status is checked by the `getEnvironmentDetails` function.
-    *   If enabled, the current mode's `roleDefinition` and `customInstructions` are added to the details sent to the LLM.
-    *   These details are wrapped in `<environment_details>` tags and become part of the context for each LLM interaction.
-*   **Impact:** By frequently including the role definition and custom instructions, the LLM is steered to generate responses more aligned with these parameters.
+*   **实验 ID：** `powerSteering`
+*   **机制：**
+    *   通过 `getEnvironmentDetails` 函数检查功能状态。
+    *   如果启用，当前模式的 `roleDefinition` 和 `customInstructions` 将添加到发送给 LLM 的详情中。
+    *   这些详情被包裹在 `<environment_details>` 标签中，并成为每次 LLM 交互上下文的一部分。
+*   **影响：** 通过频繁包含角色定义和自定义指令，LLM 被引导生成更符合这些参数的响应。
 
----
+// ... existing code ...
 
-## Enabling This Feature
+## 启用此功能
 
-Power Steering is managed within the "Experimental Features" section of Roo Code's Advanced Settings.
+动力转向在 Roo Code 高级设置的 "实验性功能" 部分进行管理。
 
-1.  Open Roo Code settings (<Codicon name="gear" /> icon in the top right corner).
-2.  Navigate to "Advanced Settings".
-3.  Locate the "Experimental Features" area.
-4.  Toggle the "Power Steering" option.
-5.  Save your changes.
-<img src="/img/power-steering/power-steering.png" alt="Settings for Intelligent Context Condensation and Power Steering" width="600" />
+1.  打开 Roo Code 设置（右上角的 <Codicon name="gear" /> 图标）。
+2.  导航到 "高级设置"。
+3.  找到 "实验性功能" 区域。
+4.  切换 "动力转向" 选项。
+5.  保存更改。
+<img src="/img/power-steering/power-steering.png" alt="智能上下文压缩和动力转向的设置" width="600" />
 
-For general information on experimental features, see [Experimental Features Overview](/features/experimental/experimental-features).
+有关实验性功能的一般信息，请参阅 [实验性功能概述](/features/experimental/experimental-features)。
 
----
+// ... existing code ...
 
-## Feedback
+## 反馈
 
-Please report any issues or suggestions regarding this feature on the [Roo Code GitHub Issues page](https://github.com/RooCodeInc/Roo-Code/issues). Your feedback is crucial for improving Roo Code.
+请在 [Roo Code GitHub Issues 页面](https://github.com/RooCodeInc/Roo-Code/issues) 上报告与此功能相关的任何问题或建议。您的反馈对于改进 Roo Code 至关重要。

@@ -1,60 +1,58 @@
 ---
-sidebar_label: Mistral AI
+sidebar_label: Mistral
 ---
 
-# Using Mistral AI With Roo Code
+# 在 Roo Code 中使用 Mistral
 
-Roo Code supports accessing models through the Mistral AI API, including both standard Mistral models and the code-specialized Codestral model.
+Mistral 是一家致力于构建强大语言模型的法国公司，其模型以强大的推理能力、实用性和诚实性而闻名。Mistral 提供了一系列开源和闭源模型，适用于多种应用场景。
 
-**Website:** [https://mistral.ai/](https://mistral.ai/)
-
----
-
-## Getting an API Key
-
-1.  **Sign Up/Sign In:** Go to the [Mistral Platform](https://console.mistral.ai/). Create an account or sign in.  You may need to go through a verification process.
-2.  **Create an API Key:**  
-    - [La Plateforme API Key](https://console.mistral.ai/api-keys/) and/or 
-    - [Codestral API Key](https://console.mistral.ai/codestral)
+**官方网站:** [https://mistral.ai/](https://mistral.ai/)
 
 ---
 
-## Supported Models
+## 获取 API 密钥
 
-Roo Code supports the following Mistral models:
-
-| Model ID               | Model Default Temperature | Function Calling | Vision / Image support |
-|------------------------|-------------------------|------------------|--------|
-| codestral-latest      | 0.3                     | ✅               | ❌      |
-| mistral-large-latest  | 0.7                     | ✅               | ❌      |
-| ministral-8b-latest   | 0.3                     | ✅               | ❌      |
-| ministral-3b-latest   | 0.3                     | ✅               | ❌      |
-| mistral-small-latest  | 0.3                     | ✅               | ❌      |
-| pixtral-large-latest  | 0.7                     | ✅               | ✅      |
-The default model temperature in Roo Code is 0.0, so you should consider experimenting with [temperature adjustments](/features/model-temperature)!
-
-**Note:**  Model availability and specifications may change.
-Refer to the [Mistral AI documentation](https://docs.mistral.ai/api/) and [Mistral Model Overview](https://docs.mistral.ai/getting-started/models/models_overview/) for the latest information.
+1.  **注册/登录:** 访问 [Mistral 平台](https://console.mistral.ai/) 创建账户或登录。
+2.  **获取 API 密钥:** 您可以在 [API 密钥管理](https://console.mistral.ai/api-keys) 页面获取 API 密钥。
+3.  **复制密钥:** 立即复制 API 密钥，该密钥仅显示一次，请妥善保存。
 
 ---
 
-## Configuration in Roo Code
+## 支持的模型
 
-1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
-2.  **Select Provider:** Choose "Mistral" from the "API Provider" dropdown.
-3.  **Enter API Key:** Paste your Mistral API key into the "Mistral API Key" field if you're using a `mistral` model.  If you intend to use `codestral-latest`, see the "Codestral" section below.
-4.  **Select Model:** Choose your desired model from the "Model" dropdown. 
+Roo Code 支持以下 Mistral 模型：
+
+*   **Mistral Large Models:**
+    *   `mistral-large-2407`
+    *   `mistral-large-2402`
+    *   `mistral-large`
+*   **Mistral Medium Models:**
+    *   `mistral-medium-2312`
+*   **Mistral Small Models:**
+    *   `mistral-small-2402`
+    *   `mistral-small`
+*   **Code Models:**
+    *   `codestral-2405`
+    *   `codestral-mamba-2407`
+*   **Embedding Models:**
+    *   `mistral-embed`
+
+关于每个模型功能的详细信息，请参阅 [Mistral 模型文档](https://docs.mistral.ai/)。
 
 ---
 
-## Using Codestral
+## 在 Roo Code 中配置
 
-[Codestral](https://docs.mistral.ai/capabilities/code_generation/) is a model specifically designed for code generation and interaction. 
-Only for Codestral you could use different endpoints (Default: codestral.mistral.ai). 
-For the La Platforme API Key change the **Codestral Base Url** to: https://api.mistral.ai 
+1.  **打开 Roo Code 设置:** 点击 Roo Code 面板中的齿轮图标 (<Codicon name="gear" />)。
+2.  **选择提供商:** 从 "API Provider" 下拉菜单中选择 "Mistral"。
+3.  **输入 API 密钥:** 将您的 Mistral API 密钥粘贴到 "Mistral API Key" 字段中。
+4.  **选择模型:** 从下拉菜单中选择您需要的模型。
+5.  **(可选) 自定义基础 URL:** 如果需要使用自定义的 Mistral API 基础 URL，请勾选 "Use custom base URL" 并输入 URL。大多数人不需要调整此项。
 
-To use Codestral:
+---
 
-1.  **Select "Mistral" as the API Provider.**
-2.  **Select a Codestral Model**
-3.  **Enter your Codestral (codestral.mistral.ai) or La Plateforme (api.mistral.ai) API Key.** 
+## 提示与注意事项
+
+*   **上下文窗口:** Mistral 模型具有较大的上下文窗口（32,768 tokens），允许您在提示中包含大量代码和上下文信息。
+*   **定价:** 请参考 [Mistral 定价页面](https://mistral.ai/pricing/) 获取最新定价信息。
+*   **速率限制:** Mistral 根据 [使用层级](https://docs.mistral.ai/rate-limits/) 实施严格的速率限制。如果您反复遇到速率限制，请考虑升级您的账户计划或联系 Mistral 支持团队。

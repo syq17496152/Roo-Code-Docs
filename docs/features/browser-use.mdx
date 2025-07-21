@@ -1,6 +1,6 @@
-# Browser Use
+# 浏览器使用
 
-Roo Code provides sophisticated browser automation capabilities that let you interact with websites directly from VS Code. This feature enables testing web applications, automating browser tasks, and capturing screenshots without leaving your development environment.
+Roo Code 提供了强大的浏览器自动化功能，让您可以直接从 VS Code 与网站互动。此功能支持测试 Web 应用程序、自动执行浏览器任务以及捕获屏幕截图，而无需离开开发环境。
 
 
 
@@ -22,162 +22,161 @@ Roo Code provides sophisticated browser automation capabilities that let you int
 
 <div style={{ marginTop: '20px' }}></div>
 
-:::caution Model Support Required
-Browser Use within Roo Code requires the use of Claude Sonnet 3.5 or 3.7
+:::caution 需要模型支持
+Roo Code 中的浏览器使用需要使用 Claude Sonnet 3.5 或 3.7
 :::
 
 ---
 
-## How Browser Use Works
+## 浏览器使用的运作方式
 
-By default, Roo Code uses a built-in browser that:
-- Launches automatically when you ask Roo to visit a website
-- Captures screenshots of web pages
-- Allows Roo to interact with web elements
-- Runs invisibly in the background
+默认情况下，Roo Code 使用一个内置浏览器，该浏览器：
+- 当您要求 Roo 访问网站时自动启动
+- 捕获网页屏幕截图
+- 允许 Roo 与网页元素互动
+- 在后台静默运行
 
-All of this happens directly within VS Code, with no setup required.
-
----
-
-## Using Browser Use
-
-A typical browser interaction follows this pattern:
-
-**Important:** Browser Use requires Claude Sonnet 3.5 or 3.7 model.
-
-1. Ask Roo to visit a website
-2. Roo launches the browser and shows you a screenshot
-3. Request additional actions (clicking, typing, scrolling)
-4. Roo closes the browser when finished
-
-For example:
-
-```
-Open the browser and view our site.
-```
-
-```
-Can you check if my website at https://roocode.com is displaying correctly?
-```
-
-```
-Browse http://localhost:3000, scroll down to the bottom of the page and check if the footer information is displaying correctly.
-```
-
-<img src="/img/browser-use/browser-use-1.png" alt="Browser use example" width="300" />
+所有这些都直接在 VS Code 内发生，无需任何设置。
 
 ---
 
-## How Browser Actions Work
+## 使用浏览器功能
 
-The browser_action tool controls a browser instance that returns screenshots and console logs after each action, allowing you to see the results of interactions.
+典型的浏览器交互遵循以下模式：
 
-Key characteristics:
-- Each browser session must start with `launch` and end with `close`
-- Only one browser action can be used per message
-- While the browser is active, no other tools can be used
-- You must wait for the response (screenshot and logs) before performing the next action
+**重要提示：** 浏览器使用需要 Claude Sonnet 3.5 或 3.7 模型。
 
-### Available Browser Actions
+1. 要求 Roo 访问网站
+2. Roo 启动浏览器并向您展示屏幕截图
+3. 请求更多操作（点击、输入、滚动）
+4. Roo 在完成后关闭浏览器
 
-| Action | Description | When to Use |
+例如：
+
+```
+打开浏览器并查看我们的网站。
+```
+
+```
+您能检查我的网站 https://roocode.com 是否显示正确吗？
+```
+
+```
+浏览 http://localhost:3000，向下滚动到页面底部并检查页脚信息是否显示正确。
+```
+
+<img src="/img/browser-use/browser-use-1.png" alt="浏览器使用示例" width="300" />
+
+---
+
+## 浏览器操作的工作原理
+
+browser_action 工具控制一个浏览器实例，在每次操作后返回屏幕截图和控制台日志，使您能够查看互动结果。
+
+关键特性：
+- 每个浏览器会话必须以 `launch` 开始并以 `close` 结束
+- 每条消息只能使用一个浏览器操作
+- 当浏览器处于活动状态时，无法使用其他工具
+- 必须等待响应（屏幕截图和日志）后才能执行下一个操作
+
+### 可用的浏览器操作
+
+| 操作 | 描述 | 使用时机 |
 |--------|-------------|------------|
-| `launch` | Opens a browser at a URL | Starting a new browser session |
-| `click` | Clicks at specific coordinates | Interacting with buttons, links, etc. |
-| `type` | Types text into active element | Filling forms, search boxes |
-| `scroll_down` | Scrolls down by one page | Viewing content below the fold |
-| `scroll_up` | Scrolls up by one page | Returning to previous content |
-| `close` | Closes the browser | Ending a browser session |
+| `launch` | 在指定 URL 打开浏览器 | 开始新的浏览器会话时 |
+| `click` | 点击特定坐标 | 与按钮、链接等互动时 |
+| `type` | 在活动元素中输入文本 | 填写表单、搜索框时 |
+| `scroll_down` | 向下滚动一页 | 查看页面下方内容时 |
+| `scroll_up` | 向上滚动一页 | 返回先前内容时 |
+| `close` | 关闭浏览器 | 结束浏览器会话时 |
 
 ---
 
-## Browser Use Configuration/Settings
+## 浏览器使用配置/设置
 
-:::info Default Browser Settings
-- **Enable browser tool**: Enabled
-- **Viewport size**: Small Desktop (900x600)
-- **Screenshot quality**: 75%
-- **Use remote browser connection**: Disabled
+:::info 默认浏览器设置
+- **启用浏览器工具**：已启用
+- **视口大小**：小型桌面 (900x600)
+- **屏幕截图质量**：75%
+- **使用远程浏览器连接**：禁用
 :::
 
-### Accessing Settings
+### 访问设置
 
-To change Browser / Computer Use settings in Roo:
+要在 Roo 中更改浏览器 / 计算机使用设置：
 
-1. Open Settings by clicking the gear icon <Codicon name="gear" /> → Browser / Computer Use
+1. 通过点击齿轮图标 <Codicon name="gear" /> → 浏览器 / 计算机使用 打开设置
 
-   <img src="/img/browser-use/browser-use.png" alt="Browser settings menu" width="600" />
+   <img src="/img/browser-use/browser-use.png" alt="浏览器设置菜单" width="600" />
 
-### Enable/Disable Browser Use
+### 启用/禁用浏览器使用
 
-**Purpose**: Master toggle that enables Roo to interact with websites using a Puppeteer-controlled browser.
+**目的**：主开关，用于启用或禁用 Roo 使用 Puppeteer 控制的浏览器与网站互动。
 
-To change this setting:
-1. Check or uncheck the "Enable browser tool" checkbox within your Browser / Computer Use settings
+要更改此设置：
+1. 在浏览器 / 计算机使用设置中勾选或取消勾选 "启用浏览器工具" 复选框
 
-   <img src="/img/browser-use/browser-use-2.png" alt="Enable browser tool setting" width="300" />
+   <img src="/img/browser-use/browser-use-2.png" alt="启用浏览器工具设置" width="300" />
 
-### Viewport Size
+### 视口大小
 
-**Purpose**: Determines the resolution of the browser session Roo Code uses.
+**目的**：确定 Roo Code 使用的浏览器会话分辨率。
 
-**Tradeoff**: Higher values provide a larger viewport but increase token usage.
+**权衡**：更高的值提供更大的视口但增加令牌使用量。
 
-To change this setting:
-1. Click the dropdown menu under "Viewport size" within your Browser / Computer Use settings
-2. Select one of the available options:
-   - Large Desktop (1280x800)
-   - Small Desktop (900x600) - Default
-   - Tablet (768x1024)
-   - Mobile (360x640)
-2. Select your desired resolution.
+要更改此设置：
+1. 在浏览器 / 计算机使用设置中的 "视口大小" 下拉菜单中点击
+2. 选择可用选项之一：
+   - 大型桌面 (1280x800)
+   - 小型桌面 (900x600) - 默认
+   - 平板电脑 (768x1024)
+   - 移动设备 (360x640)
+2. 选择所需的分辨率。
 
-   <img src="/img/browser-use/browser-use-3.png" alt="Viewport size setting" width="600" />
+   <img src="/img/browser-use/browser-use-3.png" alt="视口大小设置" width="600" />
 
-### Screenshot Quality
+### 屏幕截图质量
 
-**Purpose**: Controls the WebP compression quality of browser screenshots.
+**目的**：控制浏览器屏幕截图的 WebP 压缩质量。
 
-**Tradeoff**: Higher values provide clearer screenshots but increase token usage.
+**权衡**：更高的值提供更清晰的屏幕截图但增加令牌使用量。
 
-To change this setting:
-1. Adjust the slider under "Screenshot quality" within your Browser / Computer Use settings
-2. Set a value between 1-100% (default is 75%)
-3. Higher values provide clearer screenshots but increase token usage:
-   - 40-50%: Good for basic text-based websites
-   - 60-70%: Balanced for most general browsing
-   - 80%+: Use when fine visual details are critical
+要更改此设置：
+1. 在浏览器 / 计算机使用设置中的 "屏幕截图质量" 滑块进行调整
+2. 设置 1-100% 之间的值（默认为 75%）
+3. 更高的值提供更清晰的屏幕截图但增加令牌使用量：
+   - 40-50%：适用于基本文字网站
+   - 60-70%：适合大多数一般浏览
+   - 80%+：当精细视觉细节至关重要时使用
 
-   <img src="/img/browser-use/browser-use-4.png" alt="Screenshot quality setting" width="600" />
+   <img src="/img/browser-use/browser-use-4.png" alt="屏幕截图质量设置" width="600" />
 
-### Remote Browser Connection
+### 远程浏览器连接
 
-**Purpose**: Connect Roo to an existing Chrome browser instead of using the built-in browser.
+**目的**：将 Roo 连接到现有 Chrome 浏览器而不是使用内置浏览器。
 
-**Benefits**:
-- Works in containerized environments and remote development workflows
-- Maintains authenticated sessions between browser uses
-- Eliminates repetitive login steps
-- Allows use of custom browser profiles with specific extensions
+**优势**：
+- 在容器化环境和远程开发工作流中工作时保持认证会话
+- 消除重复登录步骤
+- 允许使用带有特定扩展的自定义浏览器配置文件
 
-**Requirements**: Chrome must be running with remote debugging enabled.
+**要求**：Chrome 必须以启用远程调试的方式运行。
 
-To enable this feature:
-1. Check the "Use remote browser connection" box in Browser / Computer Use settings
-2. Click "Test Connection" to verify
+要启用此功能：
+1. 在浏览器 / 计算机使用设置中勾选 "使用远程浏览器连接" 框
+2. 点击 "测试连接" 进行验证
 
-   <img src="/img/browser-use/browser-use-5.png" alt="Remote browser connection setting" width="600" />
+   <img src="/img/browser-use/browser-use-5.png" alt="远程浏览器连接设置" width="600" />
 
-#### Common Use Cases
+#### 常见使用场景
 
-- **DevContainers**: Connect from containerized VS Code to host Chrome browser
-- **Remote Development**: Use local Chrome with remote VS Code server
-- **Custom Chrome Profiles**: Use profiles with specific extensions and settings
+- **DevContainers**：从容器化的 VS Code 连接到主机上的 Chrome 浏览器
+- **远程开发**：将本地 Chrome 与远程 VS Code 服务器配合使用
+- **自定义 Chrome 配置文件**：使用具有特定扩展和设置的配置文件
 
-#### Connecting to a Visible Chrome Window
+#### 连接到可见的 Chrome 窗口
 
-Connect to a visible Chrome window to observe Roo's interactions in real-time:
+连接到可见的 Chrome 窗口以实时观察 Roo 的互动：
 
 **macOS**
 ```bash

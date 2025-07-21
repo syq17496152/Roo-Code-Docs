@@ -1,35 +1,35 @@
-# Human Relay Provider
+# 人类中继提供商
 
-The Human Relay provider allows you to use Roo Code with web-based AI models like ChatGPT or Claude without needing an API key. Instead, it relies on you to manually relay messages between Roo Code and the AI's web interface.
-
----
-
-## How it Works
-
-1.  **Select Human Relay**: Choose "Human Relay" as your API provider in Roo Code's settings. No API key is required.
-2.  **Initiate a Request**: Start a chat or task with Roo Code as usual.
-3.  **Dialog Prompt**: A dialog box will appear in VS Code. Your message to the AI is automatically copied to your clipboard.
-4.  **Paste to Web AI**: Go to the web interface of your chosen AI (e.g., chat.openai.com, claude.ai) and paste the message from your clipboard into the chat input.
-5.  **Copy AI Response**: Once the AI responds, copy its complete response text.
-6.  **Paste Back to Roo Code**: Return to the dialog box in VS Code, paste the AI's response into the designated field, and click "Confirm".
-7.  **Continue**: Roo Code will process the response as if it came directly from an API.
+人类中继提供商允许您通过网页界面（如 ChatGPT 或 Claude）使用 Roo Code，而无需 API 密钥。相反，它依赖于您手动在 Roo Code 和 AI 的网页界面之间传递消息。
 
 ---
 
-## Use Cases
+## 它是如何工作的
 
-This provider is useful if:
-
-*   You want to use models that don't offer direct API access.
-*   You prefer not to manage API keys.
-*   You need to leverage the specific capabilities or context available only in the web UI of certain AI models.
+1. **选择人类中继：** 在 Roo Code 的设置中选择 "Human Relay"。
+2. **发起请求：** 像平常一样开始聊天或任务。
+3. **对话框提示：** VS Code 中会出现一个对话框。您的消息会自动复制到剪贴板。
+4. **粘贴到网络 AI：** 转到您选择的 AI 的网页界面（例如 chat.openai.com, claude.ai），将剪贴板中的消息粘贴到聊天输入框中。
+5. **复制 AI 响应：** 一旦 AI 响应，复制其完整的响应文本。
+6. **粘贴回 Roo Code：** 返回到 VS Code 中的对话框，将 AI 的响应粘贴到指定字段，然后点击 "确认"。
+7. **继续：** Roo Code 会像直接从 API 接收到一样处理响应。
 
 ---
 
-## Limitations
+## 使用场景
 
-*   **Manual Effort**: Requires constant copy-pasting between VS Code and your browser.
-*   **Slower Interaction**: The back-and-forth process is significantly slower than direct API integration.
-*   **Potential for Errors**: Manual copying and pasting can introduce errors or omissions.
+此提供商在以下情况下很有用：
 
-Choose this provider when the benefits of using a specific web AI outweigh the inconvenience of the manual relay process.
+* 您想使用没有直接 API 访问权限的模型。
+* 您不想管理 API 密钥。
+* 您需要利用某些 AI 模型网页 UI 的特定功能或上下文。
+
+---
+
+## 限制
+
+* **手动操作：** 需要不断在 VS Code 和浏览器之间复制粘贴。
+* **较慢的交互：** 往返过程比直接 API 集成要慢得多。
+* **出错的可能性：** 手动复制粘贴可能会引入错误或遗漏。
+
+当网络 AI 的好处超过手动中继过程的不便时，选择此提供商。

@@ -1,111 +1,84 @@
 ---
-title: MCP vs API
-sidebar_label: MCP vs API
+title: MCP 与 API
+sidebar_label: MCP 与 API
 ---
 
-# MCP vs REST APIs: A Fundamental Distinction
+# MCP 与 REST APIs：根本区别
 
-Comparing REST APIs to the Model Context Protocol (MCP) is a category error. They operate at different layers of abstraction and serve fundamentally different purposes in AI systems.
+将 REST API 与模型上下文协议 (MCP) 进行比较是一个类别错误。它们在不同的抽象层上运行，并在 AI 系统中服务于根本不同的目的。
 
----
+// ... existing code ...
 
-## Architectural Differences
+## 架构差异
 
-| Feature | MCP | REST APIs |
+| 特性 | MCP | REST API |
 |---------|-----|-----------|
-| State Management | **Stateful** - maintains context across interactions | **Stateless** - each request is independent |
-| Connection Type | Persistent, bidirectional connections | One-way request/response |
-| Communication Style | JSON-RPC based with ongoing sessions | HTTP-based with discrete requests |
-| Context Handling | Context is intrinsic to the protocol | Context must be manually managed |
-| Tool Discovery | Runtime discovery of available tools | Design-time integration requiring prior knowledge |
-| Integration Approach | Runtime integration with dynamic capabilities | Design-time integration requiring code changes |
+| 状态管理 | **有状态** - 在交互间保持上下文 | **无状态** - 每个请求都是独立的 |
+| 连接类型 | 持久、双向连接 | 单向请求/响应 |
+| 通信风格 | 基于 JSON-RPC 的持续会话 | 基于 HTTP 的独立请求 |
+| 上下文处理 | 协议内在包含上下文 | 必须手动管理上下文 |
+| 工具发现 | 运行时发现可用工具 | 设计时集成需要预先了解 |
+| 集成方式 | 运行时集成动态能力 | 设计时集成需要代码更改 |
 
----
+// ... existing code ...
 
-## Different Layers, Different Purposes
+## 不同层级，不同目的
 
-REST APIs and MCP serve different tiers in the technology stack:
+REST API 和 MCP 在技术栈中服务于不同的层级：
 
-1. **REST**: Low-level web communication pattern that exposes operations on resources
-2. **MCP**: High-level AI protocol that orchestrates tool usage and maintains context
+1. **REST**：低级 Web 通信模式，暴露资源上的操作
+2. **MCP**：高级 AI 协议，协调工具使用并维护上下文
 
-MCP often uses REST APIs internally, but abstracts them away for the AI. Think of MCP as middleware that turns discrete web services into a cohesive environment the AI can operate within.
+MCP 通常在内部使用 REST API，但对 AI 隐藏它们。将 MCP 视为中间件，它将离散的 Web 服务转化为 AI 可以在其中操作的统一环境。
 
----
+// ... existing code ...
 
-## Context Preservation: Critical for AI Workflows
+## 动态工具发现
 
-MCP's stateful design solves a key limitation of REST in AI applications:
-
-- **REST Approach**: Each call is isolated, requiring manual context passing between steps
-- **MCP Approach**: One conversation context persists across multiple tool uses
-
-For example, an AI debugging a codebase can open a file, run tests, and identify errors without losing context between steps. The MCP session maintains awareness of previous actions and results.
-
----
-
-## Dynamic Tool Discovery
-
-MCP enables an AI to discover and use tools at runtime:
+MCP 使 AI 能够在运行时发现和使用工具：
 
 ```json
-// AI discovers available tools
+// AI 发现可用工具
 {
   "tools": [
     {
       "name": "readFile",
-      "description": "Reads content from a file",
+      "description": "从文件中读取内容",
       "parameters": {
-        "path": { "type": "string", "description": "File path" }
+        "path": { "type": "字符串", "description": "文件路径" }
       }
     },
     {
       "name": "createTicket",
-      "description": "Creates a ticket in issue tracker",
+      "description": "在问题跟踪器中创建工单",
       "parameters": {
-        "title": { "type": "string" },
-        "description": { "type": "string" }
+        "title": { "type": "字符串" },
+        "description": { "type": "字符串" }
       }
     }
   ]
 }
 ```
 
-This "plug-and-play" capability allows new tools to be added without redeploying or modifying the AI itself.
+这种 "即插即用" 的功能允许添加新工具而无需重新部署或修改 AI 本身。
 
----
+// ... existing code ...
 
-## Real-World Example: Multi-Tool Workflow
+## 为什么 Roo Code 使用 MCP
 
-Consider a task requiring multiple services: "Check recent commits, create a JIRA ticket for the bug fix, and post to Slack."
+Roo Code 利用 MCP 提供：
 
-**REST-based approach**:
-- Requires separate integrations for Git, JIRA, and Slack APIs
-- Needs custom code to manage context between calls
-- Breaks if any service changes its API
+1. **可扩展性**：添加无限的自定义工具而无需等待官方集成
+2. **上下文感知**：工具可以访问对话历史和项目上下文
+3. **简化集成**：一个标准协议而不是众多 API 模式
+4. **运行时灵活性**：即时发现和使用新功能
 
-**MCP-based approach**:
-- One unified protocol for all tools
-- Maintains context across the entire workflow
-- New tools can be swapped in without code changes
+MCP 在 Roo Code 和外部服务之间创建了一个通用连接器，而 REST API 通常在幕后为这些服务提供支持。
 
----
+// ... existing code ...
 
-## Why Roo Code Uses MCP
+## 结论：互补而非竞争的技术
 
-Roo Code leverages MCP to provide:
+MCP 并不取代 REST API - 它是在其基础上构建的。REST 擅长提供离散服务，而 MCP 擅长为 AI 代理协调这些服务。
 
-1. **Extensibility**: Add unlimited custom tools without waiting for official integration
-2. **Contextual awareness**: Tools can access conversation history and project context
-3. **Simplified integration**: One standard protocol rather than numerous API patterns
-4. **Runtime flexibility**: Discover and use new capabilities on-the-fly
-
-MCP creates a universal connector between Roo Code and external services, with REST APIs often powering those services behind the scenes.
-
----
-
-## Conclusion: Complementary, Not Competing Technologies
-
-MCP doesn't replace REST APIs - it builds upon them. REST excels at providing discrete services, while MCP excels at orchestrating those services for AI agents.
-
-The critical distinction is that MCP is AI-native: it treats the model as a first-class user, providing the contextual, stateful interaction layer that AI agents need to function effectively in complex environments.
+关键区别在于 MCP 是 AI 原生的：它将模型视为一等用户，提供 AI 代理在复杂环境中有效运行所需的上下文、有状态交互层。

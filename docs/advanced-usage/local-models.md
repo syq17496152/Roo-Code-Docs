@@ -1,44 +1,44 @@
-# Using Local Models
+# 使用本地模型
 
-Roo Code supports running language models locally on your own machine using [Ollama](https://ollama.com/) and [LM Studio](https://lmstudio.ai/).  This offers several advantages:
+Roo Code 支持使用 [Ollama](https://ollama.com/) 和 [LM Studio](https://lmstudio.ai/) 在您自己的计算机上运行语言模型。这提供了以下几个优势：
 
-*   **Privacy:** Your code and data never leave your computer.
-*   **Offline Access:**  You can use Roo Code even without an internet connection.
-*   **Cost Savings:**  Avoid API usage fees associated with cloud-based models.
-*   **Customization:**  Experiment with different models and configurations.
+*   **隐私性：** 您的代码和数据永远不会离开您的计算机。
+*   **离线访问：** 即使没有互联网连接，您也可以使用 Roo Code。
+*   **节省成本：** 避免与基于云的模型相关的 API 使用费用。
+*   **自定义配置：** 可以尝试不同的模型和配置。
 
-**However, using local models also has some drawbacks:**
+**然而，使用本地模型也有一些缺点：**
 
-*   **Resource Requirements:**  Local models can be resource-intensive, requiring a powerful computer with a good CPU and, ideally, a dedicated GPU.
-*   **Setup Complexity:**  Setting up local models can be more complex than using cloud-based APIs.
-*   **Model Performance:**  The performance of local models can vary significantly. While some are excellent, they may not always match the capabilities of the largest, most advanced cloud models.
-* **Limited Features**: Local models (and many online models) often do not support advanced features such as prompt caching, computer use, and others.
-
----
-
-## Supported Local Model Providers
-
-Roo Code currently supports two main local model providers:
-
-1.  **Ollama:**  A popular open-source tool for running large language models locally.  It supports a wide range of models.
-2.  **LM Studio:**  A user-friendly desktop application that simplifies the process of downloading, configuring, and running local models.  It also provides a local server that emulates the OpenAI API.
+*   **资源需求：** 本地模型可能对资源要求较高，需要一台性能强大的计算机，配备好的 CPU 和（最好是）独立的 GPU。
+*   **设置复杂性：** 设置本地模型可能比使用基于云的 API 更为复杂。
+*   **模型性能：** 本地模型的性能可能会有很大差异。虽然有些模型非常出色，但它们可能并不总是能匹配最大、最先进的基于云的模型的能力。
+* **功能受限**： 本地模型（以及许多在线模型）通常不支持高级功能，如提示缓存、计算机使用等。
 
 ---
 
-## Setting Up Local Models
+## 支持的本地模型提供商
 
-For detailed setup instructions, see:
-* [Setting up Ollama](/providers/ollama)
-* [Setting up LM Studio](/providers/lmstudio)
+Roo Code 当前支持两个主要的本地模型提供商：
 
-Both providers offer similar capabilities but with different user interfaces and workflows. Ollama provides more control through its command-line interface, while LM Studio offers a more user-friendly graphical interface.
+1.  **Ollama：** 一个流行的开源工具，用于在本地运行大型语言模型。它支持广泛的模型。
+2.  **LM Studio：** 一个用户友好的桌面应用程序，简化了下载、配置和运行本地模型的过程。它还提供了一个模拟 OpenAI API 的本地服务器。
 
 ---
 
-## Troubleshooting
+## 设置本地模型
 
-*   **"No connection could be made because the target machine actively refused it":**  This usually means that the Ollama or LM Studio server isn't running, or is running on a different port/address than Roo Code is configured to use.  Double-check the Base URL setting.
+有关详细的设置说明，请参阅：
+* [设置 Ollama](/providers/ollama)
+* [设置 LM Studio](/providers/lmstudio)
 
-*   **Slow Response Times:** Local models can be slower than cloud-based models, especially on less powerful hardware.  If performance is an issue, try using a smaller model.
+这两个提供商提供了类似的功能，但具有不同的用户界面和工作流程。Ollama 通过其命令行界面提供更多的控制，而 LM Studio 则提供了一个更用户友好的图形界面。
 
-*   **Model Not Found:** Ensure you have typed in the name of the model correctly. If you're using Ollama, use the same name that you provide in the `ollama run` command.
+---
+
+## 故障排查
+
+*   **"无法建立连接，因为目标机器主动拒绝了它"：** 这通常意味着 Ollama 或 LM Studio 服务器未运行，或者正在不同的端口/地址上运行，而 Roo Code 配置使用的端口/地址不同。请仔细检查基础 URL 设置。
+
+*   **响应时间慢：** 本地模型可能比基于云的模型慢，尤其是在性能较低的硬件上。如果性能是一个问题，请尝试使用较小的模型。
+
+*   **找不到模型：** 确保您正确输入了模型名称。如果您使用的是 Ollama，请使用您在 `ollama run` 命令中提供的相同名称。

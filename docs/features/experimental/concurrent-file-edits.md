@@ -1,124 +1,61 @@
 ---
-sidebar_label: 'Multi-File Edits'
+sidebar_label: '多文件编辑'
 ---
 
-# Concurrent File Edits (AKA Multi-File Edits)
+# 并发文件编辑（又名多文件编辑）
 
-Edit multiple files in a single operation, dramatically speeding up refactoring and multi-file changes.
+在单个操作中编辑多个文件，显著加快重构和多文件更改的速度。
 
----
+// ... existing code ...
 
-## What It Does
+## 它的作用
 
-<img src="/img/concurrent-file-edits/concurrent-file-edits-1.png" alt="Batch diff approval interface showing multiple file changes" width="800" />
+<img src="/img/concurrent-file-edits/concurrent-file-edits-1.png" alt="批量差异审批界面显示多个文件更改" width="800" />
 
-Concurrent File Edits allows Roo to modify multiple files in your workspace within a single request. Instead of approving each file edit individually, you review and approve all changes at once through a unified batch approval interface.
+并发文件编辑允许 Roo 在单个请求中修改您工作区中的多个文件。无需逐个批准每个文件的编辑，您可以通过统一的批量审批界面一次查看并批准所有更改。
 
----
+// ... existing code ...
 
-## Why Use It
+## 如何启用
 
-**Traditional approach**: Sequential file edits requiring individual approvals
-- Edit file A → Approve
-- Edit file B → Approve  
-- Edit file C → Approve
+:::info 实验性功能
+多文件编辑是一个实验性功能，必须在设置中启用。
 
-**With Concurrent File Edits**: All changes presented together
-- Review all proposed changes across files A, B, and C
-- Approve once to apply all changes
+1. 打开 Roo Code 设置（点击 Roo Code 中的齿轮图标）
+2. 导航到 **Roo Code > 实验性设置**
+3. 启用 **启用多文件编辑** 选项
 
-This reduces interruptions and speeds up complex tasks like:
-- Refactoring functions across multiple files
-- Updating configuration values throughout your codebase
-- Renaming components and their references
-- Applying consistent formatting or style changes
-
----
-
-## How to Enable
-
-:::info Experimental Feature
-Multi-File Edits is an experimental feature and must be enabled in settings.
-
-1. Open Roo Code settings (click the gear icon in Roo Code)
-2. Navigate to **Roo Code > Experimental Settings**
-3. Enable the **Enable multi-file edits** option
-
-<img src="/img/concurrent-file-edits/concurrent-file-edits.png" alt="Enable multi-file edits toggle in experimental settings" width="400" />
+<img src="/img/concurrent-file-edits/concurrent-file-edits.png" alt="在实验性设置中启用多文件编辑切换" width="400" />
 :::
 
----
+// ... existing code ...
 
-## Using the Feature
+## 技术细节
 
-When enabled, Roo automatically uses concurrent edits when appropriate. You'll see a "Batch Diff Approval" interface showing:
+此功能利用了 [`apply_diff`](/advanced-usage/available-tools/apply-diff#experimental-multi-file-edits-multi_file_apply_diff) 工具的实验性多文件功能。有关实现、XML 格式以及 `MultiFileSearchReplaceDiffStrategy` 的工作原理的详细信息，请参阅 [apply_diff 文档](/advanced-usage/available-tools/apply-diff#experimental-multi-file-edits-multi_file_apply_diff)。
 
-- All files to be modified
-- Proposed changes for each file
-- Options to approve all changes or review individually
+// ... existing code ...
 
-### Example Workflow
+## 故障排除
 
-1. Ask Roo to "Update all API endpoints to use the new authentication method"
-2. Roo analyzes your codebase and identifies all affected files
-3. You receive a single batch approval request showing changes across:
-   - `src/api/users.js`
-   - `src/api/products.js`
-   - `src/api/orders.js`
-   - `src/middleware/auth.js`
-4. Review all changes in the unified diff view
-5. Approve to apply all changes simultaneously
+### 更改未批处理
+- 验证是否在设置中启用了实验标志
+- 检查您的模型是否支持多文件操作
+- 确保文件未被 `.rooignore` 限制
 
----
+### 审批 UI 未出现
+- 更新到最新版本的 Roo Code
+- 检查 VS Code 的输出面板是否有错误
+- 尝试禁用并重新启用该功能
 
-## Technical Details
+### 性能问题
+- 对于非常大的批次操作，考虑将任务分解为较小的部分
+- 如果使用有限的 API 配额，请监控令牌使用情况
 
-This feature leverages the [`apply_diff`](/advanced-usage/available-tools/apply-diff#experimental-multi-file-edits-multi_file_apply_diff) tool's experimental multi-file capabilities. For detailed information about the implementation, XML format, and how the `MultiFileSearchReplaceDiffStrategy` works, see the [apply_diff documentation](/advanced-usage/available-tools/apply-diff#experimental-multi-file-edits-multi_file_apply_diff).
+// ... existing code ...
 
+## 参见
 
----
-
-## Best Practices
-
-### When to Enable
-- Using capable AI models (Claude 3.5 Sonnet, GPT-4, etc.)
-- Comfortable reviewing multiple changes at once
-
-### When to Keep Disabled
-- Working with less capable models that might struggle with complex multi-file contexts
-- Prefer reviewing each change individually
-
----
-
-## Limitations
-
-- **Experimental**: This feature is still being refined and may have edge cases
-- **Model dependent**: Works best with more capable AI models
-- **Token usage**: Initial requests may use more tokens due to larger context
-- **Complexity**: Very large batch operations might be harder to review
-
----
-
-## Troubleshooting
-
-### Changes Not Batching
-- Verify the experimental flag is enabled in settings
-- Check that your model supports multi-file operations
-- Ensure files aren't restricted by `.rooignore`
-
-### Approval UI Not Appearing
-- Update to the latest version of Roo Code
-- Check VS Code's output panel for errors
-- Try disabling and re-enabling the feature
-
-### Performance Issues
-- For very large batches, consider breaking the task into smaller chunks
-- Monitor token usage if working with limited API quotas
-
----
-
-## See Also
-
-- [`apply_diff` Tool Documentation](/advanced-usage/available-tools/apply-diff) - Detailed technical information
-- [Experimental Features](/features/experimental/experimental-features) - Other experimental capabilities
-- [`.rooignore` Configuration](/features/rooignore) - File access restrictions
+- [`apply_diff` 工具文档](/advanced-usage/available-tools/apply-diff) - 详细的技术信息
+- [实验性功能](/features/experimental/experimental-features) - 其他实验性功能
+- [`.rooignore` 配置](/features/rooignore) - 文件访问限制

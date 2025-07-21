@@ -1,24 +1,24 @@
-# SPARC by ruvnet
+# SPARC 项目（作者：ruvnet）
 
-[View Project on GitHub](https://github.com/ruvnet/rUv-dev)
+[查看 GitHub 项目](https://github.com/ruvnet/rUv-dev)
 
-SPARC orchestrates set and forget agentic development workflows through a structured framework using Roo Code Boomerang Tasks. It automates complex code development while maintaining complete developer control.
-The framework is open-source with comprehensive documentation and examples, supporting everything from simple applications to complex systems.
+SPARC 通过结构化框架协调基于 Roo Code 回旋镖任务的自动化开发工作流，实现"设定即忘"式的智能开发。在保持开发者完全控制权的同时，自动化复杂代码开发过程。
+该框架采用开源模式，提供完整文档和示例，支持从简单应用到复杂系统的全场景开发。
 
 ---
 
-## Key Features
+## 核心功能
 
-- **Scaffolding**: Generate complete project structures by running `npx create-sparc init` in your root folder, including sub directories, configurations, and boilerplate code
-- **Prompting**: Optimized templates for consistent, high-quality code generation
-- **Boomerang Mode**: Define requirements → generate code → review → refine in a continuous feedback loop
-- **Boomerang Tasks**: Define specific development tasks that can be "thrown" to Roo and returned with implementations, enabling focused problem-solving
-- **Workflow Orchestration**: Coordinate complex development sequences with predefined task chains and dependency management
-- **MCP Services**: Extend Roo's capabilities with specialized tools and resources through Model Context Protocol integration
-- **Mode Management**: Context-aware settings that optimize behavior for specific development phases
+- **脚手架生成**：在项目根目录运行 `npx create-sparc init` 即可生成完整的项目结构，包括子目录、配置文件和基础代码模板
+- **提示工程**：提供优化模板确保代码生成的一致性和高质量
+- **回旋镖模式**：定义需求 → 生成代码 → 审查 → 优化 的持续反馈循环
+- **回旋镖任务**：定义具体开发任务后"抛掷"给 Roo Code，返回实现结果，实现聚焦式问题解决
+- **工作流协调**：通过预定义任务链和依赖管理协调复杂开发流程
+- **MCP 服务集成**：通过模型上下文协议扩展 Roo Code 的专业化工具和资源
+- **模式管理**：上下文感知设置优化不同开发阶段的行为表现
 
-### Quick Start
-You don't need to install this [package directly](https://www.npmjs.com/package/create-sparc). Just run npx from your root directory to install it:
+### 快速入门
+无需直接安装 [NPM包](https://www.npmjs.com/package/create-sparc)。只需在项目根目录执行以下命令即可安装：
 
 ```bash
  npx create-sparc init

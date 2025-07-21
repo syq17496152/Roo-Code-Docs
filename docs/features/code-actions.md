@@ -1,137 +1,137 @@
-# Code Actions
+# 代码操作
 
-Code Actions provide instant access to Roo Code's AI assistance directly within your code editor through VSCode's lightbulb (quick fix) system. This context-aware feature automatically detects relevant code situations and offers appropriate AI-powered actions without requiring you to switch to the chat interface.
-
----
-
-## What are Code Actions?
-
-Code Actions appear as a lightbulb icon (💡) in the editor gutter (the area to the left of the line numbers). They can also be accessed via the right-click context menu, or via keyboard shortcut. They are triggered when:
-
-*   You select a range of code.
-*   Your cursor is on a line with a problem (error, warning, or hint).
-*   You invoke them via command.
-
-Clicking the lightbulb, right-clicking and selecting "Roo Code", or using the keyboard shortcut (`Ctrl+.` or `Cmd+.` on macOS, by default), displays a menu of available actions.
+代码操作通过 VSCode 的灯泡（快速修复）系统，为您提供即时访问 Roo Code AI 助手的功能。这个上下文感知功能可以自动检测相关的代码情况，并在不需要切换到聊天界面的情况下提供适当的 AI 驱动操作。
 
 ---
 
-## Roo Code's Code Actions
+## 什么是代码操作？
 
-Roo Code provides 5 code actions, though their availability varies by context:
+代码操作以灯泡图标（💡）的形式显示在编辑器的行号左侧区域。您也可以通过右键菜单或键盘快捷键来访问这些操作。当以下情况发生时会触发这些操作：
 
-### Context Menu Actions (Right-Click)
-*   **Add to Context:** Quickly adds the selected code to your chat with Roo, including the filename and line numbers so Roo knows exactly where the code is from. It's listed first in the menu for easy access.
-*   **Explain Code:** Asks Roo Code to explain the selected code.
-*   **Improve Code:** Asks Roo Code to suggest improvements to the selected code.
+*   您选择了一段代码。
+*   您的光标位于存在错误、警告或提示信息的代码行上。
+*   您通过命令调用它们。
 
-### Additional Actions
-*   **Fix Code:** Available through the lightbulb menu and command palette (but not the right-click menu). Asks Roo Code to fix problems in the selected code.
-*   **New Task:** Creates a new task with the selected code. Available through the command palette.
+点击灯泡图标、右键点击并选择 "Roo Code" 或使用键盘快捷键（默认情况下，在 macOS 上为 `Ctrl+.` 或 `Cmd+.`），将会显示可用操作的菜单。
 
-### Context-Aware Actions
-The lightbulb menu intelligently shows different actions based on your code's current state:
+---
 
-**For Code with Problems** (when VSCode shows red/yellow squiggles):
-- **Fix Code** - Get step-by-step guidance to resolve the specific error or warning
-- **Add to Context** - Add the problematic code to Roo's context for discussion
+## Roo Code 的代码操作
 
-**For Clean Code** (no diagnostics):
-- **Explain Code** - Get detailed explanations of what the code does
-- **Improve Code** - Receive optimization suggestions and best practices
-- **Add to Context** - Add the code to Roo's context for further work
+Roo Code 提供了 5 种代码操作，尽管它们的可用性会根据上下文而变化：
 
-### Add to Context Deep Dive
+### 上下文菜单操作（右键点击）
+*   **添加到上下文：** 快速将所选代码添加到与 Roo 的聊天中，包括文件名和行号，这样 Roo 就能确切知道代码的来源。它在菜单中列为第一个选项以便于访问。
+*   **解释代码：** 要求 Roo Code 解释选定的代码。
+*   **改进代码：** 要求 Roo Code 对选定代码提出改进建议。
 
-The **Add to Context** action is listed first in the Code Actions menu so you can quickly add code snippets to your conversation. When you use it, Roo Code includes the filename and line numbers along with the code.
+### 其他操作
+*   **修复代码：** 可通过灯泡菜单和命令面板（但不在右键菜单中）使用。要求 Roo Code 修复选定代码中的问题。
+*   **新建任务：** 使用选定代码创建一个新任务。可通过命令面板使用。
 
-This helps Roo understand the exact context of your code within the project, allowing it to provide more relevant and accurate assistance.
+### 上下文感知操作
+灯泡菜单智能地根据您的代码当前状态显示不同的操作：
 
-**Example Chat Input:**
+**对于存在问题的代码**（当 VSCode 显示红色/黄色波浪线时）：
+- **修复代码** - 获取逐步指导来解决特定错误或警告
+- **添加到上下文** - 将有问题的代码添加到 Roo 的上下文中进行讨论
+
+**对于干净的代码**（无诊断信息）：
+- **解释代码** - 获取对代码作用的详细解释
+- **改进代码** - 接收优化建议和最佳实践
+- **添加到上下文** - 将代码添加到 Roo 的上下文中以进行后续工作
+
+### 添加到上下文深度解析
+
+**添加到上下文** 操作列在代码操作菜单的第一个位置，因此您可以快速将代码片段添加到对话中。当您使用它时，Roo Code 会包含文件名和行号以及代码内容。
+
+这有助于 Roo 理解代码在项目中的确切上下文，从而提供更加相关和准确的帮助。
+
+**示例聊天输入：**
 
 ```
-Can you explain this function?
+你能解释一下这个函数吗？
 @myFile.js:15:25
 ```
 
-*(Where `@myFile.js:15:25` represents the code added via "Add to Context")*
+*(其中 `@myFile.js:15:25` 表示通过 "添加到上下文" 添加的代码)*
 
 ---
 
-## Using Code Actions
+## 使用代码操作
 
-There are three main ways to use Roo Code's Code Actions:
+有三种主要方式可以使用 Roo Code 的代码操作：
 
-### 1. From the Lightbulb (💡)
+### 1. 从灯泡图标（💡）
 
-1.  **Select Code:** Select the code you want to work with. You can select a single line, multiple lines, or an entire block of code.
-2.  **Look for the Lightbulb:** A lightbulb icon will appear in the gutter next to the selected code (or the line with the error/warning).
-3.  **Click the Lightbulb:** Click the lightbulb icon to open the Code Actions menu.
-4.  **Choose an Action:** Select the desired Roo Code action from the menu.
-5.  **Review and Approve:** Roo Code will propose a solution in the chat panel. Review the proposed changes and approve or reject them.
+1.  **选择代码：** 选择您要操作的代码。可以选择单行、多行或整个代码块。
+2.  **查找灯泡图标：** 在选定代码旁边的行号处（或出现错误/警告的代码行处）会出现一个灯泡图标。
+3.  **点击灯泡图标：** 点击灯泡图标打开代码操作菜单。
+4.  **选择操作：** 从菜单中选择所需的 Roo Code 操作。
+5.  **查看并批准：** Roo Code 将在聊天面板中提出解决方案。查看提出的更改并批准或拒绝它们。
 
-### 2. From the Right-Click Context Menu
+### 2. 从右键菜单
 
-1.  **Select Code:** Select the code you want to work with.
-2.  **Right-Click:** Right-click on the selected code to open the context menu.
-3.  **Choose "Roo Code":** Select the "Roo Code" option from the context menu. A submenu will appear with the available Roo Code actions.
-4.  **Choose an Action:** Select the desired action from the submenu.
-5.  **Review and Approve:** Roo Code will propose a solution in the chat panel. Review the proposed changes and approve or reject them.
+1.  **选择代码：** 选择您要操作的代码。
+2.  **右键点击：** 右键点击选定的代码打开上下文菜单。
+3.  **选择 "Roo Code"：** 从上下文菜单中选择 "Roo Code" 选项。子菜单将显示可用的 Roo Code 操作。
+4.  **选择操作：** 从子菜单中选择所需的操作。
+5.  **查看并批准：** Roo Code 将在聊天面板中提出解决方案。查看提出的更改并批准或拒绝它们。
 
-### 3. From the Command Palette
+### 3. 从命令面板
 
-1.  **Select Code:** Select the code you want to work with.
-2.  **Open the Command Palette:** Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS).
-3.  **Type a Command:** Type "Roo Code" to filter the commands, then choose the relevant code action (e.g., "Roo Code: Explain Code"). The action will apply in the most logical context (usually the current active chat task, if one exists).
-4.  **Review and Approve:** Roo Code will propose a solution in the chat panel. Review the proposed changes and approve or reject them.
-
----
-
-## Terminal Actions
-
-Roo Code also provides similar actions for terminal output:
-
-*   **Terminal: Add to Context:** Adds selected terminal output to your chat
-*   **Terminal: Fix Command:** Asks Roo Code to fix a failed terminal command
-*   **Terminal: Explain Command:** Asks Roo Code to explain terminal output or commands
-
-These actions are available when you select text in the terminal and right-click.
+1.  **选择代码：** 选择您要操作的代码。
+2.  **打开命令面板：** 按下 `Ctrl+Shift+P`（Windows/Linux）或 `Cmd+Shift+P`（macOS）。
+3.  **输入命令：** 输入 "Roo Code" 过滤命令，然后选择相关的代码操作（例如，"Roo Code: 解释代码"）。该操作将在最合适的上下文中执行（通常是在当前活动的聊天任务中，如果有的话）。
+4.  **查看并批准：** Roo Code 将在聊天面板中提出解决方案。查看提出的更改并批准或拒绝它们。
 
 ---
 
-## Disabling/Enabling Code Actions
+## 终端操作
 
-You can control Code Actions through VSCode settings:
+Roo Code 同样为终端输出提供了类似的操作：
 
-### Enable/Disable Code Actions
-- **Setting**: [`roo-cline.enableCodeActions`](vscode://settings/roo-cline.enableCodeActions)
-- **Default**: Enabled
-- **Description**: Controls whether Roo Code quick fix options appear in the editor
+*   **终端：添加到上下文：** 将选定的终端输出添加到您的聊天中
+*   **终端：修复命令：** 要求 Roo Code 修复失败的终端命令
+*   **终端：解释命令：** 要求 Roo Code 解释终端输出或命令
 
-To access this setting:
-1. Open VSCode Settings (`Ctrl/Cmd + ,`)
-2. Search for "enableCodeActions"
-3. Toggle the checkbox to enable or disable
+当您在终端中选择文本并右键点击时，可以使用这些操作。
 
 ---
 
-## Customizing Code Action Prompts
+## 禁用/启用代码操作
 
-You can customize the prompts used for each Code Action by modifying the "Support Prompts" in the **Prompts** tab. This allows you to fine-tune the instructions given to the AI model and tailor the responses to your specific needs.
+您可以通过 VSCode 设置控制代码操作：
 
-1.  **Open the Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar.
-2. **Find "Support Prompts":** You will see the support prompts, including "Enhance Prompt", "Explain Code", "Improve Code", and "Fix Code".
-3. **Edit the Prompts:** Modify the text in the text area for the prompt you want to customize. The prompts use placeholders in the format `${placeholder}`:
-    - `${filePath}` - The path of the current file
-    - `${selectedText}` - The currently selected text
-    - `${diagnostics}` - Any error or warning messages (for Fix Code)
-4. **Click "Done":** Save your changes.
+### 启用/禁用代码操作
+- **设置项**: [`roo-cline.enableCodeActions`](vscode://settings/roo-cline.enableCodeActions)
+- **默认值**: 已启用
+- **描述**: 控制 Roo Code 快速修复选项是否出现在编辑器中
 
-### Example Prompt Template
+要访问此设置：
+1. 打开 VSCode 设置（`Ctrl/Cmd + ,`）
+2. 搜索 "enableCodeActions"
+3. 点击复选框以启用或禁用
+
+---
+
+## 自定义代码操作提示
+
+您可以通过修改 **提示标签页** 中的 "支持提示" 来自定义每个代码操作使用的提示语。这使您可以微调给 AI 模型的指令，并根据您的具体需求定制响应。
+
+1.  **打开提示标签页：** 点击 Roo Code 顶部菜单栏中的 <Codicon name="notebook" /> 图标。
+2. **找到 "支持提示"：** 您会看到支持的提示，包括 "增强提示"、"解释代码"、"改进代码" 和 "修复代码"。
+3. **编辑提示：** 修改您想自定义的提示的文本区域。提示使用 `${placeholder}` 格式的占位符：
+    - `${filePath}` - 当前文件的路径
+    - `${selectedText}` - 当前选定的文本
+    - `${diagnostics}` - 任何错误或警告信息（用于修复代码）
+4. **点击 "完成"：** 保存您的更改。
+
+### 示例提示模板
 ```
-Please explain the following code from ${filePath}:
+请解释来自 ${filePath} 的以下代码：
 
 ${selectedText}
 ```
 
-By using Roo Code's Code Actions, you can quickly get AI-powered assistance directly within your coding workflow. This can save you time and help you write better code.
+通过使用 Roo Code 的代码操作，您可以直接在编码工作流中快速获得 AI 驱动的帮助。这可以帮助您节省时间并编写更好的代码。

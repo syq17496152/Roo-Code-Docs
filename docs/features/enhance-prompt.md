@@ -1,56 +1,38 @@
-# Enhance Prompt
+// ... existing code ...
 
-The "Enhance Prompt" feature in Roo Code helps you improve the quality and effectiveness of your prompts before sending them to the AI model.  By clicking the <Codicon name="wand" /> icon in the chat input, you can automatically refine your initial request, making it clearer, more specific, and more likely to produce the desired results.
+# 增强提示
 
----
-
-## Why Use Enhance Prompt?
-
-*   **Improved Clarity:**  Roo Code can rephrase your prompt to make it more understandable for the AI model.
-*   **Added Context:**  The enhancement process can add relevant context to your prompt, such as the current file path or selected code.
-*   **Better Instructions:**  Roo Code can add instructions to guide the AI towards a more helpful response (e.g., requesting specific formatting or a particular level of detail).
-*   **Reduced Ambiguity:**  Enhance Prompt helps to eliminate ambiguity and ensure that Roo Code understands your intent.
-*   **Consistency**: Roo will consistently format prompts the same way to the AI.
+Roo Code 中的 "增强提示" 功能可帮助您在将提示发送到 AI 模型之前提高其质量和效果。通过单击聊天输入框中的 <Codicon name="wand" /> 图标，您可以自动优化初始请求，使其更清晰、更具体，并更有可能产生期望的结果。
 
 ---
 
-## How to Use Enhance Prompt
+## 为什么要使用增强提示？
 
-1.  **Type your initial prompt:**  Enter your request in the Roo Code chat input box as you normally would.  This can be a simple question, a complex task description, or anything in between.
-2.  **Click the <Codicon name="wand" /> Icon:**  Instead of pressing Enter, click the <Codicon name="wand" /> icon located in the bottom right of the chat input box.
-3.  **Review the Enhanced Prompt:**  Roo Code will replace your original prompt with an enhanced version.  Review the enhanced prompt to make sure it accurately reflects your intent. You can further refine the enhanced prompt before sending.
-4.  **Send the Enhanced Prompt:**  Press Enter or click the Send icon (<Codicon name="send" />) to send the enhanced prompt to Roo Code.
+*   **提高清晰度：** Roo Code 可以重新表述您的提示，使其对 AI 模型更易理解。
+*   **添加上下文：** 增强过程可以向您的提示中添加相关上下文，例如当前文件路径或选定代码。
+*   **改进指令：** Roo Code 可以添加指令以指导 AI 提供更有用的响应（例如，要求特定格式或特定详细程度）。
+*   **减少歧义：** 增强提示有助于消除歧义并确保 Roo Code 理解您的意图。
+*   **一致性：** Roo 将始终以相同的方式格式化提示给 AI。
 
----
+// ... existing code ...
 
-## Customizing the Enhancement Process
+## 自定义增强过程
 
-The "Enhance Prompt" feature uses a customizable prompt template.  You can modify this template to tailor the enhancement process to your specific needs.
+"增强提示" 功能使用可自定义的提示模板。您可以修改此模板以使增强过程更适合您的特定需求。
 
-1.  **Open the Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar.
-2.  **Select "ENHANCE" Tab:** You should see listed out support prompts, including "ENHANCE". Click on this tab.
-3.  **Edit the Prompt Template:** Modify the text in the "Prompt" field.
+1.  **打开提示标签页：** 单击 Roo Code 顶部菜单栏中的 <Codicon name="notebook" /> 图标。
+2.  **选择 "ENHANCE" 标签页：** 您应该会看到列出的支持提示，包括 "ENHANCE"。单击此标签页。
+3.  **编辑提示模板：** 修改 "Prompt" 字段中的文本。
 
-The default prompt template includes the placeholder `${userInput}`, which will be replaced with your original prompt. You can modify this to fit the model's prompt format, and instruct it how to enhance your request.
+默认提示模板包含占位符 `${userInput}`，该占位符将被替换为您的原始提示。您可以根据模型的提示格式修改此内容，并指示它如何增强您的请求。
 
----
+// ... existing code ...
 
-## API Configuration
+## 限制和最佳实践
 
-The API configuration used for Enhance Prompt is, by default, the same one that is selected for Roo Code tasks,
-but it can be changed:
+*   **实验性功能：** 提示增强是一项实验性功能。增强提示的质量可能因请求的复杂性和底层模型的能力而异。
+*   **仔细审查：** 在发送之前始终审查增强的提示。Roo Code 可能会做出不符合您意图的更改。
+*   **迭代过程：** 您可以多次使用 "增强提示" 功能来迭代优化您的提示。
+*   **不是清晰指令的替代品：** 虽然 "增强提示" 可以提供帮助，但开始时编写清晰具体的提示仍然很重要。
 
-1.  **Open the Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar.
-2.  **Select "ENHANCE" Tab:** You should see an "API Configuration" dropdown
-3.  **Select an API Configuration:** Choose an existing configuration, and future Enhance Prompt requests will be sent to that configured provider/model.
-
----
-
-## Limitations and Best Practices
-
-*   **Experimental Feature:**  Prompt enhancement is an experimental feature. The quality of the enhanced prompt may vary depending on the complexity of your request and the capabilities of the underlying model.
-*   **Review Carefully:**  Always review the enhanced prompt before sending it.  Roo Code may make changes that don't align with your intentions.
-*   **Iterative Process:**  You can use the "Enhance Prompt" feature multiple times to iteratively refine your prompt.
-*   **Not a Replacement for Clear Instructions:** While "Enhance Prompt" can help, it's still important to write clear and specific prompts from the start.
-
-By using the "Enhance Prompt" feature, you can improve the quality of your interactions with Roo Code and get more accurate and helpful responses.
+// ... existing code ...

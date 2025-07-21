@@ -1,21 +1,21 @@
 # Roo Code Docs
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator, and lives at https://docs.roocode.com
+本项目基于[Docusaurus](https://docusaurus.io/)构建静态网站，部署地址：https://docs.roocode.com
 
-### Installation
+### 安装
 
 ```
 $ npm install
 ```
 
-### Local Development
+### 本地开发
 
 ```
 $ npm start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+该命令会启动本地开发服务器并自动打开浏览器窗口。大部分修改会实时生效，无需重启服务。
 
-### License
+### 许可协议
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)

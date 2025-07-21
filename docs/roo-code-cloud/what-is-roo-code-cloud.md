@@ -1,55 +1,55 @@
-# What is Roo Code Cloud?
+# 什么是 Roo Code Cloud？
 
-Roo Code Cloud is a web-based platform that extends your Roo Code extension with cloud-powered features for enhanced collaboration, data persistence, and usage tracking. By connecting your local Roo Code extension to the cloud, you unlock powerful capabilities that transform how you work with AI-assisted development.
+Roo Code Cloud 是一个基于网络的平台，通过增强的协作功能、数据持久性和使用情况跟踪功能扩展了您的 Roo Code 插件。通过将您的本地 Roo Code 插件连接到云端，您可以解锁强大的功能，这些功能将改变您使用 AI 辅助开发的方式。
 
-## Key Benefits
+## 主要优势
 
-When you connect to Roo Code Cloud, you gain access to:
+当您连接到 Roo Code Cloud 时，您将获得以下访问权限：
 
-- **Online task history** - Access your complete conversation history across devices and sessions
-- **Sharing and collaboration features** - Share tasks publicly and collaborate with team members
-- **Task, token, and cost-based usage metrics** - Monitor your AI assistant usage and optimize costs
+- **在线任务历史记录** - 跨设备和会话访问您的完整对话历史
+- **共享和协作功能** - 共享任务并与团队成员协作
+- **基于任务、令牌和成本的使用情况指标** - 监控您的 AI 助手使用情况并优化成本
 
-## Core Features
+## 核心功能
 
-### 🔗 Seamless Integration
-Connect your Roo Code extension directly to the cloud with simple authentication through GitHub, Google, or email. No complex setup required.
+### 🔗 无缝集成
+通过 GitHub、Google 或电子邮件进行简单认证，将您的 Roo Code 插件直接连接到云端。无需复杂的设置。
 
-### 📚 Persistent Task History
-Your conversations and tasks are automatically synced to the cloud, ensuring you never lose important work. Access your complete development history from any device.
+### 📚 持久任务历史记录
+您的对话和任务会自动同步到云端，确保您不会丢失任何重要的工作。可以从任何设备访问您的完整开发历史。
 
-### 🚀 Task Sharing
-Share individual tasks with colleagues, collaborators, or the community through secure, expiring links. Perfect for:
-- Getting help with complex problems
-- Demonstrating solutions to team members
-- Creating tutorials and documentation
-- Code reviews and collaboration
+### 🚀 任务共享
+通过安全的过期链接与同事、协作者或社区共享任务。非常适合：
+- 获取复杂问题的帮助
+- 向团队成员展示解决方案
+- 创建教程和文档
+- 代码审查和协作
 
-### 📊 Usage Analytics
-Track your AI assistant usage with detailed metrics including:
-- Task counts and completion rates
-- Token consumption across different models
-- Cost tracking for budget management
-- Historical usage patterns
+### 📊 使用情况分析
+通过详细的指标跟踪您的 AI 助手使用情况，包括：
+- 任务计数和完成率
+- 跨不同模型的令牌消耗
+- 成本跟踪以进行预算管理
+- 历史使用情况模式
 
-### 🌐 Web Dashboard
-Access a comprehensive web interface at [app.roocode.com](https://app.roocode.com/) to:
-- View and manage your task history
-- Create and manage share links
-- Monitor usage statistics
-- Configure account settings
+### 🌐 网络仪表盘
+访问位于 [app.roocode.com](https://app.roocode.com/) 的综合性网页界面以：
+- 查看和管理您的任务历史
+- 创建和管理共享链接
+- 监控使用情况统计数据
+- 配置账户设置
 
-## Getting Started
+## 开始使用
 
-1. **[Connect Your Account](/roo-code-cloud/login)** - Link your Roo Code extension to the cloud with simple authentication
-2. **[Explore the Dashboard](/roo-code-cloud/dashboard)** - Access your web-based control center
-3. **[Share Your First Task](/roo-code-cloud/task-sharing)** - Collaborate by sharing tasks with others
+1. **[连接您的账户](/roo-code-cloud/login)** - 通过简单认证将您的 Roo Code 插件连接到云端
+2. **[探索仪表盘](/roo-code-cloud/dashboard)** - 访问您的基于网页的控制中心
+3. **[分享您的第一个任务](/roo-code-cloud/task-sharing)** - 通过共享任务与他人协作
 
-## Privacy & Security
+## 隐私与安全
 
-- **Secure Authentication** - Industry-standard OAuth with GitHub and Google, plus traditional email authentication
-- **Controlled Sharing** - You decide what to share and when. Tasks remain private by default
-- **Expiring Links** - Share links automatically expire in 30 days for enhanced security
-- **Data Control** - Full control over your shared content with the ability to revoke access anytime
+- **安全认证** - 使用 GitHub 和 Google 的行业标准 OAuth，以及传统的电子邮件认证
+- **受控共享** - 您决定共享什么以及何时共享。任务默认为私有
+- **过期链接** - 共享链接在 30 天后自动过期，以增强安全性
+- **数据控制** - 完全控制您的共享内容，并随时可以撤销访问权限
 
-Roo Code Cloud transforms your local AI development assistant into a collaborative, persistent, and analytically-rich platform while maintaining the security and privacy of your development work.
+Roo Code Cloud 将您的本地 AI 开发助手转变为协作性、持久性和分析性丰富的平台，同时维护您开发工作的安全性和隐私。

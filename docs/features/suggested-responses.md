@@ -1,58 +1,58 @@
 ---
-sidebar_label: Suggested Responses
+sidebar_label: 建议响应
 ---
 
 import Codicon from '@site/src/components/Codicon';
 
-# Suggested Responses
+# 建议响应
 
-When Roo needs more information to complete a task, it uses the [`ask_followup_question` tool](/advanced-usage/available-tools/ask-followup-question). To make responding easier and faster, Roo often provides suggested answers alongside the question.
-
----
-
-## Overview
-
-Suggested Responses appear as clickable buttons directly below Roo's question in the chat interface. They offer pre-formulated answers relevant to the question, helping you provide input quickly.
-
-<img src="/img/suggested-responses/suggested-responses.png" alt="Example of Roo asking a question with suggested response buttons below it" width="500" />
+当 Roo 需要更多信息来完成任务时，它会使用 [`ask_followup_question` 工具](/advanced-usage/available-tools/ask-followup-question)。为了使响应更加容易和快速，Roo 通常会提供建议的答案。
 
 ---
 
-## How It Works
+## 概述
 
-1.  **Question Appears**: Roo asks a question using the `ask_followup_question` tool.
-2.  **Suggestions Displayed**: If suggestions are provided by Roo, they appear as buttons below the question.
-3.  **Interaction**: You can interact with these suggestions in two ways.
+建议响应作为可点击的按钮直接显示在聊天界面中 Roo 提出的问题下方。它们提供与问题相关的预设答案，帮助您快速提供输入。
 
----
+<img src="/img/suggested-responses/suggested-responses.png" alt="Roo 提问并显示建议响应按钮的示例" width="500" />
 
-## Interacting with Suggestions
+// ... existing code ...
 
-You have three options for using suggested responses:
+## 如何工作
 
-1.  **Direct Selection**:
-    *   **Action**: Simply click the button containing the answer you want to provide.
-    *   **Result**: The selected answer is immediately sent back to Roo as your response. This is the quickest way to reply if one of the suggestions perfectly matches your intent.
+1.  **问题出现**：Roo 使用 `ask_followup_question` 工具提出问题。
+2.  **显示建议**：如果 Roo 提供了建议，它们会作为按钮显示在问题下方。
+3.  **交互**：您可以通过两种方式与这些建议进行交互。
 
-2.  **Keyboard Shortcut**:
-    *   **Action**: Use the `roo.acceptInput` command with your configured keyboard shortcut.
-    *   **Result**: The primary (first) suggestion button is automatically selected.
-    *   **Note**: For setup details, see [Keyboard Shortcuts](/features/keyboard-shortcuts).
+// ... existing code ...
 
-3.  **Edit Before Sending**:
-    *   **Action**:
-        *   Hold down `Shift` and click the suggestion button.
-        *   *Alternatively*, hover over the suggestion button and click the pencil icon (<Codicon name="edit" />) that appears.
-    *   **Result**: The text of the suggestion is copied into the chat input box. You can then modify the text as needed before pressing Enter to send your customized response. This is useful when a suggestion is close but needs minor adjustments.
+## 与建议交互
 
-<img src="/img/suggested-responses/suggested-responses-1.png" alt="Chat input box showing text copied from a suggested response, ready for editing" width="600" />
+您有三种方式使用建议响应：
 
----
+1.  **直接选择**：
+    *   **操作**：只需点击包含您想提供的答案的按钮。
+    *   **结果**：所选答案会立即作为您的响应发送回 Roo。如果其中一个建议完全符合您的意图，这是最快的回复方式。
 
-## Benefits
+2.  **键盘快捷键**：
+    *   **操作**：使用配置的键盘快捷键执行 `roo.acceptInput` 命令。
+    *   **结果**：主（第一个）建议按钮会自动被选中。
+    *   **注意**：有关设置详情，请参阅 [键盘快捷键](/features/keyboard-shortcuts)。
 
-*   **Speed**: Quickly respond without typing full answers.
-*   **Clarity**: Suggestions often clarify the type of information Roo needs.
-*   **Flexibility**: Edit suggestions to provide precise, customized answers when needed.
+3.  **发送前编辑**：
+    *   **操作**：
+        *   按住 `Shift` 并点击建议按钮。
+        *   *或者*，将鼠标悬停在建议按钮上并点击出现的铅笔图标（<Codicon name="edit" />）。
+    *   **结果**：建议的文本会被复制到聊天输入框中。然后您可以根据需要修改文本，再按 Enter 发送自定义的响应。当建议接近但需要轻微调整时，这非常有用。
 
-This feature streamlines the interaction when Roo requires clarification, allowing you to guide the task effectively with minimal effort.
+<img src="/img/suggested-responses/suggested-responses-1.png" alt="显示从建议响应复制的文本的聊天输入框，准备进行编辑" width="600" />
+
+// ... existing code ...
+
+## 优势
+
+*   **速度**：无需键入完整答案即可快速响应。
+*   **清晰度**：建议通常会澄清 Roo 所需信息的类型。
+*   **灵活性**：在需要时编辑建议以提供精确的自定义答案。
+
+此功能在 Roo 需要澄清时简化了交互，使您能够以最小的努力有效地指导任务。

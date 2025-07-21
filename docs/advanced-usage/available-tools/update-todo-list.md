@@ -1,183 +1,183 @@
 # update_todo_list
 
-The `update_todo_list` tool enables dynamic, interactive task management within the chat interface. It replaces the entire TODO list with an updated checklist, ensuring that task status is always current and providing step-by-step tracking for complex, multi-step workflows.
+`update_todo_list` 工具可在聊天界面中实现动态、交互式的任务管理。它通过更新的检查清单完全替换原有的 TODO 列表，确保任务状态始终保持最新，并为复杂的多步骤工作流提供逐步跟踪。
 
 ---
 
-## Parameters
+## 参数
 
-The tool accepts these parameters:
+该工具接受以下参数：
 
-- `todos` (required): A markdown-formatted string representing the complete checklist with status indicators
-
----
-
-## What It Does
-
-This tool creates and manages an interactive todo list that appears as a UI component in the chat interface. It allows for real-time task tracking, status updates, and dynamic addition of new items as they are discovered during complex workflows. The list provides a structured way to manage multi-step tasks with clear visual progress indicators.
+- `todos` (必填)：一个 Markdown 格式的字符串，表示带有状态指示器的完整检查清单
 
 ---
 
-## When is it used?
+## 功能说明
 
-- When managing complex, multi-step tasks that benefit from structured tracking
-- When Roo needs to show progress through a series of related activities
-- When tasks require step-by-step completion verification before proceeding
-- When new actionable items are discovered during long or complex workflows
-- When providing clear checkpoints and progress visibility to users
+此工具创建并管理一个交互式待办事项列表，该列表会作为 UI 组件显示在聊天界面中。它支持实时任务跟踪、状态更新以及在复杂工作流程中发现新任务时动态添加。这个列表提供了一种结构化的方式来管理多步骤任务，并通过清晰的视觉进度指示器展示进展。
 
 ---
 
-## Key Features
+## 使用场景
 
-- **Full Checklist Replacement**: Overwrites the existing todo list with the updated version provided
-- **Interactive UI Component**: Displays as an editable interface element in the chat
-- **Multiple Status Types**: Supports pending, in-progress, and completed task states
-- **Dynamic Task Management**: Add new tasks as they arise during workflow execution
-- **User-Friendly Editing**: Provides direct editing capabilities within the chat interface
-- **Step-by-Step Tracking**: Enables confirmation of each step before updating and proceeding
-- **Progress Visualization**: Clear visual indicators for task completion status
-- **Workflow Integration**: Seamlessly integrates with task execution and completion flows
+- 管理需要结构化跟踪的复杂多步骤任务时
+- Roo 需要展示一系列相关活动的进展时
+- 任务需要在继续下一步之前验证每个步骤的完成情况时
+- 在漫长或复杂的工作流程中发现新的可操作项目时
+- 向用户提供明确的检查点和进度可见性时
 
 ---
 
-## Limitations
+## 主要功能
 
-- **Complete Replacement**: Replaces the entire list rather than making incremental updates
-- **Single-Level Structure**: Uses single-level markdown checklists without nesting support
-- **Format Requirements**: Requires specific markdown checkbox syntax for proper parsing
-- **Manual Updates**: Requires explicit tool calls to update the list status
-- **State Management**: Todo list state is tied to the current task and conversation context
-
----
-
-## How It Works
-
-When the `update_todo_list` tool is invoked, it follows this process:
-
-1. **Input Validation**: 
-   - Validates the required `todos` parameter is provided
-   - Parses the markdown checklist format for syntax correctness
-   - Checks for valid status indicators: `[ ]`, `[-]`, and `[x]`
-
-2. **List Processing**:
-   - Processes the markdown-formatted checklist
-   - Extracts individual todo items with their status indicators
-   - Validates the structure and format of each item
-
-3. **UI Integration**:
-   - Presents the updated todo list to the user for approval
-   - Replaces any existing todo list with the new version
-   - Renders the list as an interactive component in the chat interface
-
-4. **User Interaction**:
-   - Allows users to edit todos directly in the UI when in editing mode
-   - Provides "Add Todo" functionality for real-time list expansion
-   - Synchronizes changes back to the extension to maintain state consistency
-
-5. **State Management**:
-   - Updates the task's internal todo list representation
-   - Maintains synchronization between UI state and backend data
-   - Preserves todo list state across conversation interactions
+- **完整清单替换**：用提供的更新版本完全覆盖现有的待办事项列表
+- **交互式 UI 组件**：在聊天中显示为可编辑的界面元素
+- **多种状态类型**：支持挂起、进行中和已完成的任务状态
+- **动态任务管理**：在工作流程执行期间添加新任务
+- **用户友好编辑**：在聊天界面内提供直接编辑功能
+- **逐步跟踪**：在更新和继续之前确认每一步的完成情况
+- **进度可视化**：清晰的视觉指示器展示任务完成状态
+- **工作流集成**：无缝集成任务执行和完成流程
 
 ---
 
-## Checklist Format Requirements
+## 局限性
 
-The tool uses a specific markdown format for todo items:
-
-### Status Options
-- `[ ]` - Pending task (not started)
-- `[-]` - In progress task (currently being worked on)  
-- `[x]` - Completed task (fully finished)
-
-### Format Rules
-- Use single-level markdown checklist (no nesting or subtasks)
-- List todos in intended execution order
-- Each todo item should be clear and actionable
-- Status should accurately reflect current task state
+- **完全替换**：替换整个列表而不是增量更新
+- **单级结构**：使用单级 markdown 清单而不支持嵌套
+- **格式要求**：需要特定的 markdown 复选框语法以正确解析
+- **手动更新**：需要显式调用工具来更新列表状态
+- **状态管理**：待办事项列表状态与当前任务和对话上下文绑定
 
 ---
 
-## Task Management Guidelines
+## 工作原理
 
-### Status Updates
-- Mark tasks as completed immediately after all work is finished
-- Start the next task by marking it as in progress
-- Use pending status for tasks not yet started
-- Only mark tasks as completed when fully accomplished with no unresolved dependencies
+调用 `update_todo_list` 工具时，它遵循以下流程：
 
-### Dynamic List Management
-- Add new todos as soon as they are identified during task execution
-- Remove tasks only if they are no longer relevant or explicitly requested
-- Retain all unfinished tasks and update their status as needed
-- If a task is blocked, keep it as in progress and add new todos for resolution steps
+1. **输入验证**：
+   - 验证是否提供了必填的 `todos` 参数
+   - 解析 markdown 检查清单格式是否正确
+   - 检查有效的状态指示器：`[ ]`、`[-]` 和 `[x]`
+
+2. **列表处理**：
+   - 处理 Markdown 格式的检查清单
+   - 提取包含状态指示器的各个待办事项
+   - 验证每个项目的结构和格式
+
+3. **UI 集成**：
+   - 将更新的待办事项列表呈现给用户以获取批准
+   - 用新版本替换任何现有的待办事项列表
+   - 在聊天界面中将列表渲染为交互式组件
+
+4. **用户交互**：
+   - 允许用户在编辑模式下直接在 UI 中编辑待办事项
+   - 提供 "Add Todo" 功能以实现实时列表扩展
+   - 将更改同步回扩展程序以保持状态一致性
+
+5. **状态管理**：
+   - 更新任务内部的待办事项列表表示
+   - 在 UI 状态和后端数据之间保持同步
+   - 在对话交互中保留待办事项列表状态
 
 ---
 
-## Examples When Used
+## 检查清单格式要求
 
-- When developing a web application, Roo creates a todo list tracking design, implementation, testing, and deployment phases.
-- When setting up a development environment, Roo tracks installation of dependencies, configuration steps, and verification tasks.
-- When debugging complex issues, Roo maintains a list of investigation steps, potential causes, and testing procedures.
-- When refactoring code, Roo tracks which files need updates, what tests need modification, and documentation changes required.
-- When implementing new features, Roo manages tasks for planning, coding, testing, and integration steps.
+该工具对待办事项项使用特定的 Markdown 格式：
+
+### 状态选项
+- `[ ]` - 挂起任务（尚未开始）
+- `[-]` - 进行中的任务（当前正在处理）
+  - `[x]` - 已完成任务（已完全完成）
+
+### 格式规则
+- 使用单级 Markdown 检查清单（无嵌套或子任务）
+- 按照预期执行顺序列出待办事项
+- 每个待办事项应清晰且可操作
+- 状态应准确反映当前任务状态
 
 ---
 
-## Usage Examples
+## 任务管理指南
 
-Creating an initial todo list for a development task:
+### 状态更新
+- 所有工作完成后立即标记任务为已完成
+- 通过将下一个任务标记为进行中来开始新任务
+- 对尚未开始的任务使用挂起状态
+- 只有在没有未解决依赖关系的情况下才将任务标记为已完成
+
+### 动态列表管理
+- 在任务执行过程中一旦发现新任务就添加
+- 仅在不再相关或明确请求时删除任务
+- 保留所有未完成的任务并根据需要更新其状态
+- 如果某个任务被阻塞，请保持其处于进行中状态，并添加用于解决步骤的新待办事项
+
+---
+
+## 使用示例
+
+- 开发 Web 应用程序时，Roo 创建一个待办事项列表来跟踪设计、实施、测试和部署阶段。
+- 设置开发环境时，Roo 跟踪依赖项安装、配置步骤和验证任务。
+- 调试复杂问题时，Roo 维护一个调查步骤、潜在原因和测试过程的列表。
+- 重构代码时，Roo 跟踪哪些文件需要更新、哪些测试需要修改以及文档变更。
+- 实现新功能时，Roo 管理规划、编码、测试和集成步骤的任务。
+
+---
+
+## 使用示例代码
+
+为开发任务创建初始待办事项列表：
 ```xml
 <update_todo_list>
 <todos>
-[ ] Analyze requirements
-[ ] Design architecture  
-[ ] Implement core logic
-[ ] Write tests
-[ ] Update documentation
+[ ] 分析需求
+[ ] 设计架构  
+[ ] 实现核心逻辑
+[ ] 编写测试
+[ ] 更新文档
 </todos>
 </update_todo_list>
 ```
 
-Updating progress after completing the first task:
+完成第一个任务后更新进度：
 ```xml
 <update_todo_list>
 <todos>
-[x] Analyze requirements
-[-] Design architecture
-[ ] Implement core logic
-[ ] Write tests
-[ ] Update documentation
+[x] 分析需求
+[-] 设计架构
+[ ] 实现核心逻辑
+[ ] 编写测试
+[ ] 更新文档
 </todos>
 </update_todo_list>
 ```
 
-Adding new tasks discovered during implementation:
+在实施过程中发现新任务时添加：
 ```xml
 <update_todo_list>
 <todos>
-[x] Analyze requirements
-[x] Design architecture
-[x] Implement core logic
-[-] Write tests
-[ ] Update documentation
-[ ] Add performance benchmarks
-[ ] Create deployment script
+[x] 分析需求
+[x] 设计架构
+[x] 实现核心逻辑
+[-] 编写测试
+[ ] 更新文档
+[ ] 添加性能基准测试
+[ ] 创建部署脚本
 </todos>
 </update_todo_list>
 ```
 
-Managing a complex debugging workflow:
+管理复杂的调试工作流程：
 ```xml
 <update_todo_list>
 <todos>
-[x] Reproduce the issue
-[x] Check recent code changes
-[-] Analyze error logs
-[ ] Test with different configurations
-[ ] Check database queries
-[ ] Verify network connectivity
-[ ] Create fix and test
+[x] 重现问题
+[x] 检查最近的代码变更
+[-] 分析错误日志
+[ ] 使用不同配置测试
+[ ] 检查数据库查询
+[ ] 验证网络连接
+[ ] 创建修复并测试
 </todos>
 </update_todo_list>

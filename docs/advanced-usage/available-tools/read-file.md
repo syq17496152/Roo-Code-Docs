@@ -1,177 +1,176 @@
-
 # read_file
 
-The `read_file` tool examines the contents of files in a project. It allows Roo to understand code, configuration files, and documentation to provide better assistance.
+`read_file` 工具用于查看项目中的文件内容。它使 Roo 能够理解代码、配置文件和文档，从而提供更好的帮助。
 
-:::info Multi-File Support
-When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, this tool can read multiple files simultaneously using an enhanced XML parameter format. This significantly improves efficiency for tasks requiring analysis of multiple related files.
+:::info 多文件支持
+当启用 [Concurrent File Reads](/features/concurrent-file-reads) 实验性功能时，此工具可以通过增强的 XML 参数格式同时读取多个文件。这显著提高了需要分析多个相关文件的任务效率。
 :::
 
 ---
 
-## Parameters
+## 参数
 
-The tool accepts parameters in two formats depending on your configuration:
+根据您的配置，该工具接受两种格式的参数：
 
-### Standard Format (Single File)
+### 标准格式 (单文件)
 
-- `path` (required): The path of the file to read relative to the current working directory
-- `start_line` (optional): The starting line number to read from (1-based indexing)
-- `end_line` (optional): The ending line number to read to (1-based, inclusive)
+- `path` (必填)：要读取文件的路径（相对于当前工作目录）
+- `start_line` (可选)：开始读取的行号（1-based 索引）
+- `end_line` (可选)：结束读取的行号（1-based，包含）
 
-:::note Legacy Format
-While the single-file parameters (`path`, `start_line`, `end_line`) are still supported for backward compatibility, we recommend using the newer `args` format for consistency and future compatibility.
+:::note 旧版格式
+虽然仍支持单文件参数 (`path`, `start_line`, `end_line`) 以实现向后兼容，但我们建议使用更新的 `args` 格式以确保一致性和未来兼容性。
 :::
 
-### Enhanced Format (Multi-File - Experimental)
+### 增强格式 (多文件 - 实验性)
 
-When [Concurrent File Reads](/features/concurrent-file-reads) is enabled, the tool accepts an `args` parameter containing multiple file entries:
+当启用 [Concurrent File Reads](/features/concurrent-file-reads) 时，该工具接受包含多个文件条目的 `args` 参数：
 
-- `args` (required): Container for multiple file specifications
-  - `file` (required): Individual file specification
-    - `path` (required): The path of the file to read
-    - `line_range` (optional): Line range specification (e.g., "1-50" or "100-150")
-
----
-
-## What It Does
-
-This tool reads the content of a specified file and returns it with line numbers for easy reference. It can read entire files or specific sections, and even extract text from PDFs and Word documents.
+- `args` (必填)：包含多个文件规范的容器
+  - `file` (必填)：单个文件规范
+    - `path` (必填)：要读取文件的路径
+    - `line_range` (可选)：行范围说明（例如 "1-50" 或 "100-150"）
 
 ---
 
-## When is it used?
+## 功能说明
 
-- When Roo needs to understand existing code structure
-- When Roo needs to analyze configuration files
-- When Roo needs to extract information from text files
-- When Roo needs to see code before suggesting changes
-- When specific line numbers need to be referenced in discussions
+此工具读取指定文件的内容，并返回带行号的结果以便于参考。它可以读取整个文件或特定部分，甚至可以从 PDF 和 Word 文档中提取文本。
 
 ---
 
-## Key Features
+## 使用场景
 
-- Displays file content with line numbers for easy reference
-- Can read specific portions of files by specifying line ranges
-- Extracts readable text from PDF and DOCX files
-- Automatically truncates large text files when no line range is specified, showing the beginning of the file
-- Provides method summaries with line ranges for truncated large code files
-- Efficiently streams only requested line ranges for better performance
-- Makes it easy to discuss specific parts of code with line numbering
-- **Multi-file support** (experimental): Read multiple files simultaneously with batch approval
+- 当 Roo 需要理解现有代码结构时
+- 当 Roo 需要分析配置文件时
+- 当 Roo 需要从文本文件中提取信息时
+- 当 Roo 在提出修改建议前需要查看代码时
+- 当讨论需要引用特定行号时
 
 ---
 
-## Multi-File Capabilities (Experimental)
+## 主要功能
 
-When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, the `read_file` tool gains enhanced capabilities:
-
-### Batch Processing
-- Read up to 100 files in a single request (configurable, default 15)
-- Parallel processing for improved performance
-- Batch approval interface for user consent
-
-### Enhanced User Experience
-- Single approval dialog for multiple files
-- Individual file override options
-- Clear visibility into which files will be accessed
-- Graceful handling of mixed success/failure scenarios
-
-### Improved Efficiency
-- Reduces interruptions from multiple approval dialogs
-- Faster processing through parallel file reading
-- Smart batching of related files
-- Configurable concurrency limits to match system capabilities
+- 显示带行号的文件内容以便于参考
+- 可通过指定行范围读取文件的特定部分
+- 从 PDF 和 DOCX 文件中提取可读文本
+- 当未指定行范围时自动截断大文本文件，显示文件开头部分
+- 为截断的大代码文件提供方法摘要及行范围
+- 高效地仅流式传输请求的行范围以提高性能
+- 通过行号标记使讨论代码特定部分变得简单
+- **多文件支持** (实验性)：通过批量审批同时读取多个文件
 
 ---
 
-## Limitations
+## 多文件功能 (实验性)
 
-- May not handle extremely large files efficiently without using line range parameters
-- For binary files (except PDF and DOCX), may return content that isn't human-readable
-- **Multi-file mode**: Requires experimental feature to be enabled and may have stability issues
+当启用 [Concurrent File Reads](/features/concurrent-file-reads) 实验性功能时，`read_file` 工具将获得增强的功能：
 
----
+### 批量处理
+- 单个请求中最多可读取 100 个文件（可配置，默认 15）
+- 并行处理以提高性能
+- 批量审批界面获取用户同意
 
-## How It Works
+### 增强的用户体验
+- 多文件的单一审批对话框
+- 单个文件的覆盖选项
+- 清晰显示将访问的文件
+- 混合成功/失败情况的优雅处理
 
-When the `read_file` tool is invoked, it follows this process:
-
-1. **Parameter Validation**: Validates the required `path` parameter and optional parameters
-2. **Path Resolution**: Resolves the relative path to an absolute path
-3. **Reading Strategy Selection**:
-   - The tool uses a strict priority hierarchy (explained in detail below)
-   - It chooses between range reading, auto-truncation, or full file reading
-4. **Content Processing**:
-   - Adds line numbers to the content (e.g., "1 | const x = 13") where `1 |` is the line number.
-   - For truncated files, adds truncation notice and method definitions
-   - For special formats (PDF, DOCX), extracts readable text
-
----
-
-## Reading Strategy Priority
-
-The tool uses a clear decision hierarchy to determine how to read a file:
-
-1. **First Priority: Explicit Line Range**
-   - If either `start_line` or `end_line` is provided, the tool always performs a range read
-   - The implementation efficiently streams only the requested lines, making it suitable for processing large files
-   - This takes precedence over all other options
-
-2. **Second Priority: Automatic Truncation for Large Text Files**
-   - This applies only when **all** of the following conditions are met:
-     - Neither `start_line` nor `end_line` is specified.
-     - The file is identified as a text-based file (not binary like PDF/DOCX).
-     - The file's total line count exceeds the `maxReadFileLine` setting (default: 500 lines).
-   - When automatic truncation occurs:
-     - The tool reads only the *first* `maxReadFileLine` lines.
-     - It appends a notice indicating truncation (e.g., `[Showing only 500 of 1200 total lines...]`).
-     - For code files, it may also append a summary of source code definitions found within the truncated portion.
-   - **Special Case - Definitions Only Mode**: When `maxReadFileLine` is set to `0`, the tool returns only source code definitions without any file content.
-
-3. **Default Behavior: Read Entire File**
-   - If neither an explicit range is given nor automatic truncation applies (e.g., the file is within the line limit, or it's a supported binary type), the tool reads the entire content.
-   - For supported formats like PDF and DOCX, it attempts to extract the full text content.
+### 提高的效率
+- 减少多个审批对话框带来的中断
+- 通过并行文件读取加快处理速度
+- 相关文件的智能分组
+- 可配置的并发限制以匹配系统能力
 
 ---
 
-## Examples When Used
+## 局限性
 
-- When asked to explain or improve code, Roo first reads the relevant files to understand the current implementation.
-- When troubleshooting configuration issues, Roo reads config files to identify potential problems.
-- When working with documentation, Roo reads existing docs to understand the current content before suggesting improvements.
+- 如果不使用行范围参数，可能无法高效处理极大文件
+- 对于二进制文件（PDF 和 DOCX 除外），可能返回不可读内容
+- **多文件模式**：需要启用实验性功能，可能存在稳定性问题
 
 ---
 
-## Usage Examples
+## 工作原理
 
-Here are several scenarios demonstrating how the `read_file` tool is used and the typical output you might receive.
+调用 `read_file` 工具时，它遵循以下流程：
 
-### Reading an Entire File
+1. **参数验证**：验证必需的 `path` 参数和可选参数
+2. **路径解析**：将相对路径解析为绝对路径
+3. **读取策略选择**：
+   - 工具使用严格的优先级层次（下文详述）
+   - 它在范围读取、自动截断或完整文件读取之间进行选择
+4. **内容处理**：
+   - 为内容添加行号（如 "1 | const x = 13" 中的 "1 |" 是行号）
+   - 对于截断的文件，添加截断通知和方法定义
+   - 对特殊格式（PDF、DOCX）提取可读文本
 
-To read the complete content of a file:
+---
 
-**Input:**
+## 读取策略优先级
+
+工具使用明确的决策层次来确定如何读取文件：
+
+1. **第一优先级：显式行范围**
+   - 如果提供了 `start_line` 或 `end_line`，工具始终执行范围读取
+   - 实现高效地仅流式传输请求的行，适合处理大型文件
+   - 这一选项优先于所有其他选项
+
+2. **第二优先级：大文本文件的自动截断**
+   - 当满足以下所有条件时应用：
+     - 未指定 `start_line` 或 `end_line`
+     - 文件被识别为基于文本的文件（非 PDF/DOCX 等二进制文件）
+     - 文件总行数超过 `maxReadFileLine` 设置（默认：500 行）
+   - 自动截断时：
+     - 工具仅读取前 `maxReadFileLine` 行
+     - 添加截断通知（如 `[仅显示 500 行中的 1200 行...]`）
+     - 对代码文件，可能会追加截断部分中找到的源代码定义摘要
+   - **特殊情况 - 仅定义模式**：当 `maxReadFileLine` 设置为 `0` 时，工具仅返回源代码定义而无任何文件内容
+
+3. **默认行为：读取整个文件**
+   - 如果既未给定显式范围也未触发自动截断（如文件在行数限制内，或是受支持的二进制类型），则读取全部内容。
+   - 对 PDF 和 DOCX 等支持的格式，尝试提取完整文本内容。
+
+---
+
+## 使用示例
+
+- 当要求解释或改进代码时，Roo 会先读取相关文件以理解当前实现。
+- 排查配置问题时，Roo 会读取配置文件以识别潜在问题。
+- 处理文档时，Roo 会先读取现有文档以理解当前内容再提出改进建议。
+
+---
+
+## 使用示例代码
+
+以下是展示 `read_file` 工具使用方式以及您可能收到的典型输出的几个场景。
+
+### 读取整个文件
+
+要读取文件的完整内容：
+
+**输入：**
 ```xml
 <read_file>
 <path>src/app.js</path>
 </read_file>
 ```
 
-**Simulated Output (for a small file like `example_small.txt`):**
+**模拟输出（小文件如 `example_small.txt`）：**
 ```
-1 | This is the first line.
-2 | This is the second line.
-3 | This is the third line.
+1 | 这是第一行。
+2 | 这是第二行。
+3 | 这是第三行。
 ```
-*(Output will vary based on the actual file content)*
+*(输出将根据实际文件内容变化)*
 
-### Reading Specific Lines
+### 读取特定行
 
-To read only a specific range of lines (e.g., 46-68):
+要只读取特定范围的行（如 46-68 行）：
 
-**Input:**
+**输入：**
 ```xml
 <read_file>
 <path>src/app.js</path>
@@ -180,105 +179,105 @@ To read only a specific range of lines (e.g., 46-68):
 </read_file>
 ```
 
-**Simulated Output (for lines 2-3 of `example_five_lines.txt`):**
+**模拟输出（`example_five_lines.txt` 的第 2-3 行）：**
 ```
-2 | Content of line two.
-3 | Content of line three.
+2 | 第二行的内容。
+3 | 第三行的内容。
 ```
-*(Output shows only the requested lines with their original line numbers)*
+*(输出显示只有请求的行及其原始行号)*
 
-### Reading a Large Text File (Automatic Truncation)
+### 读取大文本文件（自动截断）
 
-When reading a large text file without specifying a line range, the tool automatically truncates the content if it exceeds the internal line limit (e.g., 500 lines).
+当读取未指定行范围的大文本文件时，工具会自动截断内容，如果其超出内部行数限制（如 500 行）。
 
-**Input:**
+**输入：**
 ```xml
 <read_file>
 <path>logs/large_app.log</path>
 </read_file>
 ```
 
-**Simulated Output (for a 1500-line log file with a 500-line limit):**
+**模拟输出（1500 行日志文件，行数限制为 500 行）：**
 ```
-1 | Log entry 1...
-2 | Log entry 2...
+1 | 日志条目 1...
+2 | 日志条目 2...
 ...
-500 | Log entry 500...
+500 | 日志条目 500...
 
-[Showing only 500 of 1500 total lines. Use start_line and end_line to read specific ranges.]
-// Optional: Source code definitions summary might appear here for code files
+[仅显示 500 行中的 1500 行。使用 start_line 和 end_line 读取特定范围。]
+// 对代码文件，这里可能会出现源代码定义摘要
 ```
-*(Output shows the beginning lines up to the `maxReadFileLine` limit, plus a truncation notice. Use line ranges for full access.)*
+*(输出显示从 `maxReadFileLine` 限制开始的起始行，加上一个截断通知。请使用行范围获取完整访问权限。)*
 
-### Reading Definitions Only
+### 仅读取定义（定义模式）
 
-When `maxReadFileLine` is set to `0` in user settings, the tool returns only source code definitions without file content:
+当在用户设置中将 `maxReadFileLine` 设为 `0` 时，工具仅返回源代码定义而无文件内容：
 
-**Input:**
+**输入：**
 ```xml
-<!-- Assuming maxReadFileLine is set to 0 in user settings -->
+<!-- 假设用户设置中 maxReadFileLine 设为 0 -->
 <read_file>
 <path>src/services/auth.service.ts</path>
 </read_file>
 ```
 
-**Simulated Output:**
+**模拟输出：**
 ```xml
 <file>
   <path>src/services/auth.service.ts</path>
   <list_code_definition_names>
-    class AuthService
-      method validateUser
-      method generateToken
+    类 AuthService
+      方法 validateUser
+      方法 generateToken
   </list_code_definition_names>
-  <notice>Showing only 0 of 150 total lines. Use start_line and end_line to read specific ranges.</notice>
+  <notice>仅显示 0 行中的 150 行。使用 start_line 和 end_line 读取特定范围。</notice>
 </file>
 ```
-*(This mode provides a quick overview of file structure without reading content.)*
+*(此模式提供文件结构的快速概览而无需读取内容。)*
 
-### Attempting to Read a Non-Existent File
+### 尝试读取不存在的文件
 
-If the specified file does not exist:
+如果指定的文件不存在：
 
-**Input:**
+**输入：**
 ```xml
 <read_file>
 <path>non_existent_file.txt</path>
 </read_file>
 ```
 
-**Simulated Output (Error):**
+**模拟输出（错误）：**
 ```
-Error: File not found at path 'non_existent_file.txt'.
+错误：在路径 'non_existent_file.txt' 未找到文件。
 ```
 
-### Attempting to Read a Blocked File
+### 尝试读取被阻止的文件
 
-If the file is excluded by rules in a `.rooignore` file:
+如果文件被 `.rooignore` 文件中的规则排除：
 
-**Input:**
+**输入：**
 ```xml
 <read_file>
 <path>.env</path>
 </read_file>
 ```
 
-**Simulated Output (Error):**
+**模拟输出（错误）：**
 ```
-Error: Access denied by .rooignore rules
+错误：由 .rooignore 规则拒绝访问
 ```
 
 ---
 
-## Multi-File Examples (Experimental)
+## 多文件示例 (实验性)
 
-When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, you can read multiple files simultaneously using the enhanced XML format.
+当启用 [Concurrent File Reads](/features/concurrent-file-reads) 实验性功能时，可以使用增强的 XML 格式同时读取多个文件。
 
-### Reading Multiple Complete Files
+### 同时读取多个完整文件
 
-To read several complete files at once:
+要一次读取多个完整文件：
 
-**Input:**
+**输入：**
 ```xml
 <read_file>
 <args>
@@ -295,7 +294,7 @@ To read several complete files at once:
 </read_file>
 ```
 
-**Simulated Output:**
+**模拟输出：**
 ```xml
 <files>
   <file>
@@ -326,11 +325,11 @@ To read several complete files at once:
 </files>
 ```
 
-### Reading Specific Line Ranges from Multiple Files
+### 从多个文件中读取特定行范围
 
-To read specific sections from multiple files:
+要从多个文件中读取特定部分：
 
-**Input:**
+**输入：**
 ```xml
 <read_file>
 <args>
@@ -347,7 +346,7 @@ To read specific sections from multiple files:
 </read_file>
 ```
 
-**Simulated Output:**
+**模拟输出：**
 ```xml
 <files>
   <file>
@@ -376,11 +375,11 @@ To read specific sections from multiple files:
 </files>
 ```
 
-### Handling Mixed Results (Some Files Denied/Blocked)
+### 处理混合结果（部分文件被拒绝/阻塞）
 
-When some files are approved and others are denied or blocked:
+当某些文件已批准而其他文件被拒绝或阻塞时：
 
-**Input:**
+**输入：**
 ```xml
 <read_file>
 <args>
@@ -397,40 +396,34 @@ When some files are approved and others are denied or blocked:
 </read_file>
 ```
 
-**Simulated Output:**
+**模拟输出：**
 ```xml
 <files>
   <file>
     <path>src/app.ts</path>
     <content>
       1 | import React from 'react'
-      2 | // ... file content successfully read
+      2 | // ... rest of file content
     </content>
   </file>
   <file>
     <path>.env</path>
-    <error>Access denied by .rooignore rules</error>
+    <error>由 .rooignore 规则拒绝访问</error>
   </file>
   <file>
     <path>src/secret-config.ts</path>
-    <error>User denied access to file</error>
+    <error>用户拒绝文件访问</error>
   </file>
 </files>
 ```
 
-### Batch Approval Interface
+### 批量审批界面
 
-When requesting multiple files, you'll see a batch approval interface that allows you to:
+请求多个文件时，您将看到一个批量审批界面，允许您：
 
-- **Approve All**: Grant access to all requested files
-- **Deny All**: Deny access to all requested files
-- **Individual Control**: Override decisions for specific files
-- **File Preview**: Click file headers to open them in your editor
+- **批准所有**：授予对所有请求文件的访问权
+- **拒绝所有**：拒绝所有请求文件的访问权
+- **单独控制**：覆盖特定文件的决定
+- **文件预览**：点击文件标题在编辑器中打开它们
 
-The interface displays each file path clearly, making it easy to understand what Roo wants to access before granting permission.
-
----
-
-## Backward Compatibility
-
-The enhanced multi-file format is fully backward compatible. Existing single-file requests using the `path` parameter continue to work exactly as before, regardless of whether the experimental feature is enabled or disabled.
+界面清晰显示每个文件路径，使您可以在授予权限前轻松了解 Roo 想要访问的内容。

@@ -1,80 +1,78 @@
 ---
 sidebar_label: Ollama
 ---
-import KangarooIcon from '@site/src/components/KangarooIcon';
 
-# Using Ollama With Roo Code
+# 在 Roo Code 中使用 Ollama
 
-Roo Code supports running models locally using Ollama. This provides privacy, offline access, and potentially lower costs, but requires more setup and a powerful computer.
+Ollama 是一个本地运行的大型语言模型 (LLM) 应用程序，允许您在不连接互联网的情况下使用多种开源模型。它提供了一个简单的命令行界面和 API，支持多种模型格式。
 
-**Website:** [https://ollama.com/](https://ollama.com/)
-
----
-
-## Setting up Ollama
-
-1.  **Download and Install Ollama:**  Download the Ollama installer for your operating system from the [Ollama website](https://ollama.com/). Follow the installation instructions. Make sure Ollama is running
-
-    ```bash
-    ollama serve
-    ```
-
-2.  **Download a Model:**  Ollama supports many different models.  You can find a list of available models on the [Ollama website](https://ollama.com/library).  Some recommended models for coding tasks include:
-
-    *   `codellama:7b-code` (good starting point, smaller)
-    *   `codellama:13b-code` (better quality, larger)
-    *   `codellama:34b-code` (even better quality, very large)
-    *   `qwen2.5-coder:32b`
-    *   `mistralai/Mistral-7B-Instruct-v0.1` (good general-purpose model)
-    *   `deepseek-coder:6.7b-base` (good for coding tasks)
-    *   `llama3:8b-instruct-q5_1` (good for general tasks)
-
-    To download a model, open your terminal and run:
-
-    ```bash
-    ollama pull <model_name>
-    ```
-
-    For example:
-
-    ```bash
-    ollama pull qwen2.5-coder:32b
-    ```
-
-3. **Configure the Model:** by default, Ollama uses a context window size of 2048 tokens, which is too small for Roo Code requests. You need to have at least 12k to get decent results, ideally - 32k. To configure a model, you actually need to set its parameters and save a copy of it.
-
-   Load the model (we will use `qwen2.5-coder:32b` as an example):
-   
-    ```bash
-    ollama run qwen2.5-coder:32b
-    ```
-
-   Change context size parameter:
-
-    ```bash
-    /set parameter num_ctx 32768
-    ```
-
-    Save the model with a new name:
-
-    ```bash
-    /save your_model_name
-    ```
-
-4.  **Configure Roo Code:**
-    *   Open the Roo Code sidebar (<KangarooIcon /> icon).
-    *   Click the settings gear icon (<Codicon name="gear" />).
-    *   Select "ollama" as the API Provider.
-    *   Enter the Model name from the previous step (e.g., `your_model_name`).
-    *   (Optional) You can configure the base URL if you're running Ollama on a different machine. The default is `http://localhost:11434`.
-    *   (Optional) Configure Model context size in Advanced settings, so Roo Code knows how to manage its sliding window.
+**官方网站:** [https://ollama.com/](https://ollama.com/)
 
 ---
 
-## Tips and Notes
+## 安装与配置
 
-*   **Resource Requirements:** Running large language models locally can be resource-intensive.  Make sure your computer meets the minimum requirements for the model you choose.
-*   **Model Selection:** Experiment with different models to find the one that best suits your needs.
-*   **Offline Use:** Once you've downloaded a model, you can use Roo Code offline with that model.
-*   **Token Tracking:** Roo Code tracks token usage for models run via Ollama, helping you monitor consumption.
-*   **Ollama Documentation:** Refer to the [Ollama documentation](https://ollama.com/docs) for more information on installing, configuring, and using Ollama.
+1.  **下载与安装:** 访问 [Ollama 下载页面](https://ollama.com/download) 下载适用于您操作系统的版本。
+2.  **安装模型:** 打开终端，运行以下命令安装模型：
+    ```bash
+    ollama pull <model-name>
+    ```
+    例如，安装 Llama3 模型：
+    ```bash
+    ollama pull llama3
+    ```
+3.  **启动模型:** 在终端运行以下命令启动模型：
+    ```bash
+    ollama run <model-name>
+    ```
+4.  **获取基础 URL:** Ollama 默认在 `http://localhost:11434` 上运行。确保该 URL 可以从 Roo Code 访问。
+
+---
+
+## 支持的模型
+
+Ollama 支持以下模型：
+
+*   **Llama3 Models:**
+    *   `llama3`
+    *   `llama3:8b`
+    *   `llama3:70b`
+*   **Mistral Models:**
+    *   `mistral`
+    *   `mistral:7b`
+*   **Code Models:**
+    *   `codellama`
+    *   `codellama:7b`
+    *   `codellama:13b`
+    *   `codellama:34b`
+*   **Other Models:**
+    *   `dolphin-llama3`
+    *   `dolphin-mixtral`
+    *   `dolphin-phi`
+    *   `gemma`
+    *   `gemma:2b`
+    *   `gemma:7b`
+    *   `phi3`
+    *   `phi3:3.8b`
+    *   `phi3:12.8b`
+
+关于每个模型功能的详细信息，请参阅 [Ollama 模型库](https://ollama.com/library)。
+
+---
+
+## 在 Roo Code 中配置
+
+1.  **打开 Roo Code 设置:** 点击 Roo Code 面板中的齿轮图标 (<Codicon name="gear" />)。
+2.  **选择提供商:** 从 "API Provider" 下拉菜单中选择 "Ollama"。
+3.  **输入基础 URL:** 将 Ollama 的基础 URL 粘贴到 "Ollama Base URL" 字段中。默认情况下，Ollama 运行在 `http://localhost:11434`。
+4.  **选择模型:** 从下拉菜单中选择您需要的模型。
+5.  **(可选) 自定义模型路径:** 如果您的模型不在默认目录中，请勾选 "Use custom model path" 并输入模型路径。
+
+---
+
+## 提示与注意事项
+
+*   **本地运行:** Ollama 是一个本地应用程序，因此您需要确保其正在运行并且可以从 Roo Code 访问。
+*   **模型性能:** Ollama 支持多种模型格式，确保选择适合您硬件的模型。
+*   **资源占用:** 本地模型可能需要较大的内存和计算资源，确保您的系统满足模型的最低要求。
+*   **隐私:** 由于模型在本地运行，您的数据不会上传到云端，确保了隐私安全。

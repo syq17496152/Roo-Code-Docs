@@ -2,108 +2,108 @@
 sidebar_label: Claude Code
 ---
 
-# Claude Code Provider
+# Claude Code 提供商
 
-The Claude Code provider allows you to use Anthropic's Claude models through their official CLI (Command Line Interface) instead of the web API. This provides direct access to your Claude Max subscription right from Roo Code.
+Claude Code 提供商允许您通过官方 CLI（命令行接口）而非 Web API 使用 Anthropic 的 Claude 模型。这使得 Roo Code 可以直接访问您的 Claude Max 订阅。
 
-:::info Setup Instructions
-Before using the Claude Code provider, ensure you have completed the following steps:
+:::info 安装说明
+在使用 Claude Code 提供商之前，请确保完成以下步骤：
 
-1.  **Install Claude CLI**: Download and install the official command-line tool from [Anthropic's documentation](https://docs.anthropic.com/en/docs/claude-code/setup).
-2.  **Authenticate**: Run `claude` in your terminal to start the application. Once the application is running, type `/login` to sign in to your Anthropic account. This step is required to grant Roo Code access to your Claude subscription.
-3.  **Verify Setup**: Confirm the CLI is working by running `claude --version`. This ensures that Roo Code can find and use the executable.
-4.  **Configure in Roo Code**:
-    *   Go to Roo Code settings and select **"Claude Code"** as your API provider.
-    *   If you installed the CLI in a custom location, set the **"Claude Code Path"** to the full executable path (e.g., `/usr/local/bin/claude`). Otherwise, you can leave it blank.
-    *   Choose your desired model from the list of available options.
+1.  **安装 Claude CLI**：从 [Anthropic 文档](https://docs.anthropic.com/en/docs/claude-code/setup) 下载并安装官方命令行工具。
+2.  **认证**：在终端运行 `claude` 启动应用程序。应用程序启动后，输入 `/login` 登录您的 Anthropic 账户。此步骤是授予 Roo Code 访问您 Claude 订阅的必要条件。
+3.  **验证安装**：通过运行 `claude --version` 确认 CLI 正常工作。这确保 Roo Code 可以找到并使用该可执行文件。
+4.  **在 Roo Code 中配置**：
+    *   进入 Roo Code 设置，选择 **"Claude Code"** 作为您的 API 提供商。
+    *   如果您将 CLI 安装在自定义位置，请将 **"Claude Code 路径"** 设置为完整的可执行文件路径（例如 `/usr/local/bin/claude`）。否则可以留空。
+    *   从可用选项中选择您需要的模型。
 
-Once configured, Roo Code will use your local Claude CLI installation to interact with Anthropic's models, leveraging your existing subscription.
+配置完成后，Roo Code 将使用您本地的 Claude CLI 安装与 Anthropic 模型交互，利用您现有的订阅。
 :::
 
 
-:::warning Environment Variable Usage
-The `claude` command-line tool, like other Anthropic SDKs, can use the `ANTHROPIC_API_KEY` environment variable for authentication. This is a common method for authorizing CLI tools in non-interactive environments.
+:::warning 环境变量使用
+`claude` 命令行工具与其他 Anthropic SDK 一样，可以使用 `ANTHROPIC_API_KEY` 环境变量进行认证。这是非交互环境中授权 CLI 工具的常用方法。
 
-If this environment variable is set on your system, the `claude` tool may use it for authentication instead of the interactive `/login` method. When Roo Code executes the tool, it will accurately reflect that an API key is being used, as this is the underlying behavior of the `claude` CLI itself.
+如果您的系统设置了这个环境变量，`claude` 工具可能会使用它进行认证而不是交互式的 `/login` 方法。当 Roo Code 执行该工具时，会准确反映正在使用 API 密钥的情况，因为这是 `claude` CLI 本身的底层行为。
 :::
 
-**Website:** [https://docs.anthropic.com/en/docs/claude-code/setup](https://docs.anthropic.com/en/docs/claude-code/setup)
+**官方网站:** [https://docs.anthropic.com/en/docs/claude-code/setup](https://docs.anthropic.com/en/docs/claude-code/setup)
 
 ---
 
-## Key Features
-- **Direct CLI Access**: Uses Anthropic's official Claude CLI tool for model interactions.
-- **Advanced Reasoning**: Full support for Claude's thinking mode and reasoning capabilities.
-- **Cost Transparency**: Shows exact usage costs as reported by the CLI.
-- **Flexible Configuration**: Works with your existing Claude CLI setup.
+## 主要功能
+- **直接 CLI 访问**：使用 Anthropic 官方 Claude CLI 工具进行模型交互。
+- **高级推理**：完整支持 Claude 的思考模式和推理能力。
+- **费用透明**：显示 CLI 报告的确切使用成本。
+- **灵活配置**：与您现有的 Claude CLI 配置配合使用。
 
 ---
 
-## Why Use This Provider
+## 为何使用此提供商
 
-- **No API Keys**: Uses your existing Claude CLI authentication.
-- **Cost Benefits**: Leverage CLI subscription rates and transparent cost reporting.
-- **Latest Features**: Access new Claude capabilities as they're released in the CLI.
-- **Advanced Reasoning**: Full support for Claude's thinking modes.
+- **无需 API 密钥**：使用您已有的 Claude CLI 认证。
+- **成本优势**：利用 CLI 订阅费率和透明的成本报告。
+- **最新特性**：在 CLI 发布新功能时立即访问。
+- **高级推理**：完整支持 Claude 的思考模式。
 
-## How it Works
+## 工作原理
 
-The Claude Code provider works by:
+Claude Code 提供商的工作方式如下：
 
-1. **Running Commands**: Executes the `claude` CLI command with your prompts.
-2. **Processing Output**: Handles the CLI's JSON output in chunks with advanced parsing.
-3. **Handling Reasoning**: Captures and displays Claude's thinking process when available.
-4. **Tracking Usage**: Reports token usage and costs as provided by the CLI.
+1. **运行命令**：用您的提示执行 `claude` CLI 命令。
+2. **处理输出**：分块处理 CLI 的 JSON 输出，并进行高级解析。
+3. **处理推理**：在可用时捕获并显示 Claude 的思考过程。
+4. **跟踪使用情况**：报告 CLI 提供的 token 使用量和成本。
 
-The provider integrates with Roo Code's interface, giving you the same experience as other providers while using the Claude CLI under the hood.
-
----
-
-## Configuration
-
-You only need to configure one optional setting:
-
-### **Claude Code Path**
-- **Setting**: `claudeCodePath`
-- **Description**: Path to your Claude CLI executable.
-- **Default**: `claude` (assumes it's in your system PATH).
-- **When to change**: If you installed Claude CLI in a custom location.
-
-**Example custom paths:**
-- macOS/Linux: `/usr/local/bin/claude` or `~/bin/claude`
+该提供商与 Roo Code 接口集成，让您获得与其他提供商相同的体验，同时使用底层的 Claude CLI。
 
 ---
 
-## Supported Models
+## 配置
 
-The Claude Code provider supports these Claude models:
+您只需配置一个可选设置：
 
-- **Claude Sonnet 4** (latest, recommended)
-- **Claude Opus 4** (most capable)
+### **Claude Code 路径**
+- **设置项**: `claudeCodePath`
+- **描述**: 您 Claude CLI 可执行文件的路径。
+- **默认值**: `claude`（假设它位于您的系统 PATH 中）。
+- **何时更改**: 如果您将 Claude CLI 安装在自定义位置。
+
+**自定义路径示例：**
+- macOS/Linux: `/usr/local/bin/claude` 或 `~/bin/claude`
+
+---
+
+## 支持的模型
+
+Claude Code 提供商支持以下 Claude 模型：
+
+- **Claude Sonnet 4** (最新版，推荐使用)
+- **Claude Opus 4** (功能最强大)
 - **Claude 3.7 Sonnet**
 - **Claude 3.5 Sonnet**
-- **Claude 3.5 Haiku** (fast responses)
+- **Claude 3.5 Haiku** (快速响应)
 
-The specific models available depend on your Claude CLI subscription and plan.
+具体可用模型取决于您的 Claude CLI 订阅和计划.
 
 
 ---
 
 
-## Common Questions
+## 常见问题
 
-**"Do I need a Claude API key for this provider?"**
-- Typically no. You can authenticate interactively using the `/login` command within the `claude` application.
-- However, if the `ANTHROPIC_API_KEY` environment variable is set, the Claude CLI may use it for authentication. See the warning above for details.
+**"我需要为此提供商提供 Claude API 密钥吗？"**
+- 通常不需要。您可以使用 `/login` 命令在 `claude` 应用程序中进行交互式认证。
+- 但是，如果设置了 `ANTHROPIC_API_KEY` 环境变量，Claude CLI 可能会使用它进行认证。详情请参阅上面的警告信息。
 
-**"How do I install the Claude CLI?"**
-- Visit [Anthropic's CLI documentation](https://docs.anthropic.com/en/docs/claude-code/setup) for installation instructions
-- The CLI handles its own authentication and setup
+**"如何安装 Claude CLI？"**
+- 访问 [Anthropic CLI 文档](https://docs.anthropic.com/en/docs/claude-code/setup) 获取安装说明
+- CLI 处理自己的认证和安装
 
-**"Why would I use this instead of the regular Anthropic provider?"**
-- Potential cost benefits depending on your subscription
+**"为什么我要使用这个而不是常规的 Anthropic 提供商？"**
+- 根据您的订阅可能具有成本优势
 
-**"What if the CLI isn't in my PATH?"**
-- Set a custom path in the Claude Code Path setting
-- Point to the full path where you installed the CLI
+**"如果 CLI 不在您的 PATH 中怎么办？"**
+- 在 Claude Code 路径设置中指定自定义路径
+- 指向您安装 CLI 的完整路径
 

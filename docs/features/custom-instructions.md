@@ -1,288 +1,94 @@
-# Custom Instructions
+// ... existing code ...
 
-Custom Instructions allow you to personalize how Roo behaves, providing specific guidance that shapes responses, coding style, and decision-making processes.
+# 自定义指令
 
-:::info Instruction File Locations
-You can provide custom instructions using global rules (applied across all projects), workspace rules (project-specific), or through the Prompts tab interface.
+自定义指令允许您个性化 Roo 的行为方式，提供特定指导来塑造响应内容、编码风格和决策过程。
 
-**Global Rules Directory:** Apply to all projects automatically.
-*   **Linux/macOS:** `~/.roo/rules/` and `~/.roo/rules-{modeSlug}/`
-*   **Windows:** `%USERPROFILE%\.roo\rules\` and `%USERPROFILE%\.roo\rules-{modeSlug}\`
+:::info 指令文件位置
+您可以使用全局规则（适用于所有项目）、工作区规则（项目特定）或通过提示标签界面来提供自定义指令。
 
-**Workspace Rules:** Apply only to the current project, can override global rules.
-*   **Preferred Method: Directory (`.roo/rules/`)**
+**全局规则目录:** 应用于所有项目。
+*   **Linux/macOS:** `~/.roo/rules/` 和 `~/.roo/rules-{modeSlug}/`
+*   **Windows:** `%USERPROFILE%\.roo\rules\` 和 `%USERPROFILE%\.roo\rules-{modeSlug}\`
+
+**工作区规则:** 仅应用于当前项目，可以覆盖全局规则。
+*   **推荐方法：目录方式 (`.roo/rules/`)**
     ```
     .
     ├── .roo/
-    │   └── rules/          # Workspace-wide rules
+    │   └── rules/          # 工作区范围的规则
     │       ├── 01-general.md
     │       └── 02-coding-style.txt
-    └── ... (other project files)
+    └── ... (其他项目文件)
     ```
-*   **Fallback Method: Single File (`.roorules`)**
+*   **备用方法：单个文件方式 (`.roorules`)**
     ```
     .
-    ├── .roorules           # Workspace-wide rules (single file)
-    └── ... (other project files)
+    ├── .roorules           # 工作区范围的规则（单个文件）
+    └── ... (其他项目文件)
     ```
 
-**Mode-Specific Instructions:** Apply only to a specific mode (e.g., `code`).
-*   **Preferred Method: Directory (`.roo/rules-{modeSlug}/`)**
+**模式特定指令:** 仅应用于特定模式（例如 `code`）。
+*   **推荐方法：目录方式 (`.roo/rules-{modeSlug}/`)**
     ```
     .
     ├── .roo/
-    │   └── rules-code/     # Rules for "code" mode
+    │   └── rules-code/     # "code" 模式的规则
     │       ├── 01-js-style.md
     │       └── 02-ts-style.md
-    └── ... (other project files)
+    └── ... (其他项目文件)
     ```
-*   **Fallback Method: Single File (`.roorules-{modeSlug}`)**
+*   **备用方法：单个文件方式 (`.roorules-{modeSlug}`)**
     ```
     .
-    ├── .roorules-code      # Rules for "code" mode (single file)
-    └── ... (other project files)
+    ├── .roorules-code      # "code" 模式的规则（单个文件）
+    └── ... (其他项目文件)
     ```
 
-Rules are loaded in order: Global rules first, then workspace rules (which can override global rules). See [Global Rules Directory](#global-rules-directory) for details.
+规则按顺序加载：首先加载全局规则，然后是工作区规则（可以覆盖全局规则）。详情请参见[全局规则目录](#global-rules-directory)。
 :::
 
 ---
 
-## What Are Custom Instructions?
+## 什么是自定义指令？
 
-Custom Instructions define specific behaviors, preferences, and constraints beyond Roo's basic role definition. Examples include coding style, documentation standards, testing requirements, and workflow guidelines.
+自定义指令定义了超出 Roo 基本角色定义的特定行为、偏好和约束。示例包括编码风格、文档标准、测试要求和工作流程指南。
 
----
+// ... existing code ...
 
-## Setting Custom Instructions
+#### 可用规则目录
 
-### Global Custom Instructions
-
-These instructions apply across all workspaces and maintain your preferences regardless of which project you're working on.
-
-**How to set them:**
-
-<img src="/img/custom-instructions/custom-instructions.png" alt="Roo Code Prompts tab showing global custom instructions interface" width="600" />
-1.  **Open Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar
-2.  **Find Section:** Find the "Custom Instructions for All Modes" section
-3.  **Enter Instructions:** Enter your instructions in the text area
-4.  **Save Changes:** Click "Done" to save your changes
-
-### Global Rules Directory
-
-The Global Rules Directory feature provides reusable rules and custom instructions that automatically apply across all your projects. This system supports both global configurations and project-specific overrides.
-
-#### Key Benefits
-
-**Without Global Rules**: You had to maintain separate rule files in each project:
-- Copy the same rules to every new project
-- Update rules manually across multiple projects
-- No consistency between projects
-
-**With Global Rules**: Create rules once and use them everywhere:
-- Set up your preferred coding standards globally
-- Override specific rules per project when needed
-- Maintain consistency across all your work
-- Easy to update rules for all projects at once
-
-#### Directory Structure
-
-The global rules directory location is fixed and cannot be customized:
-
-**Linux/macOS:**
-```
-~/.roo/                           # Your global Roo configuration
-├── rules/                        # General rules applied to all projects
-│   ├── coding-standards.md
-│   ├── formatting-rules.md
-│   └── security-guidelines.md
-├── rules-code/                   # Rules specific to Code mode
-│   ├── typescript-rules.md
-│   └── testing-requirements.md
-├── rules-docs-extractor/         # Rules for documentation extraction
-│   └── documentation-style.md
-└── rules-{mode}/                 # Rules for other specific modes
-    └── mode-specific-rules.md
-```
-
-**Windows:**
-```
-%USERPROFILE%\.roo\               # Your global Roo configuration
-├── rules\                        # General rules applied to all projects
-│   ├── coding-standards.md
-│   ├── formatting-rules.md
-│   └── security-guidelines.md
-├── rules-code\                   # Rules specific to Code mode
-│   ├── typescript-rules.md
-│   └── testing-requirements.md
-└── rules-{mode}\                 # Rules for other specific modes
-    └── mode-specific-rules.md
-```
-
-#### Setting Up Global Rules
-
-1. **Create Global Rules Directory:**
-   ```bash
-   # Linux/macOS
-   mkdir -p ~/.roo/rules
-   
-   # Windows
-   mkdir %USERPROFILE%\.roo\rules
-   ```
-
-2. **Add General Rules** (`~/.roo/rules/coding-standards.md`):
-   ```markdown
-   # Global Coding Standards
-   
-   1. Always use TypeScript for new projects
-   2. Write unit tests for all new functions
-   3. Use descriptive variable names
-   4. Add JSDoc comments for public APIs
-   ```
-
-3. **Add Mode-Specific Rules** (`~/.roo/rules-code/typescript-rules.md`):
-   ```markdown
-   # TypeScript Code Mode Rules
-   
-   1. Use strict mode in tsconfig.json
-   2. Prefer interfaces over type aliases for object shapes
-   3. Always specify return types for functions
-   ```
-
-#### Available Rule Directories
-
-| Directory | Purpose |
+| 目录 | 用途 |
 |-----------|---------|
-| `rules/` | General rules applied to all modes |
-| `rules-code/` | Rules specific to Code mode |
-| `rules-docs-extractor/` | Rules for documentation extraction |
-| `rules-architect/` | Rules for system architecture tasks |
-| `rules-debug/` | Rules for debugging workflows |
-| `rules-{mode}/` | Rules for any custom mode |
+| `rules/` | 应用于所有模式的一般规则 |
+| `rules-code/` | Code 模式的特定规则 |
+| `rules-docs-extractor/` | 文档提取器使用的规则 |
+| `rules-architect/` | 系统架构任务使用的规则 |
+| `rules-debug/` | 调试工作流使用的规则 |
+| `rules-{mode}/` | 任何自定义模式的规则 |
 
-#### Rule Loading Order
+// ... existing code ...
 
-Rules are loaded in this order:
+## 自定义指令示例
 
-1. **Global Rules** (from `~/.roo/`)
-2. **Project Rules** (from `project/.roo/`) - can override global rules
-3. **Legacy Files** (`.roorules`, `.clinerules` - for backward compatibility)
+* "始终使用空格进行缩进，宽度为4个空格"
+* "变量名使用驼峰命名法"
+* "为所有新函数编写单元测试"
+* "在提供代码之前先解释您的推理过程"
+* "关注代码的可读性和可维护性"
+* "优先使用社区中最常用的库"
+* "当向网站添加新功能时，确保它们具有响应式设计和可访问性"
 
-Within each level, mode-specific rules are loaded before general rules.
+:::tip 小贴士：团队标准化
+对于团队环境，请考虑以下方法：
 
-### Workspace-Level Instructions
+**项目标准**：在版本控制下使用工作区 `.roo/rules/` 目录来标准化特定项目的 Roo 行为。这可以确保团队成员之间保持一致的代码风格和开发工作流程。
 
-These instructions only apply within your current workspace, allowing you to customize Roo Code's behavior for specific projects.
+**组织标准**：使用全局规则 (`~/.roo/rules/`) 来建立适用于所有项目的组织范围编码标准。团队成员可以设置相同的全局规则以确保所有工作的统一性。
 
-#### Workspace-Wide Instructions via Files/Directories
+**混合方法**：将全局规则用于组织标准，将项目级工作区规则用于项目特定需求。工作区规则可以根据需要覆盖全局规则。
 
-Workspace-wide instructions apply to all modes within the current project and can be defined using files:
-
-*   **Preferred Method: Directory-Based (`.roo/rules/`)**
-    *   Create a directory named `.roo/rules/` in your workspace root.
-    *   Place instruction files (e.g., `.md`, `.txt`) inside. Roo Code reads files recursively, appending their content to the system prompt in **alphabetical order** based on filename.
-    *   This method takes precedence if the directory exists and contains files.
-*   **Fallback Method: File-Based (`.roorules`)**
-    *   If `.roo/rules/` doesn't exist or is empty, Roo Code looks for a single `.roorules` file in the workspace root.
-    *   If found, its content is loaded.
-
-#### Mode-Specific Instructions
-
-Mode-specific instructions can be set in two independent ways that can be used simultaneously:
-
-1.  **Using the Prompts Tab:**
-
-    <img src="/img/custom-instructions/custom-instructions-2.png" alt="Roo Code Prompts tab showing mode-specific custom instructions interface" width="600" />
-    * **Open Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar
-    * **Select Mode:** Under the Modes heading, click the button for the mode you want to customize
-    * **Enter Instructions:** Enter your instructions in the text area under "Mode-specific Custom Instructions (optional)"
-    * **Save Changes:** Click "Done" to save your changes
-
-        :::info Global Mode Rules
-        If the mode itself is global (not workspace-specific), any custom instructions you set for it will also apply globally for that mode across all workspaces.
-        :::
-
-2.  **Using Rule Files/Directories:** Provide mode-specific instructions via files:
-    *   **Preferred Method: Directory-Based (`.roo/rules-{modeSlug}/`)**
-        *   Create a directory named `.roo/rules-{modeSlug}/` (e.g., `.roo/rules-docs-writer/`) in your workspace root.
-        *   Place instruction files inside (recursive loading). Files are read and appended to the system prompt in **alphabetical order** by filename.
-        *   This method takes precedence over the fallback file method for the specific mode if the directory exists and contains files.
-    *   **Fallback Method: File-Based (`.roorules-{modeSlug}`)**
-        *   If `.roo/rules-{modeSlug}/` doesn't exist or is empty, Roo Code looks for a single `.roorules-{modeSlug}` file (e.g., `.roorules-code`) in the workspace root.
-        *   If found, its content is loaded for that mode.
-
-Instructions from the Prompts tab, global rules, workspace rules, and mode-specific rules are all combined. See the section below for the exact order.
-
----
-
-## How Instructions are Combined
-
-Instructions are placed in the system prompt in this exact format:
-
-```
-====
-USER'S CUSTOM INSTRUCTIONS
-
-The following additional instructions are provided by the user, and should be followed to the best of your ability without interfering with the TOOL USE guidelines.
-
-[Language Preference (if set)]
-
-[Global Instructions (from Prompts Tab)]
-
-[Mode-specific Instructions (from Prompts Tab for the current mode)]
-
-Global Rules (from ~/.roo/):
-[Contents of files in ~/.roo/rules-{modeSlug}/ (if directory exists and is not empty)]
-[Contents of files in ~/.roo/rules/ (if directory exists and is not empty)]
-
-Mode-Specific Instructions (from Files/Directories):
-[Contents of files in .roo/rules-{modeSlug}/ (if directory exists and is not empty)]
-[Contents of .roorules-{modeSlug} file (if .roo/rules-{modeSlug}/ does not exist or is empty, and file exists)]
-
-Workspace-Wide Instructions (from Files/Directories):
-[Contents of files in .roo/rules/ (if directory exists and is not empty)]
-[Contents of .roorules file (if .roo/rules/ does not exist or is empty, and file exists)]
-
-====
-```
-
-*Note: Global rules load first, followed by workspace rules that can override them. Mode-specific rules appear before general rules within each level, and directory-based rules take precedence over file-based fallbacks.*
-
----
-
-## Rules about .rules files
-
-* **File Location:** The preferred method uses directories within `.roo/` (`.roo/rules/` and `.roo/rules-{modeSlug}/`). The fallback method uses single files (`.roorules` and `.roorules-{modeSlug}`) located directly in the workspace root.
-* **Empty Files:** Empty or missing rule files are silently skipped
-* **Source Headers:** Each rule file's contents are included with a header indicating its source
-* **Rule Interaction:** Mode-specific rules complement global rules rather than replacing them
-
----
-
-## Examples of Custom Instructions
-
-* "Always use spaces for indentation, with a width of 4 spaces"
-* "Use camelCase for variable names"
-* "Write unit tests for all new functions"
-* "Explain your reasoning before providing code"
-* "Focus on code readability and maintainability"
-* "Prioritize using the most common library in the community"
-* "When adding new features to websites, ensure they are responsive and accessible"
-
-:::tip Pro Tip: Team Standardization
-For team environments, consider these approaches:
-
-**Project Standards**: Use workspace `.roo/rules/` directories under version control to standardize Roo's behavior for specific projects. This ensures consistent code style and development workflows across team members.
-
-**Organization Standards**: Use global rules (`~/.roo/rules/`) to establish organization-wide coding standards that apply to all projects. Team members can set up identical global rules for consistency across all work.
-
-**Hybrid Approach**: Combine global rules for organization standards with project-specific workspace rules for project-specific requirements. Workspace rules can override global rules when needed.
-
-The directory-based approach offers better organization than single `.roorules` files and supports both global and project-level customization.
+基于目录的方法比单一 `.roorules` 文件提供了更好的组织性，并支持全局和项目级定制。
 :::
 
----
-
-## Combining with Custom Modes
-
-For advanced customization, combine with [Custom Modes](/features/custom-modes) to create specialized environments with specific tool access, file restrictions, and tailored instructions.
+// ... existing code ...

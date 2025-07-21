@@ -1,80 +1,80 @@
 ---
-sidebar_label: Your First Task
+sidebar_label: 您的第一个任务
 ---
 import KangarooIcon from '@site/src/components/KangarooIcon';
 
-# Starting Your First Task with Roo Code
+# 开始您的第一个 Roo Code 任务
 
-Now that you've [configured your AI provider and model](/getting-started/connecting-api-provider), you're ready to start using Roo Code! This guide walks you through your first interaction.
-
----
-
-## Step 1: Open the Roo Code Panel
-
-Click the Roo Code icon (<KangarooIcon />) in the VS Code Activity Bar (vertical bar on the side of the window) to open the chat interface. If you don't see the icon, verify the extension is installed and enabled.
-
-<img src="/img/your-first-task/your-first-task.png" alt="Roo Code icon in VS Code Activity Bar" width="800" />
-
-*The Roo Code icon in the Activity Bar opens the chat interface.*
+现在您已经[配置了AI提供商和模型](/getting-started/connecting-api-provider)，可以开始使用 Roo Code 了！本指南将引导您完成第一次交互。
 
 ---
 
-## Step 2: Type Your Task
+## 第一步：打开 Roo Code 面板
 
-Type a clear, concise description of what you want Roo Code to do in the chat box at the bottom of the panel. Examples of effective tasks:
+点击 VS Code 活动栏（窗口侧边的垂直栏）中的 Roo Code 图标 (<KangarooIcon />) 打开聊天界面。如果您没有看到该图标，请验证扩展是否已安装并启用。
 
-* "Create a file named `hello.txt` containing 'Hello, world!'."
-* "Write a Python function that adds two numbers."
-* "Create an HTML file for a simple website with the title 'Roo test'"
+<img src="/img/your-first-task/your-first-task.png" alt="VS Code活动栏中的Roo Code图标" width="800" />
 
-No special commands or syntax needed—just use plain English.
-
-<img src="/img/your-first-task/your-first-task-6.png" alt="Typing a task in the Roo Code chat interface" width="500" />
-*Enter your task in natural language - no special syntax required.*
+*Roo Code 图标在活动栏中打开聊天界面。*
 
 ---
 
-## Step 3: Send Your Task
+## 第二步：输入您的任务
 
-Press Enter or click the Send icon (<Codicon name="send" />) to the right of the input box.
+在面板底部的聊天框中输入您希望 Roo Code 执行的清晰、简洁描述。有效的任务示例包括：
 
----
+* "创建一个名为 `hello.txt` 的文件，内容为 'Hello, world!'。"
+* "编写一个Python函数，将两个数字相加。"
+* "创建一个简单的HTML文件，标题为 'Roo test'"
 
-## Step 4: Review and Approve Actions
+无需特殊命令或语法 - 只需使用普通英文即可。
 
-Roo Code analyzes your request and proposes specific actions. These may include:
-
-* **Reading files:** Shows file contents it needs to access
-* **Writing to files:** Displays a diff with proposed changes (added lines in green, removed in red)
-* **Executing commands:** Shows the exact command to run in your terminal
-* **Using the Browser:** Outlines browser actions (click, type, etc.)
-* **Asking questions:** Requests clarification when needed to proceed
-
-<img src="/img/your-first-task/your-first-task-7.png" alt="Reviewing a proposed file creation action" width="800" />
-*Roo Code shows exactly what action it wants to perform and waits for your approval.*
-
-**Each action requires your explicit approval** (unless auto-approval is enabled):
-
-* **Approve:** Click the "Approve" button to execute the proposed action
-* **Reject:** Click the "Reject" button and provide feedback if needed
+<img src="/img/your-first-task/your-first-task-6.png" alt="在Roo Code聊天界面中输入任务" width="500" />
+*在自然语言中输入任务 - 无需特殊语法。*
 
 ---
 
-## Step 5: Iterate
+## 第三步：发送您的任务
 
-Roo Code works iteratively. After each action, it waits for your feedback before proposing the next step. Continue this review-approve cycle until your task is complete.
-
-<img src="/img/your-first-task/your-first-task-8.png" alt="Final result of a completed task showing the iteration process" width="500" />
-*After completing the task, Roo Code shows the final result and awaits your next instruction.*
+按下 Enter 键或点击输入框右侧的发送图标 (<Codicon name="send" />) 。
 
 ---
 
-## Conclusion
+## 第四步：查看并批准操作
 
-You've now completed your first task with Roo Code! Through this process, you've learned:
+Roo Code 分析您的请求并提出具体操作。这些可能包括：
 
-* How to interact with Roo Code using natural language
-* The approval-based workflow that keeps you in control
-* The iterative approach Roo Code uses to solve problems step-by-step
+* **读取文件：** 显示需要访问的文件内容
+* **写入文件：** 显示带有建议更改的差异（新增行用绿色，删除行用红色）
+* **执行命令：** 显示要在终端中运行的确切命令
+* **使用浏览器：** 概述浏览器操作（点击、输入等）
+* **提问：** 在需要继续时请求澄清
 
-This iterative, approval-based workflow is at the core of how Roo Code works—letting AI handle the tedious parts of coding while you maintain complete oversight. Now that you understand the basics, you're ready to tackle more complex tasks, explore different [modes](/basic-usage/using-modes) for specialized workflows, or try the [auto-approval feature](/features/auto-approving-actions) to speed up repetitive tasks.
+<img src="/img/your-first-task/your-first-task-7.png" alt="查看提议的文件创建操作" width="800" />
+*Roo Code 显示它想要执行的确切操作并等待您的批准。*
+
+**每个操作都需要您的明确批准**（除非启用了自动批准）：
+
+* **批准：** 点击 "批准" 按钮执行提议的操作
+* **拒绝：** 点击 "拒绝" 按钮并在需要时提供反馈
+
+---
+
+## 第五步：迭代
+
+Roo Code 采用迭代方式工作。每次操作后，它会等待您的反馈，然后提出下一步操作。继续这个审查-批准周期，直到任务完成。
+
+<img src="/img/your-first-task/your-first-task-8.png" alt="完成任务的最终结果，显示迭代过程" width="500" />
+*完成任务后，Roo Code 显示最终结果并等待您的下一条指令。*
+
+---
+
+## 结论
+
+您现在已经完成了您的第一个 Roo Code 任务！通过这个过程，您已经了解了：
+
+* 如何使用自然语言与 Roo Code 交互
+* 基于批准的工作流程如何让您保持控制权
+* Roo Code 逐步解决问题的迭代方法
+
+这种迭代、基于批准的工作流程是 Roo Code 运作的核心 - 让AI处理编码的繁琐部分，同时您保持完全的监督权。现在您已经掌握了基础知识，可以尝试更复杂的任务，探索不同的[模式](/basic-usage/using-modes) 以获得专门的工作流程，或尝试[自动批准功能](/features/auto-approving-actions) 来加速重复性任务。

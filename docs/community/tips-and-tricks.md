@@ -1,5 +1,5 @@
-# Roo Code Tips & Tricks by Michaelzag
+# Roo Code 技巧与窍门（作者：Michaelzag）
 
-[View Project on GitHub](https://github.com/Michaelzag/RooCode-Tips-Tricks)
+[查看 GitHub 项目](https://github.com/Michaelzag/RooCode-Tips-Tricks)
 
-This project is a collection of files designed to supercharge your Roo Code experience and maximize productivity. For those looking for a memory management system: check out the [Handoff System](https://github.com/Michaelzag/RooCode-Tips-Tricks/blob/main/handoffs/handoff-system.md) which is a simple yet powerful way to maintain optimal LLM performance during extended projects while automatically creating valuable documentation.
+本项目是一系列旨在提升 Roo Code 使用体验和最大化工作效率的文件集合。对于需要记忆管理系统的人士：推荐查看 [交接系统（Handoff System）](https://github.com/Michaelzag/RooCode-Tips-Tricks/blob/main/handoffs/handoff-system.md)，这是一种简单而强大的方法，可在长期项目中保持大语言模型的最佳性能，同时自动生成有价值的文档内容。

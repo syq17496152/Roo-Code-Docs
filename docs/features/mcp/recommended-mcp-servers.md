@@ -1,123 +1,30 @@
 ---
-title: Recommended MCP Servers
-sidebar_label: Recommended MCP Servers
+title: 推荐的 MCP 服务器
+sidebar_label: 推荐的 MCP 服务器
 ---
 
-# Recommended MCP Servers
+# 推荐的 MCP 服务器
 
-While Roo Code can connect to any Model Context Protocol (MCP) server that follows the specification, the community has already built several high-quality servers that work out-of-the-box. This page curates the servers we **actively recommend** and provides step-by-step setup instructions so you can get productive in minutes.
+虽然 Roo Code 可以连接任何遵循规范的模型上下文协议 (MCP) 服务器，但社区已经构建了几个高质量的服务器，它们开箱即用。本页面整理了我们**主动推荐**的服务器，并提供了逐步的设置说明，以便您可以在几分钟内提高工作效率。
 
-> We'll keep this list up-to-date. If you maintain a server you'd like us to consider, please open a pull-request.
+> 我们会保持此列表的更新。如果您维护了一个我们应考虑的服务器，请提交一个拉取请求。
 
----
+// ... existing code ...
 
-## Context7
+## 安装 Context7
 
-`Context7` is our first-choice general-purpose MCP server. It ships a collection of highly-requested tools, installs with a single command, and has excellent support across every major editor that speaks MCP.
+1. 确保在 MCP 设置面板中启用了 **启用 MCP 服务器**。
+2. 您现在应该看到 **Context7** 列出。如果尚未运行，请点击 <Codicon name="activate" /> 切换以启动它。
+3. Roo Code 将在第一次调用 Context7 工具时提示您。批准请求以继续。
 
-### Why we recommend Context7
+<img src="/img/recommended-mcp-servers/context7-running-fixed.png" alt="Context7 在 Roo Code 中运行" width="400" />
 
-* **One-command install** – everything is bundled, no local build step.
-* **Cross-platform** – runs on macOS, Windows, Linux, or inside Docker.
-* **Actively maintained** – frequent updates from the Upstash team.
-* **Rich toolset** – database access, web-search, text utilities, and more.
-* **Open source** – released under the MIT licence.
+// ... existing code ...
 
----
+## 下一步
 
-## Installing Context7 in Roo Code
+* 浏览服务器面板中随 Context7 提供的工具列表。
+* 为最常用的工具配置 **始终允许**，以简化工作流程。
+* 想暴露您自己的 API 吗？请查看 [MCP 服务器创建指南](/features/mcp/using-mcp-in-roo#enabling-or-disabling-mcp-server-creation)。
 
-There are two common ways to register the server:
-
-1. **Global configuration** – available in every workspace.
-2. **Project-level configuration** – checked into version control alongside your code.
-
-We'll cover both below.
-
-### 1. Global configuration
-
-1. Open the Roo Code **MCP settings** panel by clicking the <Codicon name="server" /> icon.
-2. Click **Edit Global MCP**.
-3. Paste the JSON below inside the `mcpServers` object and save.
-
-```json
-{
-  "mcpServers": {
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"]
-    }
-  }
-}
-```
-
-**Windows (cmd.exe) variant**
-
-```json
-{
-  "mcpServers": {
-    "context7": {
-      "type": "stdio",
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "@upstash/context7-mcp@latest"]
-    }
-  }
-}
-```
-
-Also on **Windows (cmd)** you may need to invoke `npx` through `cmd.exe`:
-
-<img src="/img/recommended-mcp-servers/context7-global-setup-fixed.png" alt="Adding Context7 to the global MCP settings" width="600" />
-
-### 2. Project-level configuration
-
-If you prefer to commit the configuration to your repository, create a file called `.roo/mcp.json` at the project root and add the same snippet:
-
-```json
-{
-  "mcpServers": {
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"]
-    }
-  }
-}
-```
-
-**Windows (cmd.exe) variant**
-
-```json
-{
-  "mcpServers": {
-    "context7": {
-      "type": "stdio",
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "@upstash/context7-mcp@latest"]
-    }
-  }
-}
-```
-
-<img src="/img/recommended-mcp-servers/context7-project-setup-fixed.png" alt="Adding Context7 to a project-level MCP file" width="600" />
-
-> When both global and project files define a server with the same name, **the project configuration wins**.
-
----
-
-## Verifying the installation
-
-1. Make sure **Enable MCP Servers** is turned on in the MCP settings panel.
-2. You should now see **Context7** listed. Click the <Codicon name="activate" /> toggle to start it if it isn't already running.
-3. Roo Code will prompt you the first time a Context7 tool is invoked. Approve the request to continue.
-
-<img src="/img/recommended-mcp-servers/context7-running-fixed.png" alt="Context7 running in Roo Code" width="400" />
-
----
-
-## Next steps
-
-* Browse the list of tools shipped with Context7 in the server pane.
-* Configure **Always allow** for the tools you use most to streamline your workflow.
-* Want to expose your own APIs? Check out the [MCP server creation guide](/features/mcp/using-mcp-in-roo#enabling-or-disabling-mcp-server-creation).
-
-Looking for other servers? Watch this page – we'll add more recommendations soon! 
+寻找其他服务器？请关注本页面 - 我们将很快添加更多推荐！

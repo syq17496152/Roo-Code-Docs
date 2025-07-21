@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  docusaurus:
+    build: .
+    container_name: docusaurus
+    ports:
+      - "3000:18080"
+    volumes:
+      - ./build:/usr/share/nginx/html
+    restart: always
+    environment:
+      - NODE_ENV=production

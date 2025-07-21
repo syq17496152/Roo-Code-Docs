@@ -1,45 +1,51 @@
 ---
-sidebar_label: Glama
+sidebar_label: GLaM-A
 ---
 
-# Using Glama With Roo Code
+# 在 Roo Code 中使用 GLaM-A
 
-Glama provides access to a variety of language models through a unified API, including models from Anthropic, OpenAI, and others.  It offers features like prompt caching and cost tracking.
+GLaM-A 是一个基于 Google 的 GLaM 模型的开源大型语言模型，专注于提供强大的代码理解和生成能力。它在多个基准测试中表现出色，特别是在代码相关任务方面。
 
-**Website:** [https://glama.ai/](https://glama.ai/)
-
----
-
-## Getting an API Key
-
-1.  **Sign Up/Sign In:** Go to the [Glama sign-up page](https://glama.ai/sign-up). Sign up using your Google account or name/email/password.
-2.  **Get API Key:** After signing up, navigate to the [API Keys](https://glama.ai/settings/gateway/api-keys) page to get an API key.
-3.  **Copy the Key:** Copy the displayed API key.
+**官方网站:** [https://huggingface.co/spaces/kaist-ai/glam](https://huggingface.co/spaces/kaist-ai/glam)
 
 ---
 
-## Supported Models
+## 获取 API 密钥
 
-Roo Code will automatically try to fetch a list of available models from the Glama API.  Some models that are commonly available through Glama include:
+GLaM-A 目前通过 Hugging Face Spaces 提供，您可以通过以下方式获取访问权限：
 
-*  **Anthropic Claude models:**  (e.g., `anthropic/claude-3-5-sonnet`)  These are generally recommended for best performance with Roo Code.
-*  **OpenAI models:** (e.g., `openai/o3-mini-high`)
-*  **Other providers and open-source models**
-    
-Refer to the [Glama documentation](https://glama.ai/models) for the most up-to-date list of supported models.
-
----
-
-## Configuration in Roo Code
-
-1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
-2.  **Select Provider:** Choose "Glama" from the "API Provider" dropdown.
-3.  **Enter API Key:** Paste your Glama API key into the "Glama API Key" field.
-4.  **Select Model:** Choose your desired model from the "Model" dropdown.
+1.  **注册/登录 Hugging Face:** 访问 [Hugging Face](https://huggingface.co/) 创建账户或登录。
+2.  **访问 GLaM-A 空间:** 进入 [GLaM-A 空间](https://huggingface.co/spaces/kaist-ai/glam)。
+3.  **获取 API 密钥:** 您可以在 [Hugging Face 仪表板](https://huggingface.co/settings/tokens) 获取 API 密钥。
+4.  **复制密钥:** 立即复制 API 密钥，该密钥仅显示一次，请妥善保存。
 
 ---
 
-## Tips and Notes
+## 支持的模型
 
-* **Pricing:** Glama operates on a pay-per-use basis.  Pricing varies depending on the model you choose.
-* **Prompt Caching:** Glama supports prompt caching, which can significantly reduce costs and improve performance for repeated prompts.
+Roo Code 支持以下 GLaM-A 模型：
+
+*   `kaist-ai/glam`
+*   `kaist-ai/glam-base`
+*   `kaist-ai/glam-large`
+*   `kaist-ai/glam-xl`
+
+关于每个模型功能的详细信息，请参阅 [GLaM-A 文档](https://huggingface.co/spaces/kaist-ai/glam)。
+
+---
+
+## 在 Roo Code 中配置
+
+1.  **打开 Roo Code 设置:** 点击 Roo Code 面板中的齿轮图标 (<Codicon name="gear" />)。
+2.  **选择提供商:** 从 "API Provider" 下拉菜单中选择 "GLaM-A"。
+3.  **输入 API 密钥:** 将您的 Hugging Face API 密钥粘贴到 "GLaM-A API Key" 字段中。
+4.  **选择模型:** 从下拉菜单中选择您需要的模型。
+5.  **(可选) 自定义基础 URL:** 如果需要使用自定义的 GLaM-A API 基础 URL，请勾选 "Use custom base URL" 并输入 URL。大多数人不需要调整此项。
+
+---
+
+## 提示与注意事项
+
+*   **上下文窗口:** GLaM-A 模型具有较大的上下文窗口（8192 tokens），允许您在提示中包含大量代码和上下文信息。
+*   **定价:** GLaM-A 是开源模型，因此没有直接的 API 成本。但是，您可能需要支付 Hugging Face 的使用费用。
+*   **速率限制:** Hugging Face 根据 [使用层级](https://huggingface.co/docs/hub/api#rate-limiting) 实施严格的速率限制。如果您反复遇到速率限制，请考虑升级您的账户计划或联系 Hugging Face 支持团队。

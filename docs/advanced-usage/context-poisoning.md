@@ -1,66 +1,66 @@
-# Context Poisoning
+# 上下文污染
 
 :::info
-Context poisoning is a persistent issue within a given session. Once a chat session's context is compromised, treat that session as disposable. Starting fresh with a clean context is crucial for maintaining the accuracy and effectiveness of your Roo Code agent.
+上下文污染是在给定会话中持续存在的一个问题。一旦聊天会话的上下文受到破坏，应将该会话视为可丢弃的。重新开始一个干净的上下文对于保持 Roo Code 代理的准确性和有效性至关重要。
 :::
 
-Context poisoning occurs when inaccurate or irrelevant data contaminates the language model's active context. This leads the model to draw incorrect conclusions, provide erroneous information to tools, and progressively deviate from the intended task with each interaction.
+当不准确或不相关数据污染了语言模型的活跃上下文时，就会发生上下文污染。这会导致模型得出错误的结论，向工具提供错误的信息，并在每次交互中逐渐偏离预期任务。
 
 ---
 
-## Symptoms of Context Poisoning
+## 上下文污染的症状
 
-Identify context poisoning by observing these behaviors:
+通过观察以下行为来识别上下文污染：
 
-*   **Degraded Output Quality:** Suggestions become nonsensical, repetitive, or irrelevant.
-*   **Tool Misalignment:** Tool calls no longer correspond to the user's requests.
-*   **Orchestration Failures:** Orchestrator chains may stall, loop indefinitely, or fail to complete.
-*   **Temporary Fixes:** Re-applying a clean prompt or instructions offers only brief respite before issues resurface.
-*   **Tool Usage Confusion:** The model struggles to correctly use or recall how to use tools defined in the system prompt.
-
----
-
-## Common Causes
-
-Context poisoning can be triggered by several factors:
-
-*   **Model Hallucination:** The model generates an incorrect piece of information and subsequently treats it as a factual part of the context.
-*   **Code Comments:** Outdated, incorrect, or ambiguous comments in the codebase can be misinterpreted by the model, leading it down the wrong path.
-*   **Contaminated User Input:** Copy-pasting logs or text containing hidden or rogue control characters.
-*   **Context Window Overflow:** As a session grows, older, useful information may be pushed out of the model's limited context window, allowing "poisoned" data to have a greater relative impact.
-
-Once bad data enters the context, it tends to persist. The model re-evaluates this tainted information in subsequent reasoning cycles, similar to a permanent flaw affecting its perception until the context is completely reset.
+*   **输出质量下降：** 建议变得无意义、重复或无关。
+*   **工具调用不匹配：** 工具调用不再符合用户的请求。
+*   **编排失败：** 编排链可能会停滞、无限循环或无法完成。
+*   **临时性修复：** 重新应用干净的提示或指令只能暂时缓解问题，在问题再次出现前只提供短暂的缓解。
+*   **工具使用混乱：** 模型难以正确使用或回忆如何使用系统提示中定义的工具。
 
 ---
 
-## Can a "Wake-Up Prompt" Resolve Context Poisoning?
+## 常见原因
 
-**Short Answer:** No.
+上下文污染可能由多种因素触发：
 
-A corrective prompt might temporarily suppress symptoms, but the problematic data remains in the conversational buffer. The model will likely revert to the poisoned state as soon as the interaction deviates from the narrow scope of the corrective prompt.
+*   **模型幻觉：** 模型生成了一条错误的信息，随后将其视为上下文中的事实部分。
+*   **代码注释：** 过时、错误或模棱两可的代码库注释可能会被模型误解，使其走上错误的道路。
+*   **受污染的用户输入：** 粘贴包含隐藏或恶意控制字符的日志或文本。
+*   **上下文窗口溢出：** 随着会话增长，旧的有用信息可能会被挤出模型有限的上下文窗口，使得"受污染"的数据具有更大的相对影响。
 
-**Detailed Explanation:**
-
-*   Re-injecting the full set of tool definitions or core directives can sometimes mask the damage for one or some interactions following the initial context poisoning .
-*   However, the underlying poisoned context remains. Any query or task outside the immediate "patch" will likely re-trigger the original issue.
-*   This approach is unreliable, akin to placing a warning label on a leaking pipe instead of repairing it.
-
----
-
-## Effective Recovery Strategies
-
-To reliably recover from context poisoning:
-
-*   **Hard Reset the Session:** The most dependable solution is to start a new chat session. This clears the contaminated context entirely.
-*   **Minimize Manual Data Dumps:** When pasting logs or other data, be selective. Only include the essential information the model requires.
-*   **Manage Context Window Size:** For large or complex tasks, consider breaking them into smaller, focused chat sessions. This helps ensure that stale or irrelevant information ages out of the context window more quickly.
-*   **Validate Tool Output:** If a tool returns nonsensical or clearly incorrect data, delete that message from the chat history before the model can process it and incorporate it into its context.
+一旦坏数据进入上下文，它往往会持续存在。模型会在后续推理周期中重新评估这些被污染的信息，类似于一个永久性的缺陷影响其感知，直到上下文被完全重置。
 
 ---
 
-## Addressing a Common Question: The "Magic Bullet" Prompt
+## "唤醒提示"能解决上下文污染吗？
 
-A frequent question from the community is:
-> "Have you found a prompt that wakes it back up? Maybe a prompt that just has the tools instructions we can push back in manually?”
+**简短回答：** 不能。
 
-As explained, no single prompt offers a lasting fix. Any immediate improvement is superficial because the corrupted lines of text persist in the session's history, ready to cause further issues. The only robust solution is to discard the compromised session, initiate a new one, and provide it with a clean prompt and the correct tool definitions from the outset.
+纠正性提示可能会暂时抑制症状，但有问题的数据仍留在对话缓冲区中。当交互偏离纠正提示的狭窄范围时，模型很可能会恢复到被污染的状态。
+
+**详细解释：**
+
+*   在初始上下文污染之后，重新注入完整的工具定义集或核心指令有时可以掩盖损害，维持一两次交互。
+*   然而，底层被污染的上下文仍然存在。任何超出即时"修补"范围的查询或任务都可能重新触发原始问题。
+*   这种方法不可靠，类似于在泄漏的管道上贴警告标签而不是修理它的做法。
+
+---
+
+## 有效的恢复策略
+
+要可靠地从上下文污染中恢复：
+
+*   **硬重启会话：** 最可靠的解决方案是开始一个新的聊天会话。这将完全清除被污染的上下文。
+*   **最小化手动数据转储：** 当粘贴日志或其他数据时，要有选择性。只包含模型所需的必要信息。
+*   **管理上下文窗口大小：** 对于大型或复杂的任务，考虑将其分解为更小、更专注的聊天会话。这有助于确保过时或无关的信息更快地从上下文窗口中淘汰。
+*   **验证工具输出：** 如果某个工具返回了无意义或明显错误的数据，在模型处理并将其纳入上下文之前，从聊天历史中删除该消息。
+
+---
+
+## 回答一个常见问题："灵丹妙药"提示
+
+社区经常提出的问题是：
+> "您有没有找到一个能让它恢复正常的提示？也许一个只包含我们可以手动推回的工具指令的提示？"
+
+如前所述，没有任何单一提示能够提供持久的修复。任何立即的改进都是表面的，因为损坏的文本行仍然存在于会话历史中，随时准备引发更多问题。唯一的稳健解决方案是丢弃受损会话，启动新会话，并从一开始就为其提供干净的提示和正确的工具定义。

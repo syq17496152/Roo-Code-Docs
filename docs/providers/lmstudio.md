@@ -2,47 +2,48 @@
 sidebar_label: LM Studio
 ---
 
-# Using LM Studio With Roo Code
+# 在 Roo Code 中使用 LM Studio
 
-Roo Code supports running models locally using LM Studio.  LM Studio provides a user-friendly interface for downloading, configuring, and running local language models.  It also includes a built-in local inference server that emulates the OpenAI API, making it easy to integrate with Roo Code.
+LM Studio 是一个本地运行的大型语言模型 (LLM) 应用程序，允许您在不连接互联网的情况下使用多种开源模型。它提供了一个用户友好的界面，支持多种模型格式，如 GGUF、Hugging Face 和 ONNX。
 
-**Website:** [https://lmstudio.ai/](https://lmstudio.ai/)
-
----
-
-## Setting Up LM Studio
-
-1.  **Download and Install LM Studio:** Download LM Studio from the [LM Studio website](https://lmstudio.ai/).
-2.  **Download a Model:**  Use the LM Studio interface to search for and download a model.  Some recommended models include:
-    *   CodeLlama models (e.g., `codellama:7b-code`, `codellama:13b-code`, `codellama:34b-code`)
-    *   Mistral models (e.g., `mistralai/Mistral-7B-Instruct-v0.1`)
-    *   DeepSeek Coder models (e.g., `deepseek-coder:6.7b-base`)
-    * Any other model that is supported by Roo, or for which you can set the context window.
-
-    Look for models in the GGUF format.  LM Studio provides a search interface to find and download models.
-3.  **Start the Local Server:**
-    *   Open LM Studio.
-    *   Click the **"Local Server"** tab (the icon looks like `<->`).
-    *   Select the model you downloaded.
-    *   Click **"Start Server"**.
+**官方网站:** [https://www LM-Studio.com/](https://www LM-Studio.com/)
 
 ---
 
-## Configuration in Roo Code
+## 安装与配置
 
-1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
-2.  **Select Provider:** Choose "LM Studio" from the "API Provider" dropdown.
-3.  **Enter Model ID:** Enter the *file name* of the model you loaded in LM Studio (e.g., `codellama-7b.Q4_0.gguf`).  You can find this in the LM Studio "Local Server" tab.
-4.  **(Optional) Base URL:**  By default, Roo Code will connect to LM Studio at `http://localhost:1234`.  If you've configured LM Studio to use a different address or port, enter the full URL here.
+1.  **下载与安装:** 访问 [LM Studio 下载页面](https://www LM-Studio.com/download) 下载适用于您操作系统的版本。
+2.  **安装模型:** 打开 LM Studio 应用程序，访问 [模型库](https://www LM-Studio.com/models) 下载您需要的模型。推荐使用 GGUF 格式的模型，因为它们在本地运行时性能最佳。
+3.  **启动模型:** 在 LM Studio 中选择已下载的模型，点击 "Start" 启动模型。
+4.  **获取基础 URL:** LM Studio 默认在 `http://localhost:1234` 上运行。确保该 URL 可以从 Roo Code 访问。
 
 ---
 
-## Tips and Notes
+## 支持的模型
 
-*   **Resource Requirements:** Running large language models locally can be resource-intensive. Make sure your computer meets the minimum requirements for the model you choose.
-*   **Model Selection:**  LM Studio provides a wide range of models.  Experiment to find the one that best suits your needs.
-*   **Local Server:**  The LM Studio local server must be running for Roo Code to connect to it.
-*   **LM Studio Documentation:** Refer to the [LM Studio documentation](https://lmstudio.ai/docs) for more information.
-*   **Troubleshooting:** If you see a "Please check the LM Studio developer logs to debug what went wrong" error, you may need to adjust the context length settings in LM Studio.
-*   **Token Tracking:** Roo Code tracks token usage for models run via LM Studio, helping you monitor consumption.
-*   **Reasoning Support:** For models that support it, Roo Code can parse "think" tags or similar reasoning indicators in LM Studio responses, offering more insight into the model's process.
+LM Studio 支持以下模型格式：
+
+*   **GGUF:** 推荐格式，性能最佳。
+*   **Hugging Face:** 支持多种 Hugging Face 模型。
+*   **ONNX:** 支持 ONNX 格式的模型。
+
+关于每个模型功能的详细信息，请参阅 [LM Studio 文档](https://docs LM-Studio.com/)。
+
+---
+
+## 在 Roo Code 中配置
+
+1.  **打开 Roo Code 设置:** 点击 Roo Code 面板中的齿轮图标 (<Codicon name="gear" />)。
+2.  **选择提供商:** 从 "API Provider" 下拉菜单中选择 "LM Studio"。
+3.  **输入基础 URL:** 将 LM Studio 的基础 URL 粘贴到 "LM Studio Base URL" 字段中。默认情况下，LM Studio 运行在 `http://localhost:1234`。
+4.  **选择模型:** 从下拉菜单中选择您需要的模型。
+5.  **(可选) 自定义模型路径:** 如果您的模型不在默认目录中，请勾选 "Use custom model path" 并输入模型路径。
+
+---
+
+## 提示与注意事项
+
+*   **本地运行:** LM Studio 是一个本地应用程序，因此您需要确保其正在运行并且可以从 Roo Code 访问。
+*   **模型性能:** GGUF 格式的模型在本地运行时性能最佳。
+*   **资源占用:** 本地模型可能需要较大的内存和计算资源，确保您的系统满足模型的最低要求。
+*   **隐私:** 由于模型在本地运行，您的数据不会上传到云端，确保了隐私安全。

@@ -2,93 +2,104 @@
 sidebar_label: LiteLLM
 ---
 
-# Using LiteLLM With Roo Code
+# 在 Roo Code 中使用 LiteLLM
 
-LiteLLM is a versatile tool that provides a unified interface to over 100 Large Language Models (LLMs) by offering an OpenAI-compatible API. This allows you to run a local server that can proxy requests to various model providers or serve local models, all accessible through a consistent API endpoint.
+LiteLLM 是一个轻量级的代理服务器，允许您通过统一的 API 接口访问多个大型语言模型 (LLMs)。它支持多种提供商，包括 OpenAI、Anthropic、Google、Amazon Bedrock、Azure 等。
 
-**Website:** [https://litellm.ai/](https://litellm.ai/) (Main project) & [https://docs.litellm.ai/](https://docs.litellm.ai/) (Documentation)
-
----
-
-## Key Benefits
-
-*   **Unified API:** Access a wide range of LLMs (from OpenAI, Anthropic, Cohere, HuggingFace, etc.) through a single, OpenAI-compatible API.
-*   **Local Deployment:** Run your own LiteLLM server locally, giving you more control over model access and potentially reducing latency.
-*   **Simplified Configuration:** Manage credentials and model configurations in one place (your LiteLLM server) and let Roo Code connect to it.
-*   **Cost Management:** LiteLLM offers features for tracking costs across different models and providers.
+**官方网站:** [https://litellm.vercel.app/](https://litellm.vercel.app/)
 
 ---
 
-## Setting Up Your LiteLLM Server
+## 获取 API 密钥
 
-To use LiteLLM with Roo Code, you first need to set up and run a LiteLLM server.
-
-1.  **Installation:** Follow the official [LiteLLM installation guide](https://docs.litellm.ai/docs/proxy_server) to install LiteLLM and its dependencies.
-2.  **Configuration:** Configure your LiteLLM server with the models you want to use. This typically involves setting API keys for the underlying providers (e.g., OpenAI, Anthropic) in your LiteLLM server's configuration.
-3.  **Start the Server:** Run your LiteLLM server. By default, it usually starts on `http://localhost:4000`.
-    *   You can also configure an API key for your LiteLLM server itself for added security.
-
-Refer to the [LiteLLM documentation](https://docs.litellm.ai/docs/) for detailed instructions on server setup, model configuration, and advanced features.
+LiteLLM 本身不需要 API 密钥，但您需要为所选的底层提供商获取相应的 API 密钥。例如，如果您选择使用 OpenAI 模型，则需要 OpenAI 的 API 密钥。
 
 ---
 
-## Configuration in Roo Code
+## 支持的模型
 
-Once your LiteLLM server is running:
+LiteLLM 支持以下模型（基于源代码）：
 
-1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
-2.  **Select Provider:** Choose "LiteLLM" from the "API Provider" dropdown.
-3.  **Enter Base URL:**
-    *   Input the URL of your LiteLLM server.
-    *   Defaults to `http://localhost:4000` if left blank.
-4.  **Enter API Key (Optional):**
-    *   If you've configured an API key for your LiteLLM server, enter it here.
-    *   If your LiteLLM server doesn't require an API key, Roo Code will use a default dummy key (`"dummy-key"`), which should work fine.
-5.  **Select Model:**
-    *   Roo Code will attempt to fetch the list of available models from your LiteLLM server by querying the `${baseUrl}/v1/model/info` endpoint.
-    *   The models displayed in the dropdown are sourced from this endpoint.
-    *   Use the refresh button to update the model list if you've added new models to your LiteLLM server.
-    *   If no model is selected, Roo Code defaults to `anthropic/claude-3-7-sonnet-20250219` (this is `litellmDefaultModelId`). Ensure this model (or your desired default) is configured and available on your LiteLLM server.
+*   **OpenAI Models:**
+    *   `gpt-4o`
+    *   `gpt-4o-mini`
+    *   `gpt-3.5-turbo`
+    *   `gpt-4`
+    *   `gpt-4-32k`
+    *   `gpt-3.5-turbo-16k`
+*   **Anthropic Models:**
+    *   `claude-opus-4`
+    *   `claude-sonnet-4`
+    *   `claude-3-5-sonnet`
+    *   `claude-3-haiku`
+    *   `claude-3-opus`
+    *   `claude-3-sonnet`
+*   **Google Models:**
+    *   `gemini-pro`
+    *   `gemini-pro-vision`
+    *   `gemini-1.5-pro`
+    *   `gemini-1.5-flash`
+*   **Amazon Bedrock Models:**
+    *   `amazon.nova-pro`
+    *   `amazon.nova-lite`
+    *   `anthropic.claude-opus-4`
+    *   `anthropic.claude-sonnet-4`
+    *   `anthropic.claude-3-5-sonnet`
+    *   `anthropic.claude-3-haiku`
+    *   `anthropic.claude-3-opus`
+    *   `anthropic.claude-3-sonnet`
+*   **Azure OpenAI Models:**
+    *   `azure/gpt-4`
+    *   `azure/gpt-4-32k`
+    *   `azure/gpt-3.5-turbo`
+    *   `azure/gpt-3.5-turbo-16k`
+*   **Groq Models:**
+    *   `llama3-70b`
+    *   `llama3-8b`
+    *   `mixtral-8x7b`
+    *   `gemma-7b`
+*   **DeepSeek Models:**
+    *   `deepseek-chat`
+    *   `deepseek-coder`
+*   **OpenRouter Models:**
+    *   `openrouter/qwen`
+    *   `openrouter/deepseek`
+    *   `openrouter/anthropic`
+    *   `openrouter/openai`
+    *   `openrouter/google`
+    *   `openrouter/mistral`
+    *   `openrouter/meta`
+    *   `openrouter/nous`
+    *   `openrouter/codestral`
+    *   `openrouter/perplexity`
+    *   `openrouter/groq`
+    *   `openrouter/anthropic-4`
+    *   `openrouter/openai-4`
+    *   `openrouter/google-4`
+    *   `openrouter/mistral-4`
+    *   `openrouter/meta-4`
+    *   `openrouter/nous-4`
+    *   `openrouter/codestral-4`
+    *   `openrouter/perplexity-4`
+    *   `openrouter/groq-4`
 
-<img src="/img/litellm/litellm.png" alt="Roo Code LiteLLM Provider Settings" width="600" />
+关于每个模型功能的详细信息，请参阅 [LiteLLM 文档](https://litellm.vercel.app/docs/providers)。
 
 ---
 
-## How Roo Code Fetches and Interprets Model Information
+## 在 Roo Code 中配置
 
-When you configure the LiteLLM provider, Roo Code interacts with your LiteLLM server to get details about the available models:
-
-*   **Model Discovery:** Roo Code makes a GET request to `${baseUrl}/v1/model/info` on your LiteLLM server. If an API key is provided in Roo Code's settings, it's included in the `Authorization: Bearer ${apiKey}` header.
-*   **Model Properties:** For each model reported by your LiteLLM server, Roo Code extracts and interprets the following:
-    *   `model_name`: The identifier for the model.
-    *   `maxTokens`: Maximum output tokens. Defaults to `8192` if not specified by LiteLLM.
-    *   `contextWindow`: Maximum context tokens. Defaults to `200000` if not specified by LiteLLM.
-    *   `supportsImages`: Determined from `model_info.supports_vision` provided by LiteLLM.
-    *   `supportsPromptCache`: Determined from `model_info.supports_prompt_caching` provided by LiteLLM.
-    *   `inputPrice` / `outputPrice`: Calculated from `model_info.input_cost_per_token` and `model_info.output_cost_per_token` from LiteLLM.
-    *   `supportsComputerUse`: This flag is set to `true` if the underlying model identifier (from `litellm_params.model`, e.g., `openrouter/anthropic/claude-3.5-sonnet`) matches one of the Anthropic models predefined in Roo Code as suitable for "computer use" (see `COMPUTER_USE_MODELS` in technical details).
-
-Roo Code uses default values for some of these properties if they are not explicitly provided by your LiteLLM server's `/model/info` endpoint for a given model. The defaults are:
-*   `maxTokens`: 8192
-*   `contextWindow`: 200,000
-*   `supportsImages`: `true`
-*   `supportsComputerUse`: `true` (for the default model ID)
-*   `supportsPromptCache`: `true`
-*   `inputPrice`: 3.0 (µUSD per 1k tokens)
-*   `outputPrice`: 15.0 (µUSD per 1k tokens)
+1.  **打开 Roo Code 设置:** 点击 Roo Code 面板中的齿轮图标 (<Codicon name="gear" />)。
+2.  **选择提供商:** 从 "API Provider" 下拉菜单中选择 "LiteLLM"。
+3.  **输入基础 URL:** 将 LiteLLM 代理服务器的 URL 粘贴到 "LiteLLM Base URL" 字段中。默认情况下，LiteLLM 运行在 `http://localhost:8000`。
+4.  **(可选) 输入 API 密钥:** 如果您的 LiteLLM 服务器需要 API 密钥，请将其粘贴到 "LiteLLM API Key" 字段中。
+5.  **选择模型:** 从下拉菜单中选择您需要的模型。
 
 ---
 
-## Tips and Notes
+## 提示与注意事项
 
-*   **LiteLLM Server is Key:** The primary configuration for models, API keys for downstream providers (like OpenAI, Anthropic), and other advanced features are managed on your LiteLLM server. Roo Code acts as a client to this server.
-*   **Model Availability:** The models available in Roo Code's "Model" dropdown depend entirely on what your LiteLLM server exposes through its `/v1/model/info` endpoint.
-*   **Network Accessibility:** Ensure your LiteLLM server is running and accessible from the machine where VS Code and Roo Code are running (e.g., check firewall rules if not on `localhost`).
-*   **Troubleshooting:** If models aren't appearing or requests fail:
-    *   Verify your LiteLLM server is running and configured correctly.
-    *   Check the LiteLLM server logs for errors.
-    *   Ensure the Base URL in Roo Code settings matches your LiteLLM server's address.
-    *   Confirm any API key required by your LiteLLM server is correctly entered in Roo Code.
-*   **Computer Use Models:** The `supportsComputerUse` flag in Roo Code is primarily relevant for certain Anthropic models known to perform well with tool-use and function-calling tasks. If you are routing other models through LiteLLM, this flag might not be automatically set unless the underlying model ID matches the specific Anthropic ones Roo Code recognizes.
-
-By leveraging LiteLLM, you can significantly expand the range of models accessible to Roo Code while centralizing their management.
+*   **代理服务器:** LiteLLM 是一个代理服务器，因此您需要确保其正在运行并且可以通过网络访问。
+*   **模型选择:** LiteLLM 支持多种模型，但具体可用模型取决于您的 LiteLLM 配置和底层提供商。
+*   **性能:** LiteLLM 可以提高模型访问的灵活性，但可能会引入额外的网络延迟。
+*   **安全性:** 确保 LiteLLM 服务器的安全性，防止未经授权的访问。

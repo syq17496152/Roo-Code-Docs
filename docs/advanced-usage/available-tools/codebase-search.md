@@ -1,244 +1,244 @@
 # codebase_search
 
-:::info Setup Required
-The `codebase_search` tool is part of the [Codebase Indexing](/features/codebase-indexing) feature. It requires additional setup including an embedding provider and vector database.
+:::info 需要配置
+`codebase_search` 工具是 [代码库索引](/features/codebase-indexing) 功能的一部分。它需要额外的配置，包括嵌入提供程序和向量数据库。
 :::
 
-The `codebase_search` tool performs semantic searches across your entire codebase using AI embeddings. Unlike traditional text-based search, it understands the meaning of your queries and finds relevant code even when exact keywords don't match.
+`codebase_search` 工具使用 AI 嵌入对您的整个代码库进行语义搜索。与传统的基于文本的搜索不同，它可以理解查询的含义，并找到相关代码，即使没有完全匹配的关键字。
 
 ---
 
-## Parameters
+## 参数
 
-The tool accepts these parameters:
+该工具接受以下参数：
 
-- `query` (required): Natural language search query describing what you're looking for
-- `path` (optional): Directory path to limit search scope to a specific part of your codebase
-
----
-
-## What It Does
-
-This tool searches through your indexed codebase using semantic similarity rather than exact text matching. It finds code blocks that are conceptually related to your query, even if they don't contain the exact words you searched for. Results include relevant code snippets with file paths, line numbers, and similarity scores.
+- `query` (必填)：用自然语言描述您要查找的内容的搜索查询
+- `path` (可选)：目录路径，将搜索范围限制为代码库中的特定部分
 
 ---
 
-## When is it used?
+## 功能说明
 
-- When Roo needs to find code related to specific functionality across your project
-- When looking for implementation patterns or similar code structures
-- When searching for error handling, authentication, or other conceptual code patterns
-- When exploring unfamiliar codebases to understand how features are implemented
-- When finding related code that might be affected by changes or refactoring
+此工具使用语义相似性而不是精确文本匹配来搜索您的已索引代码库。它可以找到与您的查询在概念上相关的代码块，即使它们不包含您搜索的确切词语。结果包括相关的代码片段、文件路径、行号和相似度评分。
 
 ---
 
-## Key Features
+## 使用场景
 
-- **Semantic Understanding**: Finds code by meaning rather than exact keyword matches
-- **Cross-Project Search**: Searches across your entire indexed codebase, not just open files
-- **Contextual Results**: Returns code snippets with file paths and line numbers for easy navigation
-- **Similarity Scoring**: Results ranked by relevance with similarity scores (0-1 scale)
-- **Scope Filtering**: Optional path parameter to limit searches to specific directories
-- **Intelligent Ranking**: Results sorted by semantic relevance to your query
-- **UI Integration**: Results displayed with syntax highlighting and navigation links
-- **Performance Optimized**: Fast vector-based search with configurable result limits
+- 当 Roo 需要在项目中查找与特定功能相关的代码时
+- 当查找实现模式或类似的代码结构时
+- 当搜索错误处理、身份验证或其他概念性代码模式时
+- 当探索不熟悉的代码库以了解功能如何实现时
+- 当查找可能受更改或重构影响的相关代码时
 
 ---
 
-## Requirements
+## 主要功能
 
-This tool is only available when the Codebase Indexing feature is properly configured:
-
-- **Feature Configured**: Codebase Indexing must be configured in settings
-- **Embedding Provider**: OpenAI API key or Ollama configuration required
-- **Vector Database**: Qdrant instance running and accessible
-- **Index Status**: Codebase must be indexed (status: "Indexed" or "Indexing")
-
----
-
-## Limitations
-
-- **Requires Configuration**: Depends on external services (embedding provider + Qdrant)
-- **Index Dependency**: Only searches through indexed code blocks
-- **Result Limits**: Maximum of 50 results per search to maintain performance
-- **Similarity Threshold**: Only returns results above similarity threshold (default: 0.4, configurable)
-- **File Size Limits**: Limited to files under 1MB that were successfully indexed
-- **Language Support**: Effectiveness depends on Tree-sitter language support
+- **语义理解**：通过含义而非确切关键字匹配来查找代码
+- **跨项目搜索**：搜索整个已索引的代码库，而不仅仅是打开的文件
+- **上下文结果**：返回带有文件路径和行号的代码片段以便轻松导航
+- **相似度评分**：结果按相关性排序并附带相似度评分（0-1 范围）
+- **范围过滤**：可选的路径参数将搜索限制在特定目录
+- **智能排序**：结果按与查询的语义相关性排序
+- **UI 集成**：结果显示带有语法高亮和导航链接
+- **性能优化**：快速的基于向量的搜索，支持配置结果限制
 
 ---
 
-## How It Works
+## 系统要求
 
-When the `codebase_search` tool is invoked, it follows this process:
+此工具仅在正确配置代码库索引功能时可用：
 
-1. **Availability Validation**:
-   - Verifies that the CodeIndexManager is available and initialized
-   - Confirms codebase indexing is enabled in settings
-   - Checks that indexing is properly configured (API keys, Qdrant URL)
-   - Validates the current index state allows searching
-
-2. **Query Processing**:
-   - Takes your natural language query and generates an embedding vector
-   - Uses the same embedding provider configured for indexing (OpenAI or Ollama)
-   - Converts the semantic meaning of your query into a mathematical representation
-
-3. **Vector Search Execution**:
-   - Searches the Qdrant vector database for similar code embeddings
-   - Uses cosine similarity to find the most relevant code blocks
-   - Applies the minimum similarity threshold (default: 0.4, configurable) to filter results
-   - Limits results to 50 matches for optimal performance
-
-4. **Path Filtering** (if specified):
-   - Filters results to only include files within the specified directory path
-   - Uses normalized path comparison for accurate filtering
-   - Maintains relevance ranking within the filtered scope
-
-5. **Result Processing and Formatting**:
-   - Converts absolute file paths to workspace-relative paths
-   - Structures results with file paths, line ranges, similarity scores, and code content
-   - Formats for both AI consumption and UI display with syntax highlighting
-
-6. **Dual Output Format**:
-   - **AI Output**: Structured text format with query, file paths, scores, and code chunks
-   - **UI Output**: JSON format with syntax highlighting and navigation capabilities
+- **功能配置**：必须在设置中配置代码库索引功能
+- **嵌入提供程序**：需要 OpenAI API 密钥或 Ollama 配置
+- **向量数据库**：Qdrant 实例正在运行且可访问
+- **索引状态**：代码库必须已建立索引（状态："已索引" 或 "索引中"）
 
 ---
 
-## Search Query Best Practices
+## 局限性
 
-### Effective Query Patterns
+- **需要配置**：依赖外部服务（嵌入提供程序 + Qdrant）
+- **索引依赖**：仅搜索已建立索引的代码块
+- **结果限制**：每次搜索最多 50 个结果以保持性能
+- **相似度阈值**：仅返回高于相似度阈值的结果（默认：0.4，可配置）
+- **文件大小限制**：仅限于小于 1MB 且成功建立索引的文件
+- **语言支持**：效果取决于 Tree-sitter 语言支持
 
-**Good: Conceptual and specific**
+---
+
+## 工作原理
+
+当调用 `codebase_search` 工具时，它遵循以下流程：
+
+1. **可用性验证**：
+   - 验证 CodeIndexManager 是否可用且已初始化
+   - 确认已在设置中启用代码库索引功能
+   - 检查索引是否正确配置（API 密钥，Qdrant URL）
+   - 验证当前索引状态是否允许搜索
+
+2. **查询处理**：
+   - 获取您的自然语言查询并生成嵌入向量
+   - 使用与索引相同的嵌入提供程序（OpenAI 或 Ollama）
+   - 将查询的语义转换为数学表示形式
+
+3. **向量搜索执行**：
+   - 在 Qdrant 向量数据库中搜索类似的代码嵌入
+   - 使用余弦相似度查找最相关的代码块
+   - 应用最小相似度阈值（默认：0.4，可配置）来筛选结果
+   - 将结果限制为 50 个匹配项以获得最佳性能
+
+4. **路径过滤**（如果指定了路径）：
+   - 过滤结果，仅包含指定目录路径内的文件
+   - 使用规范化路径比较进行准确过滤
+   - 在过滤范围内保持相关性排序
+
+5. **结果处理和格式化**：
+   - 将绝对文件路径转换为工作区相对路径
+   - 构建包含文件路径、评分、行范围和代码内容的结果结构
+   - 格式化为 AI 处理和 UI 显示（带语法高亮）
+
+6. **双重输出格式**：
+   - **AI 输出**：包含查询、文件路径、评分和代码块的结构化文本格式
+   - **UI 输出**：JSON 格式，带有语法高亮和导航功能
+
+---
+
+## 搜索查询最佳实践
+
+### 有效的查询模式
+
+**良好：概念性和具体性**
 ```xml
 <codebase_search>
-<query>user authentication and password validation</query>
+<query>用户身份验证和密码验证</query>
 </codebase_search>
 ```
 
-**Good: Feature-focused**
+**良好：以功能为中心**
 ```xml
 <codebase_search>
-<query>database connection pool setup</query>
+<query>数据库连接池设置</query>
 </codebase_search>
 ```
 
-**Good: Problem-oriented**
+**良好：以问题为导向**
 ```xml
 <codebase_search>
-<query>error handling for API requests</query>
+<query>API 请求的错误处理</query>
 </codebase_search>
 ```
 
-**Less effective: Too generic**
+**效果较差：过于笼统**
 ```xml
 <codebase_search>
-<query>function</query>
+<query>函数</query>
 </codebase_search>
 ```
 
-### Query Types That Work Well
+### 效果良好的查询类型
 
-- **Functional Descriptions**: "file upload processing", "email validation logic"
-- **Technical Patterns**: "singleton pattern implementation", "factory method usage"
-- **Domain Concepts**: "user profile management", "payment processing workflow"
-- **Architecture Components**: "middleware configuration", "database migration scripts"
+- **功能描述**："文件上传处理"，"电子邮件验证逻辑"
+- **技术模式**："单例模式实现"，"工厂方法使用"
+- **领域概念**："用户资料管理"，"支付处理工作流"
+- **架构组件**："中间件配置"，"数据库迁移脚本"
 
 ---
 
-## Directory Scoping
+## 目录范围限定
 
-Use the optional `path` parameter to focus searches on specific parts of your codebase:
+使用可选的 `path` 参数将搜索集中在代码库的特定部分：
 
-**Search within API modules:**
+**在 API 模块内搜索：**
 ```xml
 <codebase_search>
-<query>endpoint validation middleware</query>
+<query>端点验证中间件</query>
 <path>src/api</path>
 </codebase_search>
 ```
 
-**Search in test files:**
+**在测试文件中搜索：**
 ```xml
 <codebase_search>
-<query>mock data setup patterns</query>
+<query>模拟数据设置模式</query>
 <path>tests</path>
 </codebase_search>
 ```
 
-**Search specific feature directories:**
+**在特定功能目录中搜索：**
 ```xml
 <codebase_search>
-<query>component state management</query>
+<query>组件状态管理</query>
 <path>src/components/auth</path>
 </codebase_search>
 ```
 
 ---
 
-## Result Interpretation
+## 结果解读
 
-### Similarity Scores
+### 相似度评分
 
-- **0.8-1.0**: Highly relevant matches, likely exactly what you're looking for
-- **0.6-0.8**: Good matches with strong conceptual similarity
-- **0.4-0.6**: Potentially relevant but may require review
-- **Below 0.4**: Filtered out as too dissimilar
+- **0.8-1.0**：高度相关的结果，可能是您要找的内容
+- **0.6-0.8**：良好匹配，具有较强的概念相似性
+- **0.4-0.6**：可能相关但可能需要审查
+- **低于 0.4**：被过滤掉，因为太不相似
 
-### Result Structure
+### 结果结构
 
-Each search result includes:
-- **File Path**: Workspace-relative path to the file containing the match
-- **Score**: Similarity score indicating relevance (0.4-1.0)
-- **Line Range**: Start and end line numbers for the code block
-- **Code Chunk**: The actual code content that matched your query
-
----
-
-## Examples When Used
-
-- When implementing a new feature, Roo searches for "authentication middleware" to understand existing patterns before writing new code.
-- When debugging an issue, Roo searches for "error handling in API calls" to find related error patterns across the codebase.
-- When refactoring code, Roo searches for "database transaction patterns" to ensure consistency across all database operations.
-- When onboarding to a new codebase, Roo searches for "configuration loading" to understand how the application bootstraps.
+每个搜索结果都包含：
+- **文件路径**：包含匹配的文件的工作区相对路径
+- **评分**：表示相关性的相似度评分（0.4-1.0）
+- **行范围**：代码块的起始和结束行号
+- **代码片段**：与查询匹配的实际代码内容
 
 ---
 
-## Usage Examples
+## 使用示例
 
-Searching for authentication-related code across the entire project:
+- 当实现新功能时，Roo 会搜索 "认证中间件" 以了解现有模式，然后编写新代码。
+- 当调试问题时，Roo 会搜索 "API 调用中的错误处理" 以查找代码库中的相关错误模式。
+- 当重构代码时，Roo 会搜索 "数据库事务模式" 以确保所有数据库操作的一致性。
+- 当加入新代码库时，Roo 会搜索 "配置加载" 以了解应用程序如何启动。
+
+---
+
+## 使用示例代码
+
+在整个项目中搜索与身份验证相关的代码：
 ```xml
 <codebase_search>
-<query>user login and authentication logic</query>
+<query>用户登录和身份验证逻辑</query>
 </codebase_search>
 ```
 
-Finding database-related code in a specific directory:
+在特定目录中查找数据库相关代码：
 ```xml
 <codebase_search>
-<query>database connection and query execution</query>
+<query>数据库连接和查询执行</query>
 <path>src/data</path>
 </codebase_search>
 ```
 
-Looking for error handling patterns in API code:
+在 API 代码中查找错误处理模式：
 ```xml
 <codebase_search>
-<query>HTTP error responses and exception handling</query>
+<query>HTTP 错误响应和异常处理</query>
 <path>src/api</path>
 </codebase_search>
 ```
 
-Searching for testing utilities and mock setups:
+搜索测试工具和模拟设置：
 ```xml
 <codebase_search>
-<query>test setup and mock data creation</query>
+<query>测试设置和模拟数据创建</query>
 <path>tests</path>
 </codebase_search>
 ```
 
-Finding configuration and environment setup code:
+查找配置和环境设置代码：
 ```xml
 <codebase_search>
-<query>environment variables and application configuration</query>
+<query>环境变量和应用程序配置</query>
 </codebase_search>

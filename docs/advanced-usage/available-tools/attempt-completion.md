@@ -1,197 +1,171 @@
 # attempt_completion
 
-The `attempt_completion` tool signals that Roo believes a task is complete and presents results to the user. It provides a summary of what was accomplished, optionally includes a command to demonstrate the result, and supports continued refinement through user feedback.
+`attempt_completion` 工具用于表示 Roo 认为任务已完成，并向用户展示结果。它提供了一个总结，说明完成了什么，可选地包含一个命令来演示结果，并支持通过用户反馈进行持续改进。
 
 ---
 
-## Parameters
+## 参数
 
-The tool accepts these parameters:
+该工具接受以下参数：
 
-- `result` (required): The final result description summarizing what was accomplished
-- `command` (optional): A CLI command to execute to demonstrate the result
-
----
-
-## What It Does
-
-This tool marks the end of a task by presenting a final summary of what was accomplished. It signals to both the user and the system that the current task is complete. When a command is provided, it can also demonstrate the result through a live execution.
+- `result` (必填)：最终结果描述，总结完成的内容
+- `command` (可选)：执行以演示结果的 CLI 命令
 
 ---
 
-## When is it used?
+## 功能说明
 
-- When Roo believes the user's task has been completed
-- When summarizing what changes or improvements were made
-- When demonstrating the current result with a command execution
-- When providing a checkpoint for user feedback on the solution
-- When transitioning from one phase of work to potential refinements
+此工具通过展示任务完成的最终总结来标记任务的结束。它向用户和系统发出信号，表明当前任务已完成。当提供了命令时，还可以通过实时执行来演示结果。
 
 ---
 
-## Key Features
+## 使用场景
 
-- Provides a clear signal that Roo believes the task is complete
-- Summarizes accomplishments in a concise message
-- Optionally demonstrates results through command execution
-- Enables user feedback for further refinements
-- Displays results in a special UI format distinct from regular messages
-- Captures task completion telemetry for system analytics
-- Maintains a structured conversation flow by providing checkpoints
-- Supports subtask completion within larger workflows
-- Ensures users receive a clear summary of what was done
-- Available in all modes as part of the "always available" tool group
+- 当 Roo 认为用户的任务已经完成后
+- 当需要总结所做的更改或改进时
+- 当通过命令执行演示当前结果时
+- 当提供用户反馈解决方案的检查点时
+- 当从一个工作阶段过渡到可能的改进阶段时
 
 ---
 
-## Limitations
+## 主要功能
 
-- Should not be used until previous tool uses are confirmed successful (guideline, not enforced)
-- Limited to a single command for result demonstration
-- Cannot present multiple command options
-- Commands require user approval before execution
-- Limited to demonstrating results that can be shown via CLI commands
-- Cannot be used for partial task completion or progress updates
-- Result formatting strips XML closing tags through internal processing
-
----
-
-## How It Works
-
-When the `attempt_completion` tool is invoked, it follows this process:
-
-1. **Safety Consideration** (guideline, not enforced):
-   - The AI is instructed to confirm previous tool uses were successful
-   - This is a best practice rather than a programmatically enforced mechanism
-
-2. **Result Presentation**:
-   - Displays the completion message to the user in a special "completion_result" UI format
-   - Removes XML closing tags from the result text using the `removeClosingTag` function
-   - Presents the result differently than regular messages for visual distinction
-
-3. **Command Execution** (if provided):
-   - Requests user approval before executing the command
-   - Only executes if the user approves
-   - Executes the command using the system's command execution functionality
-   - Shows the result of the command to the user
-
-4. **Feedback Collection**:
-   - Waits for user feedback on the completion result
-   - Processes this feedback and returns it to the AI
-   - Enables continued refinement based on user input
-
-5. **Task Completion and Continuation**:
-   - Signals the task as completed in the system
-   - Captures telemetry data for the completed task
-   - For subtasks, offers to finish the subtask and resume the parent task
-   - Supports continued conversation through the feedback mechanism
-
-6. **Implementation Integration**:
-   - Tool results are parsed through the system's parsing mechanism in `parse-assistant-message.ts`
-   - The tool is part of the "ALWAYS_AVAILABLE_TOOLS" constant, making it available in all modes
+- 提供明确的信号，表明 Roo 认为任务已完成
+- 用简洁的信息总结成就
+- 可选地通过命令执行演示结果
+- 支持用户反馈以便进一步改进
+- 在特殊 UI 格式中显示结果，与常规消息不同
+- 捕获任务完成遥测数据用于系统分析
+- 通过提供检查点维护结构化的对话流程
+- 支持在更大工作流中的子任务完成
+- 确保用户收到清晰的总结信息
+- 作为 "始终可用" 工具组的一部分，在所有模式下都可用
 
 ---
 
-## Result Formatting Guidelines
+## 局限性
 
-The result message should follow these guidelines:
-
-- Clearly communicate what was accomplished
-- Be concise but complete
-- Focus on the value delivered to the user
-- Avoid unnecessary pleasantries or filler text
-- Maintain a professional, straightforward tone
-- Present information in a way that's easy to scan and understand
-- Acknowledge that the user may provide feedback for further refinements
-
-Note: The system automatically strips XML closing tags from the result text through the `removeClosingTag` function.
+- 在之前的工具使用被确认成功之前不应使用（指南，未强制执行）
+- 仅限于单个命令用于结果演示
+- 不能展示多个命令选项
+- 命令在执行前需要用户批准
+- 仅限于可以通过 CLI 命令展示的结果
+- 不能用于部分任务完成或进度更新
+- 结果格式化会通过内部处理去除 XML 闭合标签
 
 ---
 
-## Command Selection Guidelines
+## 工作原理
 
-When including a command, follow these guidelines:
+当调用 `attempt_completion` 工具时，它遵循以下流程：
 
-- Choose commands that visually demonstrate the result
-- Prefer commands that show the user what was created or modified
-- Examples include:
-  * `open index.html` to display a created website
-  * `npm start` to launch a development server
-  * `python app.py` to run a created application
-- Avoid commands that merely print text (like `echo` or `cat`)
-- Remember that commands require user approval before execution
-- Ensure the command is valid for the user's operating system
+1. **安全考虑** (指南，未强制执行)：
+   - 指示 AI 确认之前的工具使用已成功完成
+   - 这是一种最佳实践而非程序强制机制
 
----
+2. **结果展示**：
+   - 在特殊的 "completion_result" UI 格式中向用户显示完成信息
+   - 使用 `removeClosingTag` 函数从结果文本中移除 XML 闭合标签
+   - 以不同于常规消息的方式呈现结果以便视觉区分
 
-## Feedback and UI Representation
+3. **命令执行** (如果提供了命令)：
+   - 在执行命令前请求用户批准
+   - 仅在用户批准后执行
+   - 使用系统的命令执行功能执行命令
+   - 向用户展示命令的结果
 
-The `attempt_completion` tool has a unique feedback mechanism:
+4. **反馈收集**：
+   - 等待用户对完成结果的反馈
+   - 处理这些反馈并将其返回给 AI
+   - 支持基于用户输入的持续改进
 
-- Results appear in a special "completion_result" UI format distinct from regular messages
-- The system waits for user feedback after presenting the result
-- Feedback is processed and returned to Roo for further refinements
-- This creates an iterative improvement cycle rather than ending the conversation
-- The UI includes special elements for providing feedback
-- Results serve as clear checkpoints in the conversation flow
+5. **任务完成与继续**：
+   - 在系统中标记任务为已完成
+   - 捕获已完成任务的遥测数据
+   - 对于子任务，提供完成子任务并继续父任务的选项
+   - 通过反馈机制支持持续对话
 
-When used within subtasks:
-- The system offers to finish the subtask and resume the parent task
-- If approved, the subtask is completed with a summary
-- The parent task resumes with context from the completed subtask
-- This enables complex, nested workflows while maintaining context
-
----
-
-## Examples When Used
-
-- When creating a website, Roo presents the solution and uses `open index.html` to show the result. The user provides feedback, and Roo refines the design.
-- When implementing a feature, Roo summarizes the changes and their impact. The user requests additional test coverage, and Roo continues the task.
-- When fixing bugs, Roo explains what was fixed and how the solution addresses the root cause. The user confirms the fix works.
-- When setting up a development environment, Roo confirms all components are installed. The user requests additional configuration, and Roo continues.
-- When creating a data processing script, Roo summarizes the functionality. The user suggests performance improvements, and Roo optimizes the code.
+6. **实现集成**：
+   - 工具结果通过 `parse-assistant-message.ts` 中的解析机制进行解析
+   - 该工具是 "ALWAYS_AVAILABLE_TOOLS" 常量的一部分，使其在所有模式下都可用
 
 ---
 
-## Usage Examples
+## 结果格式化指南
 
+结果消息应遵循以下准则：
 
-Completing a task with just a result summary:
+- 清晰地传达完成的内容
+- 简洁但完整
+- 聚焦于为用户提供的价值
+- 避免不必要的客套话或填充文字
+- 维持专业、直接的语气
+- 以易于扫描和理解的方式呈现信息
+- 承认用户可能会提供反馈以进行进一步改进
+
+注意：系统会通过 `removeClosingTag` 函数自动从结果文本中剥离 XML 闭合标签。
+
+---
+
+## 命令选择指南
+
+当包含命令时，请遵循以下准则：
+
+- 选择能直观展示结果的命令
+- 建议选择能展示创建或修改内容的命令
+- 示例包括：
+  * `open index.html` 来显示创建的网站
+  * `npm start` 来启动开发服务器
+  * `python app.py` 来运行创建的应用程序
+- 避免仅打印文本的命令（如 `echo` 或 `cat`）
+- 请记住，命令在执行前需要用户批准
+- 确保命令适用于用户的操作系统
+
+---
+
+## 反馈与 UI 表示
+
+`attempt_completion` 工具有一个独特的反馈机制：
+
+- 结果出现在特殊的 "completion_result" UI 格式中，与常规消息不同
+- 系统在展示结果后等待用户反馈
+- 反馈经过处理后返回给 Roo 以便进一步改进
+- 这创造了一个迭代改进循环而不是结束对话
+- UI 包括提供反馈的特殊元素
+- 结果作为对话流程中的明确检查点
+
+在子任务中使用时：
+- 系统提供完成子任务并恢复父任务的选项
+- 如果批准，子任务以总结完成
+- 父任务在完成子任务的上下文中恢复
+- 这使得复杂、嵌套的工作流能够保持上下文
+
+---
+
+## 使用示例
+
+完成一个仅含结果总结的任务：
 ```
 <attempt_completion>
 <result>
-I've updated the CSS for the navigation bar to match the design mockup. The changes include:
-1. Updated color scheme to use the new brand colors
-2. Added responsive behavior for mobile devices
-3. Fixed the alignment issues in the dropdown menus
+我已经根据设计样图更新了导航栏的 CSS。更改包括：
+1. 更新配色方案以使用新的品牌颜色
+2. 添加移动端响应行为
+3. 修复下拉菜单中的对齐问题
 </result>
 </attempt_completion>
 ```
 
-Completing a task with a result and demonstration command:
+完成带结果和演示命令的任务：
 ```
 <attempt_completion>
 <result>
-I've created a simple React application with the following features:
-1. A responsive landing page with the requested hero section
-2. A working contact form with validation
-3. Navigation between all three requested pages
-4. Styling that matches the provided design mockup
+我创建了一个简单的 React 应用程序，包含以下功能：
+1. 具有请求英雄部分的响应式着陆页
+2. 带验证的工作联系表单
+3. 所有三个请求页面之间的导航
+4. 与提供的设计样图匹配的样式
 </result>
 <command>npm start</command>
 </attempt_completion>
-```
-
-Completing a Python script task with execution:
-```
-<attempt_completion>
-<result>
-I've created a data processing script that:
-1. Reads the CSV files from the data directory
-2. Cleans and normalizes the data as requested
-3. Generates the summary statistics in JSON format
-4. Outputs the processed data to the output directory
-</result>
-<command>python process_data.py</command>
-</attempt_completion>
-```

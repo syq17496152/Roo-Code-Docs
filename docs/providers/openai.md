@@ -2,52 +2,52 @@
 sidebar_label: OpenAI
 ---
 
-# Using OpenAI With Roo Code
+# 在 Roo Code 中使用 OpenAI
 
-Roo Code supports accessing models directly through the official OpenAI API.
+Roo Code 支持通过官方 OpenAI API 直接访问模型。
 
-**Website:** [https://openai.com/](https://openai.com/)
-
----
-
-## Getting an API Key
-
-1.  **Sign Up/Sign In:** Go to the [OpenAI Platform](https://platform.openai.com/). Create an account or sign in.
-2.  **Navigate to API Keys:** Go to the [API keys](https://platform.openai.com/api-keys) page.
-3.  **Create a Key:** Click "Create new secret key". Give your key a descriptive name (e.g., "Roo Code").
-4.  **Copy the Key:** **Important:** Copy the API key *immediately*. You will not be able to see it again. Store it securely.
+**官方网站:** [https://openai.com/](https://openai.com/)
 
 ---
 
-## Supported Models
+## 获取 API 密钥
 
-Roo Code supports a variety of OpenAI models, including:
+1.  **注册/登录:** 访问 [OpenAI 平台](https://platform.openai.com/) 创建账户或登录。
+2.  **导航到 API 密钥:** 进入 [API 密钥页面](https://platform.openai.com/api-keys)。
+3.  **创建密钥:** 点击 "Create new secret key"。为密钥输入一个描述性名称（例如 "Roo Code"）。
+4.  **复制密钥:** **重要：** 立即复制 API 密钥，该密钥仅显示一次，请妥善保存。
 
-*	`o3-mini` (medium reasoning effort)
-*	`o3-mini-high` (high reasoning effort)
-* `o3-mini-low` (low reasoning effort)
-* `o1`
-* `o1-preview`
-*	`o1-mini`
+---
+
+## 支持的模型
+
+Roo Code 支持以下 OpenAI 模型：
+
+*   `o3-mini` (中等推理能力)
+*   `o3-mini-high` (高推理能力)
+*   `o3-mini-low` (低推理能力)
+*   `o1`
+*   `o1-preview`
+*   `o1-mini`
 *   `gpt-4.5-preview`
-* `gpt-4o`
-* `gpt-4o-mini`
+*   `gpt-4o`
+*   `gpt-4o-mini`
 
-Refer to the [OpenAI Models documentation](https://platform.openai.com/docs/models) for the most up-to-date list of models and capabilities.
-
----
-
-## Configuration in Roo Code
-
-1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
-2.  **Select Provider:** Choose "OpenAI" from the "API Provider" dropdown.
-3.  **Enter API Key:** Paste your OpenAI API key into the "OpenAI API Key" field.
-4.  **Select Model:** Choose your desired model from the "Model" dropdown.
-5.  **(Optional) Base URL:** If you need to use a custom base URL, enter the URL. Most people won't need to adjust this.
+请参阅 [OpenAI 模型文档](https://platform.openai.com/docs/models) 以获取最新的模型列表和功能。
 
 ---
 
-## Tips and Notes
+## 在 Roo Code 中配置
 
-*   **Pricing:** Refer to the [OpenAI Pricing](https://openai.com/pricing) page for details on model costs.
-*   **Azure OpenAI Service:** If you'd like to use the Azure OpenAI service, please see our section on [OpenAI-compatible](/providers/openai-compatible) providers.
+1.  **打开 Roo Code 设置:** 点击 Roo Code 面板中的齿轮图标 (<Codicon name="gear" />)。
+2.  **选择提供商:** 从 "API Provider" 下拉菜单中选择 "OpenAI"。
+3.  **输入 API 密钥:** 将您的 OpenAI API 密钥粘贴到 "OpenAI API Key" 字段中。
+4.  **选择模型:** 从下拉菜单中选择您需要的模型。
+5.  **(可选) 自定义基础 URL:** 如果需要使用自定义的 OpenAI API 基础 URL，请勾选 "Use custom base URL" 并输入 URL。大多数人不需要调整此项。
+
+---
+
+## 提示与注意事项
+
+*   **定价:** 请参考 [OpenAI 定价页面](https://openai.com/pricing) 获取详细信息。
+*   **Azure OpenAI 服务:** 如果您想使用 Azure OpenAI 服务，请参阅我们的 [OpenAI 兼容部分](/providers/openai-compatible)。
