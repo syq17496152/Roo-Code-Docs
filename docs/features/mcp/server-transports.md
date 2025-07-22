@@ -172,7 +172,7 @@ SSE传输机制适用于：
 
 ### SSE实现示例
 
-``typescript
+```typescript
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import express from 'express';
