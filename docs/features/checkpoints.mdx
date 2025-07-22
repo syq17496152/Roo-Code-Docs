@@ -1,73 +1,261 @@
-// ... existing code ...
-
 # 检查点
 
-检查点功能会在 Roo Code 任务期间自动对工作区文件进行版本控制，使您能够安全地探索 AI 建议并轻松恢复不需要的更改。
+检查点功能会在Roo Code任务期间自动版本化您的工作区文件，使您能够安全地探索AI建议并轻松从意外更改中恢复。
 
-检查点让您：
-- 安全尝试 AI 建议的更改方案
-- 轻松回滚到先前状态
-- 对比不同的实现方法
-- 在不丢失工作成果的前提下恢复到之前的项目状态
+检查点功能可帮助您：
+- 安全地尝试AI建议的更改
+- 轻松从不想要的修改中恢复
+- 比较不同的实现方法
+- 在不丢失工作的情况下回退到项目之前的状态
 
-// ... existing code ...
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+  <iframe title="检查点教程视频"
+    src="https://www.youtube.com/embed/Ho30nyY332E"
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%'
+    }}
+    frameBorder="0"
+    allow="autoplay; encrypted-media"
+    allowFullScreen
+  ></iframe>
+</div>
 
-### Git 安装
+<div style={{ marginTop: '20px' }}></div>
 
-检查点通过聊天界面直接集成到您的工作流中。
+:::info 重要说明
+- **默认启用检查点功能**
+- **必须安装Git** 才能使用检查点功能 - [查看安装说明](#git-installation)
+- 不需要GitHub账户或仓库
+- 不需要配置Git个人信息
+- 影子Git仓库独立于项目现有的Git配置运行
+:::
 
-检查点会以两种形式出现在您的聊天历史中：
+---
 
-- **初始检查点** 标记了您项目的起始状态
+## 配置选项
+
+在Roo Code设置的"检查点"部分访问检查点设置：
+
+1. 点击齿轮图标 <Codicon name="gear" /> → 检查点
+2. 勾选或取消勾选"启用自动检查点"复选框
+
+   <img src="/img/checkpoints/checkpoints.png" alt="Roo Code配置中的检查点设置" width="500" />
+
+---
+
+## 检查点的工作原理
+
+Roo Code使用一个独立于主版本控制系统的影子Git仓库来捕获项目状态的快照。这些快照称为检查点，会自动记录AI辅助工作流程中的更改——每当任务开始、文件更改或命令运行时。
+
+检查点以Git提交的形式存储在影子仓库中，记录以下内容：
+- 文件内容更改
+- 新增文件
+- 删除文件
+- 重命名文件
+- 二进制文件更改
+
+---
+
+## 使用检查点
+
+检查点通过聊天界面直接集成到您的工作流程中。
+
+检查点以两种形式出现在聊天历史中：
+
+- **初始检查点** 标记您的初始项目状态
    <img src="/img/checkpoints/checkpoints-1.png" alt="聊天中的初始检查点指示器" width="500" />
 
-- **定期检查点** 在文件修改或命令执行后出现
-   <img src="/img/checkpoints/checkpoints-2.png" alt="聊天中的定期检查点指示器" width="500" />
+- **常规检查点** 出现在文件修改或命令执行后
+   <img src="/img/checkpoints/checkpoints-2.png" alt="聊天中的常规检查点指示器" width="500" />
 
 每个检查点提供两个主要功能：
 
 ### 查看差异
 
-要比较当前工作区与某个检查点：
+要比较当前工作区与之前检查点的差异：
 
-1. 在聊天历史中找到该检查点
-2. 点击检查点的 `查看差异` 按钮
+1. 在聊天历史中找到检查点
+2. 点击检查点的`查看差异`按钮
 
    <img src="/img/checkpoints/checkpoints-6.png" alt="查看差异按钮界面" width="100" />
 
 3. 在比较视图中查看差异：
-   - 新增行用绿色高亮显示
-   - 删除行用红色高亮显示
-   - 修改文件列出详细更改
-   - 重命名和移动文件跟踪路径更改
-   - 新增或删除的文件明确标记
+   - 新增行以绿色高亮显示
+   - 删除行以红色高亮显示
+   - 修改的文件会列出详细更改
+   - 重命名和移动的文件会跟踪路径更改
+   - 新建或删除的文件会有明确标记
 
-<img src="/img/checkpoints/checkpoints-3.png" alt="检查点查看差异选项" width="800" />
+<img src="/img/checkpoints/checkpoints-3.png" alt="检查点的查看差异选项" width="800" />
 
-// ... existing code ...
+### 还原检查点
 
-### Restoring Checkpoints
+要将项目恢复到之前的检查点状态：
 
-To restore a project to a previous checkpoint state:
-
-1. Locate the checkpoint in your chat history
-2. Click the checkpoint's `Restore Checkpoint` button
-   <img src="/img/checkpoints/checkpoints-7.png" alt="Restore checkpoint button interface" width="100" />
-3. Choose one of these restoration options:
+1. 在聊天历史中找到检查点
+2. 点击检查点的`还原检查点`按钮
+   <img src="/img/checkpoints/checkpoints-7.png" alt="还原检查点按钮界面" width="100" />
+3. 选择以下恢复选项之一：
    
-   <img src="/img/checkpoints/checkpoints-4.png" alt="Restore checkpoint option" width="300" />
+   <img src="/img/checkpoints/checkpoints-4.png" alt="还原检查点选项" width="300" />
 
-   - **仅恢复文件** - 仅回滚工作区文件到检查点状态，不修改聊天记录。适合在保持聊天上下文的同时比较替代实现方案，允许您无缝切换不同的项目状态。此选项不需要确认，可让您快速切换不同的实现。
+   - **仅还原文件** - 仅将工作区文件回退到检查点状态，不修改对话历史。适合在保持聊天上下文的同时比较替代实现方案，允许您无缝切换不同的项目状态。此选项无需确认，可快速切换不同实现。
+   
+   - **还原文件和任务** - 回退工作区文件并删除后续对话消息。当您需要将代码和对话完整回退到检查点状态时使用。此选项需要确认对话框，因为不可逆。
 
-   - **恢复文件和任务** - 回滚工作区文件并删除后续聊天消息。当您想要完全重置代码和对话到检查点的时间点时使用。此选项需要确认对话框，因为无法撤销。
-
-      <img src="/img/checkpoints/checkpoints-9.png" alt="恢复检查点文件和任务的确认对话框" width="300" />
+      <img src="/img/checkpoints/checkpoints-9.png" alt="还原检查点文件与任务的确认对话框" width="300" />
 
 ### 限制和注意事项
 
-- **范围**：检查点只捕获活动 Roo Code 任务期间的更改
-- **外部更改**：任务之外的更改（手动编辑、其他工具）不包括在内
-- **大文件**：非常大的二进制文件可能会影响性能
-- **未保存的更改**：恢复会覆盖工作区中的任何未保存更改
+- **作用范围**：检查点仅记录活动Roo Code任务期间的更改
+- **外部更改**：任务之外的修改（手动编辑、其他工具）不会被包含
+- **大文件**：非常大的二进制文件可能影响性能
+- **未保存的工作**：恢复会覆盖工作区中的未保存更改
 
-// ... existing code ...
+---
+
+## 技术实现
+
+### 检查点架构
+
+检查点系统包含三个主要组件：
+
+1. **影子Git仓库**：专门用于检查点跟踪的独立Git仓库，作为检查点状态的持久化存储机制。
+
+2. **检查点服务**：通过以下方式处理Git操作和状态管理：
+   - 仓库初始化
+   - 检查点创建和存储
+   - 差异计算
+   - 状态恢复
+
+3. **UI组件**：在聊天界面中显示的检查点交互元素。
+
+### 恢复过程
+
+执行恢复时，Roo Code会：
+- 对指定的检查点提交执行硬重置
+- 将影子仓库中的所有文件复制到工作区
+- 更新内部检查点跟踪状态
+
+### 存储类型
+
+检查点是任务作用域的，意味着它们特定于单个任务。
+
+### 差异计算
+
+检查点比较使用Git的基础差异功能生成结构化文件差异：
+- 修改的文件显示逐行更改
+- 二进制文件被正确检测和处理
+- 重命名和移动的文件被正确跟踪
+- 文件创建和删除被明确标识
+
+### 文件排除和忽略模式
+
+检查点系统使用智能文件排除来只跟踪相关文件：
+
+#### 内置排除项
+
+系统在初始化期间会将以下模式写入影子仓库的`.git/info/exclude`文件中：
+- 构建产物和依赖目录（`node_modules/`、`dist/`、`build/`）
+- 媒体文件和二进制资产（图片、视频、音频）
+- 缓存和临时文件（`.cache/`、`.tmp/`、`.bak`）
+- 包含敏感信息的配置文件（`.env`）
+- 大型数据文件（归档、可执行文件、二进制文件）
+- 数据库文件和日志
+
+#### .gitignore支持
+
+检查点系统会遵循工作区中的`.gitignore`模式：
+- 被`.gitignore`排除的文件不会触发检查点创建
+- 排除的文件不会出现在检查点差异中
+- 阶段化文件更改时应用标准Git忽略规则
+
+#### .rooignore行为
+
+`.rooignore`文件（控制AI访问文件）与检查点跟踪是分开的：
+- 被`.rooignore`排除但未被`.gitignore`排除的文件仍会被检查点跟踪
+- AI不可访问文件的更改仍可通过检查点恢复
+
+这种分离是故意设计的，因为`.rooignore`限制了AI可以访问的文件，而检查点跟踪与版本历史记录相关。
+
+#### 嵌套Git仓库
+
+检查点系统对嵌套Git仓库有特殊处理：
+- 在操作期间将嵌套的`.git`目录临时重命名为`.git_disabled`
+- 操作完成后恢复
+- 允许正确跟踪嵌套仓库中的文件
+- 确保嵌套仓库保持功能完整
+
+### 并发控制
+
+操作被排队以防止可能损坏仓库状态的并发Git操作。这确保即使快速连续请求检查点操作也能安全完成。
+
+---
+
+## Git安装
+
+检查点功能要求系统安装Git。实现使用`simple-git`库，该库依赖Git命令行工具创建和管理影子仓库。
+
+### macOS
+
+1. **推荐：使用Homebrew安装**：
+   ```
+   brew install git
+   ```
+
+2. **替代：使用Xcode命令行工具安装**：
+   ```
+   xcode-select --install
+   ```
+
+3. **验证安装**：
+   - 打开终端
+   - 输入 `git --version`
+   - 应该看到版本号如 `git version 2.40.0`
+
+### Windows
+
+1. **下载Git for Windows**：
+   - 访问 https://git-scm.com/download/win
+   - 下载应自动开始
+
+2. **运行安装程序**：
+   - 接受许可协议
+   - 选择安装位置（推荐默认）
+   - 选择组件（默认选项通常足够）
+   - 选择默认编辑器
+   - 选择命令行Git使用方式（推荐：命令行和第三方软件都可用）
+   - 配置换行符转换（推荐：检出Windows风格，提交Unix风格）
+   - 完成安装
+
+3. **验证安装**：
+   - 打开命令提示符或PowerShell
+   - 输入 `git --version`
+   - 应该看到版本号如 `git version 2.40.0.windows.1`
+
+### Linux
+
+**Debian/Ubuntu**：
+```
+sudo apt update
+sudo apt install git
+```
+
+**Fedora**：
+```
+sudo dnf install git
+```
+
+**Arch Linux**：
+```
+sudo pacman -S git
+```
+
+**验证安装**：
+- 打开终端
+- 输入 `git --version`
+- 应该看到版本号

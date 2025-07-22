@@ -7,7 +7,7 @@ import Codicon from '@site/src/components/Codicon';
 
 "动力转向" 实验性功能 (`POWER_STEERING`) 旨在通过更频繁地提醒底层大语言模型 (LLM) 其当前模式定义和任何自定义指令来增强 Roo Code 响应的一致性。
 
-// ... existing code ...
+---
 
 ## 它如何工作
 
@@ -28,7 +28,7 @@ import Codicon from '@site/src/components/Codicon';
 
 **默认状态：** 禁用。
 
-// ... existing code ...
+---
 
 ## 技术细节
 
@@ -39,7 +39,7 @@ import Codicon from '@site/src/components/Codicon';
     *   这些详情被包裹在 `<environment_details>` 标签中，并成为每次 LLM 交互上下文的一部分。
 *   **影响：** 通过频繁包含角色定义和自定义指令，LLM 被引导生成更符合这些参数的响应。
 
-// ... existing code ...
+---
 
 ## 启用此功能
 
@@ -54,7 +54,7 @@ import Codicon from '@site/src/components/Codicon';
 
 有关实验性功能的一般信息，请参阅 [实验性功能概述](/features/experimental/experimental-features)。
 
-// ... existing code ...
+---
 
 ## 反馈
 

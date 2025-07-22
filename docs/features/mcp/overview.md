@@ -7,7 +7,7 @@ sidebar_label: MCP 概述
 
 模型上下文协议 (MCP) 是一个通过连接外部工具和服务来扩展 Roo Code 功能的标准。MCP 服务器提供额外的工具和资源，帮助 Roo 完成超出其内置功能的任务，例如访问数据库、自定义 API 和专用功能。
 
-// ... existing code ...
+---
 
 ## MCP 文档
 

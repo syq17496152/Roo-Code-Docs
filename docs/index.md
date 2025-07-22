@@ -1,7 +1,6 @@
 ---
 sidebar_label: 欢迎
 ---
-
 # Roo 代码文档
 
 Roo Code（前身为 Roo Cline）是一个 AI 驱动的自主编码代理，存在于您的编辑器中。无论您是启动新项目、维护现有代码，还是学习新技术，它都能帮助您更快、更智能地编码。
@@ -30,7 +29,9 @@ Roo Code（前身为 Roo Cline）是一个 AI 驱动的自主编码代理，存�
 ## 核心功能
 
 ### 多模式支持
+
 Roo Code 可根据您的需求适配专业化的[使用模式](/basic-usage/using-modes)：
+
 - **代码模式**：通用编码任务
 - **架构师模式**：进行规划和技术领导
 - **问答模式**：回答问题并提供信息
@@ -39,7 +40,9 @@ Roo Code 可根据您的需求适配专业化的[使用模式](/basic-usage/usin
 - **[自定义模式](/features/custom-modes)**：创建无限专业化角色用于安全审计、性能优化、文档等任何其他任务
 
 ### 智能工具
+
 Roo Code 配备强大的[工具](/basic-usage/how-tools-work)，能够：
+
 - 读写项目中的文件
 - 在 VS Code 终端中执行命令
 - 控制网页浏览器
@@ -48,7 +51,9 @@ Roo Code 配备强大的[工具](/basic-usage/how-tools-work)，能够：
 MCP 通过允许添加无限自定义工具来扩展 Roo Code 的能力。集成外部 API、连接数据库或创建专用开发工具 - MCP 提供了扩展 Roo Code 功能以满足特定需求的框架。
 
 ### 自定义配置
+
 按您的方式使用 Roo Code：
+
 - [自定义指令](/features/custom-instructions)：个性化行为设置
 - [自定义模式](/features/custom-modes)：专业化任务处理
 - [本地模型](/advanced-usage/local-models)：离线使用
@@ -59,11 +64,13 @@ MCP 通过允许添加无限自定义工具来扩展 Roo Code 的能力。集成
 ## 资源
 
 ### 文档资料
+
 - [基础使用指南](/basic-usage/the-chat-interface)
 - [高级功能](/features/auto-approving-actions)
 - [常见问题](/faq)
 
 ### 社区与社交平台
+
 - **Discord**：[加入我们的 Discord 服务器](https://discord.gg/roocode) 获取实时帮助和讨论。
 - **Reddit**：[访问我们的子版块](https://www.reddit.com/r/RooCode) 分享经验和技巧。
 - **GitHub**：报告[问题](https://github.com/RooCodeInc/Roo-Code/issues) 或请求[功能](https://github.com/RooCodeInc/Roo-Code/discussions/categories/feature-requests?discussions_q=is%3Aopen+category%3A%22Feature+Requests%22+sort%3Atop)。

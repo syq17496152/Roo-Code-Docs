@@ -4,7 +4,7 @@ Roo Code 包含仍在开发中的实验性功能。这些功能可能不稳定�
 
 **警告：** 实验性功能可能会有意外行为，包括潜在的数据丢失或安全漏洞。启用它们需自行承担风险。
 
-// ... existing code ...
+---
 
 ## 启用实验性功能
 
@@ -14,7 +14,7 @@ Roo Code 包含仍在开发中的实验性功能。这些功能可能不稳定�
 2.  进入 "高级设置" 部分。
 3.  找到 "实验性功能" 部分。
 
-// ... existing code ...
+---
 
 ## 当前实验性功能
 
@@ -24,7 +24,7 @@ Roo Code 包含仍在开发中的实验性功能。这些功能可能不稳定�
 - [并发文件编辑](/features/experimental/concurrent-file-edits) - 在单个操作中编辑多个文件
 - [动力转向](/features/experimental/power-steering)
 
-// ... existing code ...
+---
 
 ## 提供反馈
 

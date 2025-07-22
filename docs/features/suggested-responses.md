@@ -16,7 +16,7 @@ import Codicon from '@site/src/components/Codicon';
 
 <img src="/img/suggested-responses/suggested-responses.png" alt="Roo 提问并显示建议响应按钮的示例" width="500" />
 
-// ... existing code ...
+---
 
 ## 如何工作
 
@@ -24,7 +24,7 @@ import Codicon from '@site/src/components/Codicon';
 2.  **显示建议**：如果 Roo 提供了建议，它们会作为按钮显示在问题下方。
 3.  **交互**：您可以通过两种方式与这些建议进行交互。
 
-// ... existing code ...
+---
 
 ## 与建议交互
 
@@ -47,7 +47,7 @@ import Codicon from '@site/src/components/Codicon';
 
 <img src="/img/suggested-responses/suggested-responses-1.png" alt="显示从建议响应复制的文本的聊天输入框，准备进行编辑" width="600" />
 
-// ... existing code ...
+---
 
 ## 优势
 

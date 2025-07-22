@@ -1,5 +1,3 @@
-// ... existing code ...
-
 # 差异/快速编辑
 
 :::info 默认设置
@@ -28,7 +26,7 @@ Roo Code 提供了一个高级设置，可以更改其编辑文件的方式，�
 如果您取消选中 **通过差异启用编辑**，Roo 将恢复到每次编辑时写入整个文件内容，使用 [`write_to_file`](/advanced-usage/available-tools/write-to-file) 工具，而不是使用 [`apply_diff`](/advanced-usage/available-tools/apply-diff) 应用定向更改。这种全写方法通常较慢，并且会导致更高的令牌使用率。
 :::
 
-// ... existing code ...
+---
 
 ## 匹配精度
 

@@ -1,6 +1,6 @@
 ---
 title: 市场
-description: 发现并安装模式和 MCP 以扩展 Roo Code 的功能
+escription: 发现并安装模式和MCP以扩展Roo Code的功能
 ---
 import Codicon from '@site/src/components/Codicon';
 
@@ -14,7 +14,7 @@ import Codicon from '@site/src/components/Codicon';
       top: 0,
       left: 0,
       width: '100%',
-      height: '100%',
+      height: '100%'
     }}
     frameBorder="0"
     allow="autoplay; encrypted-media"
@@ -28,111 +28,136 @@ import Codicon from '@site/src/components/Codicon';
 
 ## 概述
 
-Roo Code 市场是发现和安装社区贡献的扩展（称为 MCP（模型上下文协议）和模式）的中心枢纽。它允许您轻松扩展 Roo Code 的功能，以满足您的特定需求和工作流程。
+Roo Code市场是发现和安装社区贡献的扩展（称为MCP和模式）的中心枢纽。它允许您轻松扩展Roo Code的功能，以满足您的特定需求和工作流程。
 
-### 主要功能
-- **可发现性**：浏览精选的 MCP 和模式列表。
-- **简单安装**：单击即可安装和卸载项目。
-- **社区驱动**：访问来自 Roo Code 社区的不断增长的扩展集合。
-- **项目和全局范围**：为特定项目或所有项目安装项目。
+### 主要特性
+- **可发现性**：浏览精心策划的MCP和模式列表
+- **简单安装**：单击即可安装和卸载项目
+- **社区驱动**：访问来自Roo Code社区不断增长的扩展集合
+- **项目与全局作用域**：可以为特定项目或所有项目安装项目
 
-// ... existing code ...
+---
+
+## 入门
+
+Roo Code市场直接集成在VS Code的Roo Code扩展中。点击顶部菜单栏的市场图标 <Codicon name="extensions" /> 即可访问。
+
+---
+
+
 
 ## 市场项目
 
 市场提供两种类型的项目：
 
 ### MCP（模型上下文协议）
-MCP 允许 Roo Code 连接并交互各种 AI 模型、API 和其他外部工具。通过安装 MCP，您可以配置 Roo Code 使用不同的语言模型（如 OpenAI、Anthropic 或其他模型）或集成其他服务。了解更多关于 [什么是 MCP？](/features/mcp/what-is-mcp) 和 [如何在 Roo Code 中使用 MCP](/features/mcp/using-mcp-in-roo)。
+MCP允许Roo Code连接和交互各种AI模型、API和其他外部工具。通过安装MCP，您可以配置Roo Code使用不同的语言模型（如OpenAI、Anthropic等）或集成其他服务。了解更多[什么是MCP？](/features/mcp/what-is-mcp)和[如何在Roo Code中使用MCP](/features/mcp/using-mcp-in-roo)。
 
-// ... existing code ...
+<img src="/img/marketplace/marketplace-1.png" alt="显示可用MCP的MCP选项卡，包含安装和卸载按钮" width="500" />
 
 ### 模式
-模式是自定义的指令和规则集，用于调整 Roo Code 的行为以适应特定任务。例如，您可能会找到一个优化创建 React 组件的 "React 组件" 模式，或用于编写技术文档的 "文档编写者" 模式。了解更多关于 [使用模式](/basic-usage/using-modes) 和 [创建自定义模式](/features/custom-modes)。
+模式是自定义的指令和规则集，用于调整Roo Code的行为以适应特定任务。例如，您可以找到专为创建React组件优化的"React组件"模式，或用于编写技术文档的"文档编写者"模式。了解更多[使用模式](/basic-usage/using-modes)和[创建自定义模式](/features/custom-modes)。
 
-// ... existing code ...
+<img src="/img/marketplace/marketplace-4.png" alt="显示可用模式的模式选项卡" width="500" />
 
-## 安装范围
+---
 
-当您从市场安装项目时，可以选择在项目级别或全局级别安装。
+## 安装作用域
+
+从市场安装项目时，可以选择在项目级别或全局级别安装。
 
 ### 项目安装
-- **范围**：项目仅在当前 VS Code 工作区（您的项目）中可用。
+- **作用域**：项目仅在当前VS Code工作区（您的项目）中可用。
 - **配置文件**：
-    - **MCP**：项目根目录中的 [`.roo/mcp.json`](/features/mcp/using-mcp-in-roo#configuring-mcp-servers)。
-    - **模式**：项目根目录中的 [`.roomodes`](/features/custom-modes#3-manual-configuration-yaml--json)。
-- **用例**：当项目特定于某个项目的需要或希望与团队共享项目特定的配置时，这非常有用。
+    - **MCP**：[`.roo/mcp.json`](/features/mcp/using-mcp-in-roo#configuring-mcp-servers) 在项目根目录中。
+    - **模式**：[`.roomodes`](/features/custom-modes#3-manual-configuration-yaml--json) 在项目根目录中。
+- **使用场景**：当某个项目仅适用于特定项目的需要时，或当您想与团队共享项目特定的配置时。
 
 ### 全局安装
-- **范围**：项目在所有 VS Code 工作区中可用。
+- **作用域**：项目在所有VS Code工作区中可用。
 - **配置文件**：
-    - **MCP**：Roo Code 扩展的全局设置目录中的 [`mcp_settings.json`](/features/mcp/using-mcp-in-roo#configuring-mcp-servers)。
-    - **模式**：Roo Code 扩展的全局设置目录中的 [`custom_modes.yaml`](/features/custom-modes)。
-- **用例**：这是理想的选择，适用于您希望在所有项目中使用项目的情况，例如最喜欢的模式或常用 MCP。
+    - **MCP**：在Roo Code扩展的全局设置目录中的[`mcp_settings.json`](/features/mcp/using-mcp-in-roo#configuring-mcp-servers)。
+    - **模式**：在Roo Code扩展的全局设置目录中的[`custom_modes.yaml`](/features/custom-modes)。
+- **使用场景**：适用于所有项目的项目，例如常用模式或常用MCP。
 
-// ... existing code ...
+---
 
 ## 使用市场
 
-### 浏览和筛选
+### 浏览和过滤
 
 您可以在市场视图中浏览所有可用项目。要查找特定项目：
-- **搜索**：使用搜索栏按名称或描述查找项目。
-- **按类型筛选**：仅显示 MCP 或仅显示模式。
-- **按标签筛选**：查找与特定技术或任务相关的项目。
+- **搜索**：使用搜索栏按名称或描述查找项目
+- **按类型过滤**：仅显示MCP或模式
+- **按标签过滤**：查找与特定技术或任务相关的项目
 
 ### 安装项目
 
-1. 找到您要安装的项目。
-2. 点击 "安装" 按钮。
-3. 选择是为当前 **项目** 还是 **全局** 安装。
+1. 找到要安装的项目
+2. 点击"安装"按钮
+3. 选择是为当前**项目**还是**全局**安装
 
-#### 安装 MCP
-<img src="/img/marketplace/marketplace-3.png" alt="MCP 安装模态显示安装范围和方法选项" width="500" />
+#### 安装MCP
+<img src="/img/marketplace/marketplace-3.png" alt="MCP安装对话框，显示安装作用域和方法选项" width="500" />
 
-对于 MCP，您可能还需要：
-- 选择安装方法（NPX 或 Docker）
-- 在提示时提供额外参数（参见 [参数化 MCP](#parameterized-mcps)）
+对于MCP，您可能还需要：
+- 选择安装方法（NPX或Docker）
+- 在提示时提供额外参数（参见[参数化MCP](#parameterized-mcps)）
 
 #### 安装模式
-<img src="/img/marketplace/marketplace-5.png" alt="模式安装模态显示安装范围选项" width="500" />
+<img src="/img/marketplace/marketplace-5.png" alt="模式安装对话框，显示安装作用域选项" width="500" />
 
-对于模式，只需选择安装范围并点击安装。
+对于模式，只需选择安装作用域并点击安装。
 
-5. Roo Code 自动将项目添加到相应的配置文件中。如果文件不存在，Roo Code 将为您创建它。然后文件会打开供您查看。
+5. Roo Code会自动将项目添加到相应的配置文件中。如果文件不存在，Roo Code会为您创建。然后文件会打开供您查看。
 
 ### 卸载项目
 
-1. 在市场视图中找到已安装的项目（已安装的项目显示 "移除" 按钮）。
-2. 点击 "移除" 按钮。
-3. 如果项目在两个范围内都安装了，选择从当前项目移除还是全局移除。
-4. Roo Code 从相应的配置文件中移除项目。
+1. 在市场视图中找到已安装的项目（已安装的项目会显示"卸载"按钮）
+2. 点击"卸载"按钮
+3. 如果项目在两个作用域都安装，请选择从当前项目卸载还是全局卸载
+4. Roo Code会从相应的配置文件中移除项目
 
-**注意：** "移除" 按钮是上下文相关的。如果项目仅在单个范围内安装（例如，仅限项目），它将是一个单操作按钮。只有当项目在两个范围内都安装时，才会出现带有 "从项目移除" 和 "全局移除" 选项的下拉菜单。
+**注意**："卸载"按钮是上下文感知的。如果项目仅安装在一个作用域（例如仅项目），它会是一个单击按钮。只有当项目在两个作用域都安装时，才会出现包含"从项目卸载"和"全局卸载"选项的下拉菜单。
 
-**重要：** 单击按钮或从下拉菜单中选择选项后，移除是立即进行的。没有额外的确认提示。
+**重要**：点击按钮或从下拉菜单选择选项后，卸载会立即执行。没有额外的确认提示。
 
-### 参数化 MCP
+### 参数化MCP
 
-<img src="/img/marketplace/marketplace-6.png" alt="参数化 MCP 安装显示 API 密钥输入和先决条件" width="500" />
+<img src="/img/marketplace/marketplace-6.png" alt="参数化MCP安装，显示API密钥输入和先决条件" width="500" />
 
-某些 MCP 在安装期间需要特定信息，如 API 密钥或 URL。安装这些 "参数化" MCP 时，系统会提示您：
-- 查看任何先决条件（如创建账户或获取 API 密钥）
+某些MCP在安装时需要特定信息，例如API密钥或URL。安装这些"参数化"MCP时，您会被提示：
+- 查看任何先决条件（如创建账户或获取API密钥）
 - 输入所需的配置值
-- 选择安装方法（如适用）
+- 如果适用，选择安装方法
 
-这保持了敏感信息的安全性，并使配置更加灵活。
+这可以保护敏感信息的安全，并使配置更加灵活。
 
-// ... existing code ...
+---
+
+## 故障排除
+
+### 安装错误
+- **无效的YAML/JSON**：配置文件（`.roomodes`、`.roo/mcp.json`等）有语法错误。为防止数据丢失，Roo Code不会修改损坏的配置文件。请在安装或卸载项目前修复语法错误。
+- **文件未找到**：罕见错误 - Roo Code会自动创建必要的配置文件。
+
+### 项目无法工作
+如果安装的项目无法正常工作：
+1. **检查配置文件**：验证项目是否正确添加
+2. **重启VS Code**：新配置有时需要重启
+3. **检查先决条件**：查看项目描述中的任何要求
+4. **检查Roo Code日志**：在Roo Code输出面板中查看错误信息
+
+---
 
 ## 相关文档
 
-### 对于 MCP
-- [MCP 概述](/features/mcp/overview) - MCP 的全面指南
-- [什么是 MCP？](/features/mcp/what-is-mcp) - 理解基础知识
-- [在 Roo Code 中使用 MCP](/features/mcp/using-mcp-in-roo) - 详细的配置和使用指南
-- [推荐的 MCP 服务器](/features/mcp/recommended-mcp-servers) - 精选的测试服务器列表
+### 关于MCP
+- [MCP概述](/features/mcp/overview) - 模型上下文协议的全面指南
+- [什么是MCP？](/features/mcp/what-is-mcp) - 理解基础概念
+- [在Roo Code中使用MCP](/features/mcp/using-mcp-in-roo) - 详细配置和使用指南
+- [推荐的MCP服务器](/features/mcp/recommended-mcp-servers) - 精选的测试服务器列表
 
-### 对于模式
-- [使用模式](/basic-usage/using-modes) - 了解内置模式以及如何在它们之间切换
-- [自定义模式](/features/custom-modes) - 创建和配置自己的专用模式
+### 关于模式
+- [使用模式](/basic-usage/using-modes) - 了解内置模式及如何切换
+- [自定义模式](/features/custom-modes) - 创建和配置自己的专业模式
