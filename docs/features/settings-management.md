@@ -1,138 +1,138 @@
 ---
-title: Import, Export, and Reset Settings
-sidebar_label: Import/Export/Reset Settings
-description: Manage your Roo Code settings by exporting, importing, or resetting them to defaults.
+title: 导入、导出和重置设置
+sidebar_label: 导入/导出/重置设置
+description: 管理Roo Code设置，可通过导出、导入或重置为默认值。
 ---
 
-# Import, Export, and Reset Settings
+# 导入、导出和重置设置
 
-Roo Code allows you to manage your configuration settings effectively through export, import, and reset options. These features are useful for backing up your setup, sharing configurations with others, or restoring default settings if needed.
+Roo Code通过导出、导入和重置选项帮助您有效管理配置设置。这些功能可用于备份配置、与他人共享配置或按需恢复默认设置。
 
-You can find these options at the bottom of the Roo Code settings page, accessible via the gear icon (<i class="codicon codicon-gear"></i>) in the Roo Code chat view.
+您可以在Roo Code设置页面底部找到这些选项（通过聊天界面的齿轮图标(<i class="codicon codicon-gear"></i>访问）。
 
-<img src="/img/settings-management/settings-management.png" alt="Export, Import, and Reset buttons in Roo Code settings" width="400" />
-*Image: Export, Import, and Reset buttons.*
-
----
-
-## Export Settings
-
-Clicking the **Export** button saves your current Roo Code settings to a JSON file.
-
-*   **What's Exported:** The file includes your configured API Provider Profiles and Global Settings (UI preferences, mode configurations, context settings, etc.).
-*   **Security Warning:** The exported JSON file contains **all** your configured API Provider Profiles and Global Settings. Crucially, this includes **API keys in plaintext**. Treat this file as highly sensitive. Do not share it publicly or with untrusted individuals, as it grants access to your API accounts.
-*   **Process:**
-    1.  Click **Export**.
-    2.  A file save dialog appears, suggesting `roo-code-settings.json` as the filename (usually in your `~/Documents` folder).
-    3.  Choose a location and save the file.
-
-This creates a backup of your configuration or a file you can share.
+<img src="/img/settings-management/settings-management.png" alt="导出、导入和重置按钮" width="400" />
+*图片：导出、导入和重置按钮*
 
 ---
 
-## Import Settings
+## 导出设置
 
-Clicking the **Import** button allows you to load settings from a previously exported JSON file.
+点击**导出**按钮将当前Roo Code设置保存为JSON文件。
 
-*   **Process:**
-    1.  Click **Import**.
-    2.  A file open dialog appears. Select the `roo-code-settings.json` file (or similarly named file) you want to import.
-    3.  Roo Code reads the file, validates its contents against the expected schema, and applies the settings.
-*   **Merging:** Importing settings **merges** the configurations. It adds new API profiles and updates existing ones and global settings based on the file content. It does **not** delete configurations present in your current setup but missing from the imported file.
-*   **Validation:** Only valid settings matching the internal schema can be imported, preventing configuration errors. A success notification appears upon completion.
+*   **导出内容**：文件包含配置的API提供者配置文件和全局设置（UI偏好、模式配置、上下文设置等）。
+*   **安全警告**：导出的JSON文件包含**所有**API提供者配置文件和全局设置，包括**明文API密钥**。请视此文件为高度敏感信息，勿公开或与不可信人员共享。
+*   **操作流程**：
+    1.  点击**导出**。
+    2.  出现文件保存对话框，默认建议文件名为`roo-code-settings.json`（通常位于`~/Documents`文件夹）。
+    3.  选择位置并保存文件。
+
+此操作可创建配置备份或用于共享的文件。
 
 ---
 
-## Automatic Configuration Import
+## 导入设置
 
-Automatically import your Roo Code settings from a file every time you start VS Code. This is a powerful way to sync your configuration across multiple machines or standardize settings for your entire team.
+点击**导入**按钮可从先前导出的JSON文件加载设置。
 
-### Key Features
-- **Effortless Sync**: Keep your settings consistent across different workspaces and devices.
-- **Team Standardization**: Share a single configuration file to ensure your whole team uses the same settings.
-- **Flexible Pathing**: Works with absolute paths, or paths relative to your home directory (e.g., `~/Documents/roo-settings.json`).
-- **Silent & Safe**: If the file isn't found or contains errors, Roo Code starts up normally without blocking your workflow.
+*   **操作流程**：
+    1.  点击**导入**。
+    2.  出现文件打开对话框，选择要导入的`roo-code-settings.json`文件。
+    3.  Roo Code读取文件并验证内容，然后应用设置。
+*   **合并机制**：导入设置会**合并**配置。它会添加新API配置文件并更新现有配置，但不会删除当前存在但导入文件中缺失的配置。
+*   **验证机制**：仅导入符合内部模式的设置，防止配置错误。导入成功后会显示成功通知。
 
-### Use Case
+---
 
-**Before**: Manually exporting and importing settings every time you moved to a new machine or wanted to share your setup.
-- Manually open the settings panel.
-- Export your current settings to a file.
-- Send the file to a teammate or a new machine.
-- Manually import the file.
+## 自动配置导入
 
-**With this feature**: Configure the path once, and Roo Code handles the rest on every launch.
+每次启动VS Code时自动从文件导入Roo Code设置。这是跨设备同步配置或标准化团队设置的强大方式。
 
-### How it Works
+### 核心功能
+- **无缝同步**：保持不同工作区和设备的设置一致。
+- **团队标准化**：共享单个配置文件确保团队统一设置。
+- **灵活路径**：支持绝对路径或相对主目录路径（如`~/Documents/roo-settings.json`）。
+- **静默安全**：若文件未找到或含错误，Roo Code正常启动不阻塞工作流。
 
-When VS Code starts, Roo Code checks for a specific setting: `roo-cline.autoImportSettingsPath`. If this setting contains a path to a valid Roo Code configuration file (`.json`), Roo Code will load it automatically.
+### 使用场景
 
-- Upon successful import, you will see a notification: `Successfully imported settings from [your-file-name.json]`.
-- If the file is invalid or can't be found, you'll get a non-intrusive warning, and the extension will start with your last known settings. The `autoImportSettings` function is designed to never block the extension from activating.
+**之前**：手动导出导入设置迁移设备或共享设置。
+- 手动打开设置面板
+- 导出当前设置到文件
+- 发送文件给同事或新设备
+- 手动导入文件
 
-### Configuration
+**使用此功能**：配置路径一次，Roo Code每次启动自动处理。
 
-To use this feature, add the following to your VS Code `settings.json` file:
+### 实现原理
 
-1.  **Open your `settings.json` file**:
-    *   Use the Command Palette (`Ctrl/Cmd + Shift + P`) and search for "Preferences: Open User Settings (JSON)".
+VS Code启动时，Roo Code检查`roo-cline.autoImportSettingsPath`设置。若该设置包含有效配置文件路径（`.json`），则自动加载。
 
-2.  **Add the setting**:
-    *   Add the `roo-cline.autoImportSettingsPath` key with the path to your configuration file.
+- 导入成功显示通知：`成功从[your-file-name.json]导入设置`。
+- 若文件无效或未找到，显示非侵入性警告并使用最后已知设置启动。
 
-**Examples**:
+### 配置方法
 
-*   **Absolute Path (Recommended)**
+要在VS Code中使用此功能，请在`settings.json`文件中添加以下内容：
+
+1.  **打开`settings.json`文件**：
+    *   使用命令面板(`Ctrl/Cmd + Shift + P`)搜索"Preferences: Open User Settings (JSON)"。
+
+2.  **添加设置**：
+    *   添加`roo-cline.autoImportSettingsPath`键并指定配置文件路径。
+
+**示例**：
+
+*   **绝对路径（推荐）**
     ```json
     {
       "roo-cline.autoImportSettingsPath": "/Users/your-username/Documents/dev-configs/roo-code.json"
     }
     ```
 
-*   **Home Directory Path** (using `~`)
+*   **主目录路径**（使用`~`）
     ```json
     {
       "roo-cline.autoImportSettingsPath": "~/roo-code-settings.json"
     }
     ```
 
-*   **To disable**, simply leave the path empty or remove the line entirely:
+*   **禁用自动导入**：
     ```json
     {
       "roo-cline.autoImportSettingsPath": ""
     }
     ```
 
-### FAQ
+### 常见问题
 
-**"What happens if my file has an error?"**
-- Roo Code will show a warning notification with the error details. The extension will continue to load normally with your previously saved settings.
+**"文件有错误会怎样？"**
+- Roo Code会显示带详细信息的警告通知，并使用最后保存的设置正常加载扩展。
 
-**"Where does Roo Code look for relative paths?"**
-- For safety and consistency, paths that are not absolute or home-directory-based are resolved relative to your home directory.
+**"相对路径解析位置？"**
+- 出于安全和一致性，非绝对或主目录路径将相对于主目录解析。
 
-**"Can I use this to manage settings for my team?"**
-- Yes. Place the configuration file in a shared location (like a synced cloud folder or a shared network drive) and have each team member point to that file.
+**"如何管理团队设置？"**
+- 将配置文件放在共享位置（如同步云存储或共享网络驱动器），团队成员指向同一文件即可。
 ---
 
-## Reset Settings
+## 重置设置
 
-Clicking the **Reset** button completely clears all Roo Code configuration data and returns the extension to its default state. This is a destructive action intended for troubleshooting or starting fresh.
+点击**重置**按钮将完全清除所有Roo Code配置数据并恢复默认状态。此操作具有破坏性，用于故障排除或重新开始。
 
-*   **Warning:** This action is **irreversible**. It permanently deletes all API configurations (including keys stored in secret storage), custom modes, global settings, and task history.
+*   **警告**：此操作**不可逆**。永久删除所有API配置（包括密钥存储）、自定义模式、全局设置和任务历史。
 
-*   **Process:**
-    1.  Click the red **Reset** button.
-    2.  A confirmation dialog appears, warning that the action cannot be undone.
-    3.  Click "Yes" to confirm.
+*   **操作流程**：
+    1.  点击红色**重置**按钮。
+    2.  出现确认对话框，警告操作不可逆。
+    3.  点击"是"确认。
 
-*   **What is Reset:**
-    *   **API Provider Profiles:** All configurations are deleted from settings and secret storage.
-    *   **Global Settings:** All preferences (UI, modes, approvals, browser, etc.) are reset to defaults.
-    *   **Custom Modes:** All user-defined modes are deleted.
-    *   **Secret Storage:** All API keys and other secrets managed by Roo Code are cleared.
-    *   **Task History:** The current task stack is cleared.
+*   **重置内容**：
+    *   **API提供者配置**：从设置和密钥存储中删除所有配置。
+    *   **全局设置**：所有偏好（UI、模式、审批、浏览器等）恢复默认。
+    *   **自定义模式**：删除所有用户定义模式。
+    *   **密钥存储**：清除所有Roo Code管理的API密钥。
+    *   **任务历史**：清除当前任务栈。
 
-*   **Result:** Roo Code returns to its initial state, as if freshly installed, with default settings and no user configurations.
+*   **结果**：Roo Code恢复初始状态，如同新安装，使用默认设置且无用户配置。
 
-Use this option only if you are certain you want to remove all Roo Code data or if instructed during troubleshooting. Consider exporting your settings first if you might want to restore them later.
+仅在确定要删除所有Roo Code数据或故障排除时使用此功能。建议先导出设置以便后续恢复。

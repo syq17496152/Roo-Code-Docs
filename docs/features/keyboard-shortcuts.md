@@ -1,71 +1,79 @@
 ---
-sidebar_label: Keyboard Navigation
+sidebar_label: 键盘导航
 ---
 
-# Keyboard Navigation
+# 键盘导航
 
-The Roo Code interface supports keyboard navigation and shortcuts to streamline your workflow and reduce dependence on mouse interactions.
+Roo Code界面支持键盘导航和快捷键，优化您的工作流并减少对鼠标交互的依赖。
 
 ---
 
-## Available Keyboard Commands
+## 可用键盘命令
 
-Roo Code offers keyboard commands to enhance your workflow. This page focuses on the `roo.acceptInput` command, but here's a quick reference to all keyboard commands:
+Roo Code提供键盘命令来增强工作流。本页重点介绍`roo.acceptInput`命令，但以下快速参考涵盖所有键盘命令：
 
-| Command | Description | Default Shortcut |
+| 命令 | 描述 | 默认快捷键 |
 |---------|-------------|-----------------|
-| `roo.acceptInput` | Submit text or accept the primary suggestion | None (configurable) |
-| `roo.focus` | Focus the Roo input box | None (configurable) |
-| Arrow Up/Down | Navigate through prompt history | Built-in |
+| `roo.acceptInput` | 提交文本或接受主要建议 | 无（可配置） |
+| `roo.focus` | 聚焦Roo输入框 | 无（可配置） |
+| 箭头键（上/下） | 浏览提示历史 | 内置 |
 
-### Key Benefits of Keyboard Commands
+### 键盘命令的核心优势
 
-* **Keyboard-Driven Interface**: Submit text or select the primary suggestion button without mouse interaction
-* **Improved Accessibility**: Essential for users with mobility limitations or those who experience discomfort with mouse usage
-* **Vim/Neovim Compatibility**: Supports seamless transitions for developers coming from keyboard-centric environments
-* **Workflow Efficiency**: Reduces context switching between keyboard and mouse during development tasks
+* **键盘驱动界面**：无需鼠标即可提交文本或选择主要建议按钮
+* **提升可访问性**：对行动不便或使用鼠标不适的用户至关重要
+* **Vim/Neovim兼容性**：支持从键盘为中心环境过渡的开发者
+* **工作流效率**：减少开发任务中的键盘与鼠标切换
 
 ---
 
-## roo.acceptInput Command
+## roo.acceptInput命令
 
-The `roo.acceptInput` command lets you submit text or accept suggestions with keyboard shortcuts instead of clicking buttons or pressing Enter in the input area.
+`roo.acceptInput`命令允许您使用键盘快捷键提交文本或接受建议，而非点击按钮或按输入框中的回车键。
 
-### What It Does
+### 功能说明
 
-The `roo.acceptInput` command is a general-purpose input submission command. When triggered, it:
+`roo.acceptInput`命令是一个通用输入提交命令。触发时会：
 
-- Submits your current text or image input when in the text input area (equivalent to pressing Enter)
-- Clicks the primary (first) button when action buttons are visible (such as confirm/cancel buttons or any other action buttons)
+- 在文本输入区域提交当前文本或图片输入（等效于按回车键）
+- 当显示操作按钮时（如确认/取消按钮），点击主要（第一个）按钮
 
-### Detailed Setup Guide
+### 详细设置指南
 
-#### Method 1: Using the VS Code UI
+#### 方法1：使用VS Code界面
 
-1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac)
-2. Type "Preferences: Open Keyboard Shortcuts"
-3. In the search box, type "roo.acceptInput"
-4. Locate "Roo: Accept Input/Suggestion" in the results
-5. Click the + icon to the left of the command
-6. Press your desired key combination (e.g., `Ctrl+Enter` or `Alt+Enter`)
-7. Press Enter to confirm
+1. 打开命令面板（`Ctrl+Shift+P` 或 Mac上的`Cmd+Shift+P`）
+2. 输入"Preferences: Open Keyboard Shortcuts"
+3. 在搜索框中输入"roo.acceptInput"
+4. 在结果中定位"Roo: 接受输入/建议"
+5. 点击命令左侧的+图标
+6. 按下您希望的组合键（如`Ctrl+Enter`或`Alt+Enter`）
+7. 按回车确认
 
+#### 方法2：直接编辑keybindings.json
 
-#### Method 2: Editing keybindings.json directly
-
-1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac)
-2. Type "Preferences: Open Keyboard Shortcuts (JSON)"
-3. Add the following entry to the JSON array:
+1. 打开命令面板（`Ctrl+Shift+P` 或 Mac上的`Cmd+Shift+P`）
+2. 输入"Preferences: Open Keyboard Shortcuts (JSON)"
+3. 在JSON数组中添加以下条目：
 
 ```json
 {
-  "key": "ctrl+enter",  // or your preferred key combination
+  "key": "ctrl+enter",  // 或您偏好的组合键
   "command": "roo.acceptInput",
-  "when": "rooViewFocused"  // This is a context condition that ensures the command only works when Roo is focused
+  "when": "rooViewFocused"  // 确保仅在Roo聚焦时生效
 }
 ```
 
-You can also use a more specific condition:
+更正后的JSON代码块：
+
+```json
+{
+  "key": "ctrl+enter",
+  "command": "roo.acceptInput",
+  "when": "rooViewFocused"
+}
+```
+
 ```json
 {
   "key": "ctrl+enter",
@@ -74,147 +82,141 @@ You can also use a more specific condition:
 }
 ```
 
-#### Recommended Key Combinations
+#### 推荐组合键
 
-Choose a key combination that doesn't conflict with existing VS Code shortcuts:
+选择不与现有VS Code快捷键冲突的组合：
 
-- `Alt+Enter` - Easy to press while typing
-- `Ctrl+Space` - Familiar for those who use autocomplete
-- `Ctrl+Enter` - Intuitive for command execution
-- `Alt+A` - Mnemonic for "Accept"
+- `Alt+Enter` - 输入时易于操作
+- `Ctrl+Space` - 自动补全用户熟悉
+- `Ctrl+Enter` - 命令执行直观
+- `Alt+A` - "Accept"的助记键
 
-### Practical Use Cases
+### 实用使用场景
 
-#### Quick Development Workflows
+#### 快速开发工作流
 
-- **Text Submission**: Send messages to Roo without moving your hands from the keyboard
-- **Action Confirmations**: Accept operations like saving files, running commands, or applying diffs
-- **Multi-Step Processes**: Move quickly through steps that require confirmation or input
-- **Consecutive Tasks**: Chain multiple tasks together with minimal interruption
+- **文本提交**：无需移开双手即可向Roo发送消息
+- **操作确认**：接受保存文件、运行命令或应用差异等操作
+- **多步骤流程**：快速通过需要确认或输入的步骤
+- **连续任务**：以最小干扰串联多个任务
 
-#### Keyboard-Centric Development
+#### 键盘为中心开发
 
-- **Vim/Neovim Workflows**: If you're coming from a Vim/Neovim background, maintain your keyboard-focused workflow
-- **IDE Integration**: Use alongside other VS Code keyboard shortcuts for a seamless experience
-- **Code Reviews**: Quickly accept suggestions when reviewing code with Roo
-- **Documentation Writing**: Submit text and accept formatting suggestions when generating documentation
+- **Vim/Neovim工作流**：保持从Vim/Neovim过渡的键盘聚焦工作流
+- **IDE集成**：与其他VS Code快捷键无缝配合
+- **代码审查**：审查代码时快速接受建议
+- **文档编写**：生成文档时提交文本和接受格式建议
 
-#### Accessibility Use Cases
+#### 可访问性场景
 
-- **Hand Mobility Limitations**: Essential for users who have difficulty using a mouse
-- **Repetitive Strain Prevention**: Reduce mouse usage to prevent or manage repetitive strain injuries
-- **Screen Reader Integration**: Works well with screen readers for visually impaired users
-- **Voice Control Compatibility**: Can be triggered via voice commands when using voice control software
+- **手部活动受限**：对难以使用鼠标用户至关重要
+- **重复性劳损预防**：减少鼠标使用预防劳损
+- **屏幕阅读器集成**：与屏幕阅读器配合使用
+- **语音控制兼容性**：与语音控制软件配合
 
-### Accessibility Benefits
+### 可访问性优势
 
-The `roo.acceptInput` command was designed with accessibility in mind:
+`roo.acceptInput`命令设计考虑了可访问性：
 
-- **Reduced Mouse Dependence**: Complete entire workflows without reaching for the mouse
-- **Reduced Physical Strain**: Helps users who experience discomfort or pain from mouse usage
-- **Alternative Input Method**: Supports users with mobility impairments who rely on keyboard navigation
-- **Workflow Optimization**: Particularly valuable for users coming from keyboard-centric environments like Vim/Neovim
+- **减少鼠标依赖**：无需使用鼠标完成整个工作流
+- **减轻身体负担**：帮助因鼠标使用不适的用户
+- **替代输入法**：支持依赖键盘导航的行动不便用户
+- **工作流优化**：对从Vim/Neovim等键盘环境过渡的用户特别有价值
 
-### Keyboard-Centric Workflows
+### 键盘工作流示例
 
-Here are some complete workflow examples showing how to effectively use keyboard shortcuts with Roo:
+以下完整工作流示例展示如何有效使用Roo的键盘快捷键：
 
-#### Development Workflow Example
+#### 开发工作流示例
 
-1. Open VS Code and navigate to your project
-2. Open Roo via the sidebar
-3. Type your request: "Create a REST API endpoint for user registration"
-4. When Roo asks for framework preferences, use your `roo.acceptInput` shortcut to select the first suggestion
-5. Continue using the shortcut to accept code generation suggestions
-6. When Roo offers to save the file, use the shortcut again to confirm
-7. Use VS Code's built-in shortcuts to navigate through the created files
+1. 打开VS Code并导航到项目
+2. 通过侧边栏打开Roo
+3. 输入请求："为用户注册创建REST API端点"
+4. Roo询问框架偏好时，使用`roo.acceptInput`快捷键选择第一个建议
+5. 继续使用快捷键接受代码生成建议
+6. Roo提供保存文件建议时再次使用快捷键确认
+7. 使用VS Code内置快捷键导航创建的文件
 
-#### Code Review Workflow
+#### 代码审查工作流
 
-1. Select code you want to review and use VS Code's "Copy" command
-2. Ask Roo to review it: "Review this code for security issues"
-3. As Roo asks clarifying questions about the code context, use your shortcut to accept suggestions
-4. When Roo provides improvement recommendations, use the shortcut again to accept implementation suggestions
+1. 选择要审查的代码并使用VS Code的"复制"命令
+2. 询问Roo审查代码："审查此代码的安全问题"
+3. Roo提出代码上下文澄清问题时，使用快捷键接受建议
+4. Roo提供改进建议时再次使用快捷键接受实现建议
 
-### Troubleshooting
+### 故障排除
 
-| Issue | Solution |
+| 问题 | 解决方案 |
 |-------|----------|
-| Shortcut doesn't work | Ensure Roo is focused (click in the Roo panel first) |
-| Wrong suggestion selected | The command always selects the first (primary) button; use mouse if you need a different option |
-| Conflicts with existing shortcuts | Try a different key combination in VS Code keyboard settings |
-| No visual feedback when used | This is normal - the command silently activates the function without visual confirmation |
-| Shortcut works inconsistently | Make sure the `when` clause is properly configured in your keybindings.json (either `rooViewFocused` or the webview-specific condition) |
+| 快捷键无效 | 确保Roo已聚焦（先点击Roo面板） |
+| 选择错误建议 | 命令始终选择第一个（主要）按钮；需要不同选项时使用鼠标 |
+| 与现有快捷键冲突 | 在VS Code键盘设置中尝试其他组合键 |
+| 使用时无视觉反馈 | 属正常现象 - 命令静默激活功能 |
+| 快捷键不稳定 | 确保keybindings.json中的`when`子句配置正确 |
 
-### Technical Implementation
+### 技术实现
 
-The `roo.acceptInput` command is implemented as follows:
+`roo.acceptInput`命令实现如下：
 
-- Command registered as `roo.acceptInput` with display title "Roo: Accept Input/Suggestion" in the command palette
-- When triggered, it sends an "acceptInput" message to the active Roo webview
-- The webview determines the appropriate action based on the current UI state:
-  - Clicks the primary action button if action buttons are visible and enabled
-  - Sends the message if the text area is enabled and contains text/images
-- No default key binding - users assign their preferred shortcut
-
-### Limitations
-
-- Works only when the Roo interface is active
-- Has no effect if no inputs or suggestions are currently available
-- Prioritizes the primary (first) button when multiple options are shown
+- 在命令面板中注册为`roo.acceptInput`，显示标题为"Roo: 接受输入/建议"
+- 触发时向活动的Roo网络视图发送"acceptInput"消息
+- 网络视图根据当前UI状态确定操作：
+  - 显示且启用操作按钮时点击主要按钮
+  - 文本区域启用且包含文本/图片时发送消息
+- 无默认键绑定 - 用户需配置自己的快捷键
 
 ---
 
-## Command Line Style Prompt History Navigation
+## 类终端提示历史导航
 
-Navigate your prompt history with a terminal-like experience using the arrow keys. This feature makes it easy to reuse and refine previous prompts, whether from your current conversation or past tasks.
+使用箭头键以终端体验导航提示历史。此功能可轻松重用和优化先前提示，无论来自当前对话还是过往任务。
 
-### Key Features
-- **Up/Down Arrows**: Cycle through previous prompts.
-- **Context-Aware**: Switches between conversation and task history.
-- **Preserves Input**: Remembers what you were typing.
+### 核心功能
+- **上下箭头**：循环浏览先前提示。
+- **上下文感知**：在对话和任务历史间切换。
+- **输入保留**：记住您正在输入的内容。
 
-### Why This Matters
+### 重要性
 
-**Before**: Reusing a prompt meant scrolling up, copying, and pasting.
-- Tedious and slow
-- Easy to lose your place
-- Interrupted your workflow
+**之前**：重用提示需要滚动、复制和粘贴。
+- 繁琐缓慢
+- 易丢失位置
+- 中断工作流
 
-**With Prompt History Navigation**: Quickly access past prompts without leaving the keyboard.
+**使用提示历史导航**：无需离开键盘即可快速访问过往提示。
 
-### How it Works
+### 实现原理
 
-The navigation is designed to be intuitive and adapt to your current context.
+导航设计直观且适应当前上下文。
 
-#### In an Active Conversation
-- **Arrow Up**: Shows the last prompt you sent. Keep pressing to go further back in the conversation.
-- **Arrow Down**: Moves forward through the conversation history, eventually returning to the text you were typing.
+#### 活跃对话中
+- **上箭头**：显示上一个发送的提示。持续按可回溯对话历史。
+- **下箭头**：在对话历史中向前移动，最终返回正在输入的文本。
 
-#### Starting a New Chat
-- **Arrow Up**: Shows the most recent prompt from your task history in the current workspace.
-- **Arrow Down**: Moves forward through your task history.
+#### 新建对话时
+- **上箭头**：显示当前工作区任务历史中最近的提示。
+- **下箭头**：在任务历史中向前移动。
 
-#### Edge Cases
-- If you start typing while navigating, the history is dismissed, and your new text is preserved.
-- Navigation only works when your cursor is on the first or last line of the input box to avoid interfering with multi-line editing.
+#### 边界情况
+- 导航时开始输入会保留新文本。
+- 仅当光标位于输入框第一行或最后一行时生效，避免干扰多行编辑。
 
-### Configuration
+### 配置
 
-This feature is enabled by default. There are no settings to configure.
+此功能默认启用，无需配置。
 
-### Benefits
+### 优势
 
-- **Faster Workflow**: Reuse prompts without using the mouse.
-- **Better Context**: Easily access and build upon previous interactions.
-- **Less Interruption**: Stay focused on the task at hand.
+- **提升效率**：无需鼠标重用提示。
+- **增强上下文**：轻松访问和构建过往交互。
+- **减少中断**：保持专注。
 
-### Common Questions
+### 常见问题
 
-**"Why doesn't anything happen when I press the up arrow?"**
-- You might be in the middle of a multi-line prompt. The cursor must be on the first line.
-- There might be no history available for the current context.
+**"按上箭头无反应？"**
+- 可能处于多行提示中间。光标需位于第一行。
+- 当前上下文可能无历史记录。
 
-**"What's the difference between conversation and task history?"**
-- **Conversation history** includes prompts from your current, active chat session.
-- **Task history** includes the initial prompts from all previous tasks in your current workspace.
+**"对话历史和任务历史有何区别？"**
+- **对话历史**：包含当前活跃对话中的提示。
+- **任务历史**：包含当前工作区所有过往任务的初始提示。
