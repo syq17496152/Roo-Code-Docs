@@ -49,7 +49,7 @@ STDIO传输机制适用于：
 
 ### STDIO实现示例
 
-``typescript
+```typescript
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
