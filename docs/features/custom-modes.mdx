@@ -1,6 +1,6 @@
 # 自定义模式
 
-Roo Code 允许您创建 **自定义模式** 来定制 Roo 在特定任务或工作流中的行为。自定义模式可以是 **全局模式**（适用于所有项目）或 **项目专属模式**（仅在单一项目中定义）。
+Roo Code允许您创建**自定义模式**来定制Roo的行为以适应特定任务或工作流。自定义模式可以是**全局**（适用于所有项目）或**项目特定**（在单个项目中定义）。
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
   <iframe
@@ -10,48 +10,550 @@ Roo Code 允许您创建 **自定义模式** 来定制 Roo 在特定任务或工
       top: 0,
       left: 0,
       width: '100%',
-      height: '100%',
+      height: '100%'
     }}
     frameBorder="0"
     allow="autoplay; encrypted-media"
     allowFullScreen
-    title="Custom Modes Overview Video"
+    title="自定义模式概述视频"
   ></iframe>
 </div>
 
 <br />
 
-:::tip 粘性模型提升工作效率
-每个模式——包括自定义模式——都具备 **粘性模型** 特性。这意味着 Roo Code 会自动记忆并选择您上次使用特定模式时使用的模型。当您切换模式时，Roo 将根据当前模式自动切换对应的首选模型，避免了频繁重新配置的麻烦。
+:::tip 粘性模型优化工作流
+每个模式（包括自定义模式）都包含**粘性模型**。这意味着Roo Code会自动记忆并选择您最后使用的模型。您无需频繁重新配置即可为不同任务分配不同模型，Roo会在切换模式时自动切换模型。
 :::
 
 ---
 
 ## 为何使用自定义模式？
 
-*   **专业化定制：** 创建针对特定任务优化的模式，如“文档撰写者”、“测试工程师”或“重构专家”。
-*   **安全性增强：** 限制某个模式对敏感文件或命令的访问权限。例如，“审查模式”可以被限制为仅读取操作。
-*   **实验性尝试：** 可以在不影响其他模式的情况下安全地试验不同的提示词和配置方案。
-*   **团队协作：** 与团队成员共享自定义模式以标准化工作流程。
+*   **专业化**：创建针对特定任务优化的模式，如"文档编写者"、"测试工程师"或"重构专家"。
+*   **安全性**：限制模式对敏感文件或命令的访问。例如，"审查模式"可设为只读操作。
+*   **实验性**：在不影响其他模式的情况下安全地试验不同提示和配置。
+*   **团队协作**：与团队共享自定义模式以标准化工作流。
 
-<img src="/img/custom-modes/custom-modes-3.png" alt="Overview of custom modes interface" width="500" />
+<img src="/img/custom-modes/custom-modes-3.png" alt="自定义模式界面概述" width="500" />
 
-    *Roo Code 的自定义模式创建与管理界面*
+    *Roo Code的自定义模式创建和管理界面。*
 
 ---
 
 ## 自定义模式包含哪些内容？
 
-自定义模式由多个关键属性定义。理解这些概念将有助于您有效定制 Roo 的行为。
+自定义模式由多个关键属性定义。理解这些概念有助于您有效定制Roo的行为。
 
-| UI字段 / YAML属性                 | 概念性描述                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 标识符 (`slug`)                   | 模式的 **唯一内部标识符**。该标识符会被 Roo Code 用于引用模式，特别是关联[模式专属指令文件](#通过文件目录指定模式专属指令)时使用。                                                                                                                                                                                                            |
-| 名称 (`name`)                      | 模式在 Roo Code 用户界面中显示的 **展示名称**。该名称应当易于理解且具有描述性。                                                                                                                                                                                                                                                             |
-| 描述 (`description`)               | 模式用途的 **简短、用户友好型摘要**，显示在模式选择器界面中。                                                                                                                                                                                                                                                                             |
-| 角色定义 (`roleDefinition`)        | 定义模式核心身份和专长的内容。这部分文本将放置在系统提示词的开头部分。                                                                                                                                                                                                                                                                     |
-| 可用工具组 (`groups`)              | 定义模式可访问的工具集和文件访问权限。                                                                                                                                                                                                                                                                                                     |
-| 使用场景 (可选) (`whenToUse`)      | （可选）提供 Roo 自动决策的指导方针，特别是模式选择和任务编排方面。                                                                                                                                                                                                                                                                         |
-| 自定义指令 (可选) (`customInstructions`) | 模式的 **具体行为指南** 或规则。这部分内容通常作为 `roleDefinition` 的补充说明添加到系统提示词的后半段。
+| UI字段 / YAML属性                 | 概念描述                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Slug (`slug`)                      | 模式的**唯一内部标识符**。Roo Code使用它来引用模式，尤其是关联[模式特定指令文件](#mode-specific-instructions-via-filesdirectories)。                                                                                                                                                                                                                                                              |
+| 名称 (`name`)                      | 模式在Roo Code用户界面中显示的**名称**。应具描述性且易于理解。                                                                                                                                                                                                                                                                                                                                 |
+| 描述 (`description`)               | **用户友好的简短说明**，显示在模式选择器UI中。<br />- 该文本出现在模式名称下方，简要说明模式功能。<br />- 保持简洁，聚焦模式功能。                                                                                                                                                                                                                                                         |
+| 角色定义 (`roleDefinition`)        | 定义模式的**核心身份和专业知识**。该文本置于系统提示开头。<br />- 主要用于定义模式激活时Roo的身份和行为。<br />- 引入`description`字段后，`roleDefinition`应提供详细身份描述，而`description`处理UI简要说明。<br />- `whenToUse`字段现用于自动化上下文（如任务编排）的总结。                                                                                                      |
+| 可用工具 (`groups`)                | 定义模式的**允许工具集和文件访问权限**。<br />- 在UI中对应选择工具类别（如读取文件、编辑文件、浏览或执行命令）。<br />- UI显示"编辑"组的文件类型限制通常通过手动YAML/JSON配置或Roo设置管理。<br />- 详细说明见[groups属性详情](#groups)。                                                                                                                                           |
+| 使用时机 (可选) (`whenToUse`)     | (可选) 提供**Roo自动化决策指南**，特别是模式选择和任务编排。<br />- 该文本由Roo用于[任务编排](/features/boomerang-tasks)（如[`new_task`](/advanced-usage/available-tools/new-task)工具）。<br />- 也用于[切换模式](/basic-usage/using-modes#switching-between-modes)（如[`switch_mode`](/advanced-usage/available-tools/switch-mode)工具）。<br />- 该字段不在模式选择器UI显示 - 由`description`字段处理。                                                                     |
+| 自定义指令 (可选) (`customInstructions`) | **特定行为指南**或规则。<br />- 这些指令添加到系统提示末尾，补充`roleDefinition`。<br />- 可直接在配置中提供或通过单独指令文件提供。                                                                                                                         |
 
 ---
+## 导入/导出模式
+
+轻松共享、备份和模板化您的自定义模式。该功能允许您将任何模式及其关联规则导出为单个可移植YAML文件，并导入到任何项目。
+
+### 核心功能
+- **可共享设置**：将模式及其规则打包成一个文件以便共享。
+- **便捷备份**：保存自定义模式配置以防丢失。
+- **项目模板**：为不同项目类型创建标准化模式模板。
+- **简单迁移**：轻松在全局设置和项目之间迁移模式。
+
+---
+
+### 使用场景
+
+**之前**：手动在新项目或团队成员间复制`.roo/rules-{slug}/`文件夹，繁琐且易错。
+
+**使用此功能**：单击导出模式为YAML文件，再单击导入自动完成设置。
+
+### 实现原理
+
+导入/导出功能在**模式**视图中管理。
+
+![模式导出导入按钮](/img/custom-modes/custom-modes-5.png)
+
+#### 导出模式
+1.  进入**模式**视图。
+2.  选择要导出的模式。
+3.  点击**导出模式**按钮（下载图标）。
+4.  选择保存位置。
+
+Roo将模式配置和`.roo/rules-{slug}/`目录的规则打包进YAML文件。
+
+#### 导入模式
+1.  点击**模式**视图的**导入模式**按钮（上传图标）。
+2.  选择YAML文件。
+3.  选择导入级别：<br />    ![导入级别对话框](/img/custom-modes/custom-modes-6.png)<br />-   **项目**：模式仅在当前工作区可用。添加到`.roomodes`文件，规则保存到`.roo/rules-{slug}/`目录。<br />-   **全局**：模式在所有项目可用。添加到全局设置，规则存储在系统全局Roo配置目录（如`~/.roo/rules-{slug}/`）。
+
+---
+
+### 导出的YAML文件格式：
+
+```yaml
+customModes:
+  - slug: "my-custom-mode"
+    name: "我的自定义模式"
+    roleDefinition: "您是乐于助人的助手。"
+    groups: ["read", "edit"]
+    rulesFiles:
+      - relativePath: "rules-my-custom-mode/rules.md"
+        content: "这些是我的自定义模式规则。"
+```
+
+---
+
+### 常见问题
+
+**"导入同名模式会怎样？"**
+- 现有模式将被导入配置覆盖。
+
+**"全局和项目导入的主要区别？"**
+- **全局**模式在所有项目可用。<br />**项目**模式特定于工作区，存储在`.roomodes`文件中。
+
+**"能导出内置模式如代码或架构师？"**
+- 是的。如果自定义过内置模式，可以导出保存自定义配置。
+
+**"全局导入模式含规则？"**
+- 规则仍保留。存储在用户主目录的全局`rules-{slug}`文件夹（如`~/.roo/rules-my-custom-mode/`）而非项目`.roo`文件夹。
+
+---
+
+## 创建和配置自定义模式的方法
+
+您可以通过以下方式创建和配置自定义模式：
+
+### 1. 询问Roo!（推荐）
+
+可通过向Roo Code提问快速创建基础自定义模式，例如：
+```
+创建名为"文档编写者"的新模式。它只能读取文件并编写Markdown文件。
+```
+Roo Code会引导您完成过程，提示输入必要信息。Roo将使用YAML格式创建模式。后续可使用提示标签或手动配置进行微调。
+
+### 2. 使用提示标签
+
+1.  **打开提示标签**：点击Roo Code顶部菜单栏的<Codicon name="notebook" />图标。
+2.  **创建新模式**：点击模式标题右侧的<Codicon name="add" />按钮。
+3.  **填写字段**：
+
+<img src="/img/custom-modes/custom-modes-4.png" alt="提示标签中的自定义模式创建界面" width="600" />
+
+    *显示名称、slug、描述、保存位置、角色定义、可用工具、自定义指令字段的界面。*
+
+    界面提供`名称`、`Slug`、`描述`、`保存位置`、`角色定义`、`使用时机(可选)`、`可用工具`、`自定义指令`字段。填写后点击"创建模式"按钮。Roo Code将以YAML格式保存新模式。
+
+*详见[自定义模式包含哪些内容？](#whats-included-in-a-custom-mode)表中的概念解释。编辑工具组的文件类型限制可通过询问Roo或手动YAML/JSON配置添加。*
+
+### 3. 手动配置（YAML & JSON）
+
+可通过直接编辑配置文件创建或修改自定义模式。此方法提供最全面的属性控制。Roo Code现支持YAML（推荐）和JSON格式。
+
+*   **全局模式**：编辑`custom_modes.yaml`（推荐）或`custom_modes.json`。通过**提示标签** > <Codicon name="settings-gear" />（全局提示旁设置图标） > "编辑全局模式"访问。
+*   **项目模式**：编辑项目根目录的`.roomodes`文件（YAML或JSON）。通过**提示标签** > <Codicon name="settings-gear" />（项目提示旁设置图标） > "编辑项目模式"访问。
+
+这些文件定义模式数组/列表。
+
+**YAML示例 (`custom_modes.yaml` 或 `.roomodes`)：**
+```yaml
+customModes:
+  - slug: docs-writer
+    name: 📝 文档编写者
+    description: 专门用于编写和编辑技术文档的模式。
+    roleDefinition: 您是专注于清晰文档的技术写作者。
+    whenToUse: 用于编写和编辑文档。
+    customInstructions: 关注文档的清晰度和完整性。
+    groups:
+      - read
+      - - edit # 编辑工具组
+        - fileRegex: $$md|mdx) # Markdown文件
+          description: 仅Markdown文件
+      - browser
+  - slug: another-mode
+    name: 另一个模式
+    # ... 其他属性
+```
+
+**JSON示例 (`custom_modes.json` 或 `.roomodes`)：**
+```json
+{
+  "customModes": [
+    {
+      "slug": "docs-writer",
+      "name": "📝 文档编写者",
+      "description": "专门用于编写和编辑技术文档的模式。",
+      "roleDefinition": "您是专注于清晰文档的技术写作者。",
+      "whenToUse": "用于编写和编辑文档。",
+      "customInstructions": "关注文档的清晰度和完整性。",
+      "groups": [
+        "read",
+        ["edit", { "fileRegex": "\\.(js|ts)$$", "description": "JS/TS文件仅限" }],
+        "browser"
+      ]
+    },
+    {
+      "slug": "another-mode",
+      "name": "另一个模式"
+    }
+  ]
+}
+```
+
+### YAML/JSON属性详情
+
+##### `slug`
+*   **用途**：模式的唯一标识符。
+*   **格式**：使用小写字母、数字和连字符。
+*   **用法**：内部使用且用于模式特定规则的文件/目录名（如`.roo/rules-{slug}/`）。
+*   **建议**：保持简短且具描述性。
+*   *YAML示例:* `slug: docs-writer`
+*   *JSON示例:* `"slug": "docs-writer"`
+
+##### `name`
+*   **用途**：显示在Roo Code UI中的名称。
+*   **格式**：可包含空格和大写。
+*   *YAML示例:* `name: 📝 文档编写者`
+*   *JSON示例:* `"name": "文档编写者"`
+
+##### `description`
+*   **用途**：在模式选择器UI中显示在模式名称下方的简短说明。
+*   **格式**：保持简短且聚焦模式功能。
+*   **UI显示**：显示在重构后的模式选择器中。
+*   *YAML示例:* `description: 专门用于编写和编辑技术文档的模式。`
+*   *JSON示例:* `"description": "专门用于编写和编辑技术文档的模式。"`
+
+##### `roleDefinition`
+*   **用途**：详细描述模式的角色、专业知识和个性。
+*   **位置**：模式激活时，该文本置于系统提示开头。
+*   **更新角色**：引入`description`字段后，`roleDefinition`应提供详细身份描述，而`description`处理UI简要说明。`whenToUse`字段现用于自动化上下文的总结。
+*   *YAML多行示例：*
+     ```yaml
+     roleDefinition: >-
+       您是具备以下专长的测试工程师：
+       - 编写全面测试套件
+       - 测试驱动开发
+     ```
+*   *JSON示例:* `"roleDefinition": "您是专注于清晰文档的技术写作者。"`
+
+##### `groups`
+*   **用途**：定义模式可访问的工具组及文件限制。
+*   **可用工具组**：`"read"`, `"edit"`, `"browser"`, `"command"`, `"mcp"`。
+*   **编辑组文件限制**：
+    *   要应用文件限制，编辑条目变为列表（YAML）或数组（JSON），第一个元素为`"edit"`，第二个为定义限制的映射/对象。
+    *   `fileRegex`：正则表达式字符串，控制模式可编辑的文件类型。
+        *   YAML中通常单个反斜杠（如`\.md$`）。
+        *   JSON中需双反斜杠（如`"\\.md$"`）。
+    *   `description`：描述限制的可选字符串。
+*   *YAML示例：*
+    ```yaml
+    groups:
+      - read
+      - - edit # 编辑工具组限制
+        - fileRegex: \.(js|ts)$$ # JS/TS文件限制
+          description: 仅限JS/TS文件
+      - command
+    ```
+*   *JSON示例：*
+    ```json
+    "groups": [
+      "read",
+      ["edit", { "fileRegex": "\\.(js|ts)$$", "description": "仅限JS/TS文件" }],
+      "command"
+    ]
+    ```
+
+##### `whenToUse`
+*   **用途**：（可选）提供Roo自动化决策指南，特别是模式选择和任务编排。
+*   **格式**：描述理想场景或任务类型的字符串。
+*   **用法**：该字段用于Roo自动化决策，不在模式选择器UI显示 - 由`description`处理。若填充，Roo用此描述进行编排；否则使用`roleDefinition`首句。
+*   *YAML示例:* `whenToUse: 本模式最适合重构Python代码。`
+*   *JSON示例:* `"whenToUse": "本模式最适合重构Python代码。"`
+
+##### `customInstructions`
+*   **用途**：包含模式的附加行为指南字符串。
+*   **位置**：该文本添加到系统提示末尾。
+*   **补充**：可通过[文件/目录模式特定指令](#mode-specific-instructions-via-filesdirectories)补充。
+*   *YAML多行示例：*
+    ```yaml
+    customInstructions: |-
+      编写测试时：
+      - 使用describe/it块
+      - 包含有意义的描述
+    ```
+*   *JSON示例:* `"customInstructions": "聚焦解释概念和提供示例。"`
+
+### YAML格式优势
+
+YAML现为定义自定义模式的首选格式，相比JSON有以下优势：
+
+*   **可读性**：YAML的缩进结构更易读。
+*   **注释**：YAML允许注释（以`#`开头），可注释模式定义。
+    ```yaml
+customModes:
+  - slug: security-review
+    name: 🔒 安全审查员
+    # 本模式限制为只读访问
+    roleDefinition: 您是审查代码漏洞的安全专家。
+    whenToUse: 用于安全审查和漏洞评估。
+    # 仅允许读取文件，无编辑权限
+    groups:
+      - read
+      - browser
+    ```
+*   **多行字符串**：YAML对多行字符串（如`roleDefinition`或`customInstructions`）提供更简洁的语法。
+*   **标点更少**：YAML通常比JSON少用标点（如逗号和大括号），减少语法错误。
+*   **编辑器支持**：现代编辑器提供YAML语法高亮和验证，增强可读性。
+
+虽然仍支持JSON，但通过UI或询问Roo创建的新模式默认使用YAML。
+
+#### YAML使用技巧
+
+手动编辑YAML时注意：
+
+*   **缩进关键**：YAML使用缩进（空格，非制表符）定义结构。错误缩进是常见错误来源。
+*   **冒号分隔键值对**：键后接冒号和空格（如`slug: my-mode`）。
+*   **连字符表示列表项**：列表项以连字符和空格开头（如`- read`）。
+*   **验证YAML**：若遇问题，使用在线YAML验证器或编辑器的验证功能检查语法错误。
+
+### 向YAML格式迁移
+
+*   **全局模式**：当Roo Code启动时，若存在`custom_modes.json`且无`custom_modes.yaml`，会自动将全局模式迁移为YAML格式。
+*   **项目模式**（`.roomodes`）：
+    *   **无自动迁移**：项目模式不会自动从JSON转YAML。
+    *   **格式检测**：Roo Code可读取YAML或JSON格式的`.roomodes`文件。
+    *   **UI编辑时转换**：通过Roo Code UI编辑项目模式时，若`.roomodes`为JSON，会保存为YAML格式。
+    *   **手动转换**：需手动将JSON `.roomodes`转YAML时：<br />1. 打开JSON `.roomodes`文件。<br />2. 转换内容为YAML（可询问Roo帮助或使用在线转换工具）。<br />3. 保存为YAML或重命名旧文件（如`.roomodes.json.bak`）并保存新YAML内容。
+
+:::tip
+手动转换`.roomodes`文件时，可使用在线JSON转YAML工具或询问Roo帮助。保存前确保YAML有效。
+:::
+---
+
+## 通过文件/目录提供模式特定指令
+
+:::info 模式特定指令文件位置
+您可以通过工作区内的专用文件或目录为自定义模式提供指令。相比仅使用`customInstructions`属性，这更利于组织和版本控制。
+
+**推荐方法：目录形式（`.roo/rules-{mode-slug}/`）**
+```
+.
+├── .roo/
+│   └── rules-docs-writer/  # 示例模式slug为"docs-writer"
+│       ├── 01-style-guide.md
+│       └── 02-formatting.txt
+└── ... (其他项目文件)
+```
+
+**备选方法：单文件形式（`.roorules-{mode-slug}`）**
+```
+.
+├── .roorules-docs-writer  # 示例模式slug为"docs-writer"
+└── ... (其他项目文件)
+```
+目录方法优先，若存在且含文件则优先使用。
+:::
+
+除`customInstructions`属性外，您可以通过工作区文件为模式提供特定指令。这对以下情况特别有用：
+
+*   将长或复杂指令组织为多个可管理文件。
+*   使用版本控制管理指令。
+*   允许非技术成员通过修改文件调整指令。
+
+Roo Code加载这些指令有两种方法，优先使用新目录方法：
+
+**1. 推荐方法：基于目录的指令（`.roo/rules-{mode-slug}/`）**
+
+*   **结构**：创建名为`.roo/rules-{mode-slug}/`的目录（如`.roo/rules-docs-writer/`）。
+*   **内容**：放置一个或多个含指令的文件（如`.md`、`.txt`）。可进一步使用子目录组织指令。`.roo/rules-{mode-slug}/`目录内的文件按字母顺序递归读取。
+*   **加载**：加载所有找到的指令文件并应用到指定模式。
+
+**2. 备选方法（向后兼容）：基于文件的指令（`.roorules-{mode-slug}`）**
+
+*   **结构**：若`.roo/rules-{mode-slug}/`**不存在或为空**，Roo Code会在工作区根目录查找`.roorules-{mode-slug}`文件。
+*   **加载**：若找到，加载该文件内容作为模式指令。
+
+**优先级：**
+
+*   **目录方法优先**：若存在且含文件，忽略根目录的`.roorules-{mode-slug}`文件。
+*   确保迁移后的行为可预测，旧单文件方法仍兼容。
+
+**与`customInstructions`结合：**
+
+*   从目录或回退文件加载的指令与模式配置中的`customInstructions`属性结合。
+*   通常，文件/目录内容在`customInstructions`之后追加。
+
+---
+
+## 配置优先级
+
+模式配置按以下顺序应用：
+
+1. 项目级模式配置（来自`.roomodes` - YAML或JSON）
+2. 全局模式配置（来自`custom_modes.yaml`，若无YAML则用`custom_modes.json`）
+3. 默认模式配置
+
+这意味着项目配置覆盖全局配置，全局配置覆盖默认配置。例如，全局`code`模式和项目`.roomodes`中的`code`模式，项目模式在该项目中使用。
+
+*   **指令文件注意**：从文件系统加载模式特定指令时，目录`.roo/rules-{mode-slug}/`优先于根目录的`.roorules-{mode-slug}`文件。
+
+---
+
+## 覆盖默认模式
+
+您可以创建与默认模式相同slug的自定义模式来覆盖Roo Code内置模式（如`💻 代码`、`🪲 调试`、`❓ 问答`、`🏗️ 架构`、`🪃 编排`）。
+
+### 全局覆盖默认模式
+
+要跨所有项目自定义默认模式：
+
+1. **打开提示标签**：点击<Codicon name="notebook" />图标。
+2. **访问设置菜单**：点击"全局提示"旁的<Codicon name="settings-gear" />图标。
+3. **编辑全局模式**：选择"编辑全局模式"编辑`custom_modes.yaml`（或`custom_modes.json`）。
+4. **添加覆盖**：
+
+**YAML示例：**
+```yaml
+customModes:
+  - slug: code # 默认code模式的slug
+    name: 💻 代码（全局覆盖） # 自定义显示名称
+    roleDefinition: 您是具有全局约束的软件工程师。
+    whenToUse: 本全局覆盖代码模式用于JS/TS任务。
+    customInstructions: 聚焦项目特定的JS/TS开发。
+    groups:
+      - read
+      - - edit
+        - fileRegex: \.(js|ts)$$
+          description: 仅限JS/TS文件
+```
+
+**JSON示例：**
+```json
+{
+  "customModes": [{
+    "slug": "code",
+    "name": "💻 代码（全局覆盖）",
+    "roleDefinition": "您是具有全局约束的软件工程师",
+    "whenToUse": "本全局覆盖代码模式用于JS/TS任务。",
+    "customInstructions": "聚焦项目特定的JS/TS开发。",
+    "groups": [
+      "read",
+      ["edit", { "fileRegex": "\\.(js|ts)$$", "description": "仅限JS/TS文件" }]
+    ]
+  }]
+}
+```
+此示例用限制JS/TS文件的全局`💻 代码`模式替换默认模式。
+
+### 项目级模式覆盖
+
+要为单个项目覆盖默认模式：
+
+1. **打开提示标签**：点击<Codicon name="notebook" />图标。
+2. **访问设置菜单**：点击"项目提示"旁的<Codicon name="settings-gear" />图标。
+3. **编辑项目模式**：选择"编辑项目模式"编辑`.roomodes`。
+4. **添加覆盖**：
+
+**YAML示例：**
+```yaml
+customModes:
+  - slug: code # 默认code模式的slug
+    name: 💻 项目特定代码模式 # 自定义显示名称
+    roleDefinition: 您是具有项目约束的软件工程师。
+    whenToUse: 本项目代码模式用于Python任务。
+    customInstructions: 遵循PEP8并使用类型提示。
+    groups:
+      - read
+      - - edit
+        - fileRegex: \.py$$
+          description: 仅限Python文件
+      - command
+```
+
+**JSON示例：**
+```json
+{
+  "customModes": [{
+    "slug": "code",
+    "name": "💻 项目特定代码模式",
+    "roleDefinition": "您是具有项目约束的软件工程师。",
+    "whenToUse": "本项目代码模式用于Python任务。",
+    "customInstructions": "遵循PEP8并使用类型提示。",
+    "groups": [
+      "read",
+      ["edit", { "fileRegex": "\\.py$$", "description": "仅限Python文件" }],
+      "command"
+    ]
+  }]
+```
+项目特定覆盖优先于全局覆盖。
+
+### 覆盖默认模式的常见用例
+* **限制文件访问**：限制模式仅访问特定文件类型。
+* **定制行为**：根据技术栈定制专长。
+* **添加自定义指令**：集成项目标准。
+* **更改可用工具**：移除工具以防止不必要操作。
+
+:::tip
+覆盖默认模式时，请仔细测试。重大更改前考虑备份配置。
+:::
+
+---
+
+## 理解自定义模式中的正则表达式
+
+正则表达式（`fileRegex`）提供文件编辑权限的细粒度控制。
+
+:::tip
+**让Roo生成正则表达式**
+
+无需手动编写复杂正则，可询问Roo：
+```
+创建匹配JavaScript文件但排除测试文件的正则
+```
+Roo会生成模式。记得适配YAML（通常单个反斜杠）或JSON（双反斜杠）。
+:::
+
+指定`fileRegex`时，您创建的模式必须匹配文件路径。
+
+**重要规则：**
+*   **JSON转义**：JSON中反斜杠需双转义（如`"\\.md$$"`）。
+*   **YAML转义**：YAML中未引号包裹时，单反斜杠通常足够（如`\.md$$`）。
+*   **路径匹配**：模式匹配工作区根目录的相对文件路径（如`src/components/button.js`）。
+*   **大小写敏感**：正则默认大小写敏感。
+
+**常见模式示例：**
+| 模式（概念/类YAML） | JSON `fileRegex`值          | 匹配                                     | 不匹配                         |
+| ---------------------- | -------------------------- | ----------------------------------------- | ----------------------------- |
+| `\.md$$`             | `"\\.md$$"`             | `readme.md`, `docs/guide.md`              | `script.js`, `readme.md.bak`  |
+| `^src/.*`             | `"^src/.*"`               | `src/app.js`, `src/components/button.tsx`   | `lib/utils.js`, `test/src/mock.js` |
+| `\.(css|scss)$$`      | `"\\.(css|scss)$$"`     | `styles.css`, `theme.scss`                 | `styles.less`, `styles.css.map` |
+| `docs/.*\.md$$`      | `"docs/.*\\.md$$"`      | `docs/guide.md`, `docs/api/reference.md`   | `guide.md`, `src/docs/notes.md` |
+| `^(?!.*(test|spec))\.(js|ts)$$`  | `"^(?!.*(test|spec))\\.(js|ts)$$"` | `app.js`, `utils.ts`                      | `app.test.js`, `utils.spec.js`, `app.jsx` |
+
+**关键正则构建块：**
+*   `\.`: 匹配字面点号。
+*   `$$`: 匹配字符串结尾。
+*   `^`: 匹配字符串开头。
+*   `.*`: 匹配零个或多个任意字符（换行除外）。
+*   `(a|b)`: 匹配"a"或"b"。
+*   `(?!...)`: 否定前瞻。
+
+**测试您的模式：**
+1.  在示例文件路径上测试。在线正则测试器有帮助。
+2.  记住JSON与YAML的转义规则。
+3.  从简单开始逐步构建复杂性。
+
+:::info 错误处理
+当模式尝试编辑不匹配其`fileRegex`模式的文件时，您将看到`FileRestrictionError`及允许的模式详情。
+:::
+
+---
+
+## 社区画廊
+准备探索更多？查看主社区页面的[自定义模式画廊](/community/#custom-modes-gallery)以发现和共享社区创建的模式！

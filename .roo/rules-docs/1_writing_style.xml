@@ -1,46 +1,46 @@
 <writing_style_guide>
   <overview>
-    This guide defines the writing style for Roo Code documentation. The style is direct, concise, and technical. It avoids marketing language and prioritizes clarity for a developer audience. All output must be in markdown.
+    本指南定义了Roo Code文档的写作风格。该风格直接、简洁且技术性强，避免使用营销语言，优先考虑开发者受众的清晰度。所有输出必须使用Markdown格式。
   </overview>
 
   <core_principles>
-    <principle name="directness">
-      <rule>Start with the most important information. No filler introductions.</rule>
-      <bad>In this guide, we will explore how to configure the tool.</bad>
-      <good>To configure the tool, open...</good>
+    <principle name="直接性">
+      <rule>从最重要的信息开始，避免冗长的引言。</rule>
+      <bad>在本指南中，我们将探讨如何配置工具。</bad>
+      <good>要配置工具，请打开...</good>
     </principle>
-    <principle name="brevity">
-      <rule>Use short sentences. Cut unnecessary words. If it doesn't add value, remove it.</rule>
+    <principle name="简洁性">
+      <rule>使用短句，删除不必要的词语。没有价值的内容应予以删除。</rule>
     </principle>
-    <principle name="utility">
-      <rule>Focus on what the user can do and why it matters. Provide actionable steps.</rule>
+    <principle name="实用性">
+      <rule>关注用户能做什么及其意义。提供可操作的步骤。</rule>
     </principle>
-    <principle name="consistency">
-      <rule>When editing a document, use its existing style, structure, and format as a guideline for any updates. Do not make major changes unless explicitly asked.</rule>
+    <principle name="一致性">
+      <rule>编辑文档时，使用其现有风格、结构和格式作为更新指南。除非明确要求，否则不要进行重大更改。</rule>
     </principle>
   </core_principles>
 
   <banned_language>
-    <description>Avoid marketing jargon, buzzwords, and clichés. These words are ambiguous and reduce signal.</description>
+    <description>避免使用市场术语、流行语和陈词滥调。这些词汇含糊不清且降低信息密度。</description>
     <words>
-      <word>seamlessly</word>
-      <word>comprehensive</word>
-      <word>enhanced</word>
-      <word>streamlined</word>
-      <word>powerful</word>
-      <word>improved</word>
-      <word>intuitive</word>
-      <word>state-of-the-art</word>
-      <word>revolutionary</word>
-      <word>robust</word>
-      <word>easily</word>
-      <word>simply</word>
+      <word>无缝</word>
+      <word>全面</word>
+      <word>增强</word>
+      <word>优化</word>
+      <word>强大</word>
+      <word>改进</word>
+      <word>直观</word>
+      <word>尖端</word>
+      <word>革命性</word>
+      <word>稳健</word>
+      <word>轻松</word>
+      <word>简单</word>
     </words>
   </banned_language>
 
   <formatting>
-    <guideline>Use structured headings, lists, and short paragraphs for scannability.</guideline>
-    <guideline>Provide clear, copy-pasteable code snippets.</guideline>
-    <guideline>Assume user familiarity with basic concepts. Do not over-explain.</guideline>
+    <guideline>使用结构化标题、列表和短段落提高可读性。</guideline>
+    <guideline>提供清晰、可复制粘贴的代码片段。</guideline>
+    <guideline>假设用户已具备基本概念理解能力，避免过度解释。</guideline>
   </formatting>
 </writing_style_guide>

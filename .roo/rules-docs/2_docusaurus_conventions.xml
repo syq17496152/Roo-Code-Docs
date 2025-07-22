@@ -1,35 +1,35 @@
 <docusaurus_conventions>
   <overview>
-    This guide covers Docusaurus-specific formatting rules for Roo Code documentation.
+    本指南包含Roo Code文档中Docusaurus特定的格式规范。
   </overview>
 
   <linking>
-    <rule name="internal_links">
-      <description>Use absolute paths from `/docs/`. Do not include the `.md` extension.</description>
-      <good>[Link to Guide](/intro/)</good>
-      <bad>[Link to Guide](../intro.md)</bad>
+    <rule name="内部链接">
+      <description>使用从`/docs/`开始的绝对路径，不要包含`.md`扩展名。</description>
+      <good>[链接到指南](/intro/)</good>
+      <bad>[链接到指南](../intro.md)</bad>
     </rule>
-    <rule name="site_alias">
-      <description>Use `@site` for code imports or asset references from the project root. Do not use it for Markdown links.</description>
-      <good>import Header from \'@site/src/components/Header\';</good>
-      <bad>[Link](@site/docs/intro.md)</bad>
+    <rule name="站点别名">
+      <description>使用`@site`引用项目根目录的代码导入或资源，但不要用于Markdown链接。</description>
+      <good>import Header from '@site/src/components/Header';</good>
+      <bad>[链接](@site/docs/intro.md)</bad>
     </rule>
   </linking>
 
   <media>
-    <rule name="images">
-      <description>Place images in `/static/img/`. Use a relative path in `src`.</description>
+    <rule name="图片">
+      <description>图片存放在`/static/img/`目录，使用相对路径引用。</description>
       <example>
         <![CDATA[
-<img src="/img/installing/installing-2.png" alt="VS Code's Install from VSIX dialog" width="600" />
+<img src="/img/installing/installing-2.png" alt="VS Code的从VSIX安装对话框" width="600" />
         ]]>
       </example>
     </rule>
   </media>
 
   <versioning>
-    <rule name="no_version_numbers">
-      <description>Do not include version numbers or phrases like "as of version X.Y" in general documentation. Version information belongs only in `docs/update-notes`.</description>
+    <rule name="无版本号">
+      <description>常规文档中不要包含版本号或"as of version X.Y"等表述，版本信息仅出现在`docs/update-notes`中。</description>
     </rule>
   </versioning>
 </docusaurus_conventions>
